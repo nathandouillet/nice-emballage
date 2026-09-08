@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import machinesImg from "../assets/machines.webp";
+import { rel } from "../lib/base";
 ---
 <section class="ml">
   <div class="ml-grid wrap">
@@ -12,7 +13,7 @@ import machinesImg from "../assets/machines.webp";
         du domaine de l'emballage : machines à sceller, machines à film, modules
         d'injection et lignes complètes adaptées à vos besoins.
       </p>
-      <a href="/contact" class="btn-primary">Nous contacter</a>
+      <a href={rel("/contact")} class="btn-primary">Nous contacter</a>
     </div>
     <div class="ml-visual">
       <Image src={machinesImg} alt="Ligne de production industrielle" />

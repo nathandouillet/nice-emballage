@@ -1,18 +1,19 @@
 ---
 import Logo from "./Logo.astro";
 import WhatsAppButton from "./WhatsAppButton.astro";
+import { rel } from "../lib/base";
 ---
 
 <footer class="ft">
   <div class="ft-inner">
-    <a href="/" class="ft-logo" aria-label="Nice Emballage — accueil">
+    <a href={rel("/")} class="ft-logo" aria-label="Nice Emballage — accueil">
       <Logo />
     </a>
 
     <nav class="ft-nav">
-      <a href="/">Accueil</a>
-      <a href="/actualites">Actualités</a>
-      <a href="/contact">Contact</a>
+      <a href={rel("/")}>Accueil</a>
+      <a href={rel("/actualites")}>Actualités</a>
+      <a href={rel("/contact")}>Contact</a>
     </nav>
 
     <div class="ft-contact">

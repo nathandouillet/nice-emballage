@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
+import { rel } from "../lib/base";
 
 /* 1 grand article (le plus récent) + 3 suivants dans la colonne de droite */
 const articles = (
@@ -11,7 +12,7 @@ const featured = articles[0];
 const sideItems = articles.slice(1, 4);
 ---
 <div class="news-section wrap">
-  <a class="news-featured" href={`/actualites/${featured.id}`}>
+  <a class="news-featured" href={rel(`/actualites/${featured.id}`)}>
     <Image src={featured.data.cover} alt={featured.data.title} />
     <div class="scrim"></div>
     <div class="content">
@@ -23,7 +24,7 @@ const sideItems = articles.slice(1, 4);
   <div class="news-list">
     {
       sideItems.map((item) => (
-        <a class="news-list-item" href={`/actualites/${item.id}`}>
+        <a class="news-list-item" href={rel(`/actualites/${item.id}`)}>
           <div class="text">
             <span class="news-pill-outline">{item.data.category}</span>
             <h4>{item.data.title}</h4>

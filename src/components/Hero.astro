@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import heroImg from "../assets/hero.webp";
+import { rel } from "../lib/base";
 ---
 <section class="hero wrap">
   <div>
@@ -13,8 +14,8 @@ import heroImg from "../assets/hero.webp";
       ouest-africaine.
     </p>
     <div class="actions">
-      <a href="/#nos-emballages" class="btn-primary">Voir nos produits</a>
-      <a href="/contact" class="btn-ghost">Demander un devis</a>
+      <a href={rel("/#nos-emballages")} class="btn-primary">Voir nos produits</a>
+      <a href={rel("/contact")} class="btn-ghost">Demander un devis</a>
     </div>
   </div>
   <div class="hero-graphic">

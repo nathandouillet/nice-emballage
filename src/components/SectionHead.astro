@@ -8,6 +8,8 @@ interface Props {
   actionLabel?: string;
   actionHref?: string;
 }
+import { rel } from "../lib/base";
+
 const { kicker, title, align = "left", actionLabel, actionHref } = Astro.props;
 ---
 <div class:list={["section-head wrap", `is-${align}`]}>
@@ -19,7 +21,7 @@ const { kicker, title, align = "left", actionLabel, actionHref } = Astro.props;
 
     {
       actionHref && (
-        <a class="sh-action" href={actionHref} aria-label={actionLabel ?? "Voir tout"}>
+        <a class="sh-action" href={rel(actionHref)} aria-label={actionLabel ?? "Voir tout"}>
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path
               d="M5 12h14M13 6l6 6-6 6"
