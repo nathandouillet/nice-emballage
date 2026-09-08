@@ -1,0 +1,92 @@
+---
+import { Image } from "astro:assets";
+import preformes from "../assets/preformes.webp";
+import bouchons from "../assets/bouchons.webp";
+import bouteilles from "../assets/bouteilles.webp";
+import emballages from "../assets/emballages.webp";
+
+const tiles = [
+  { img: preformes, label: "Préformes", sub: "PET, tous formats" },
+  { img: bouchons, label: "Bouchons", sub: "Moules sur-mesure" },
+  { img: bouteilles, label: "Bouteilles", sub: "Soufflage PET" },
+  { img: emballages, label: "Emballages", sub: "Film & conditionnement" },
+];
+---
+
+<div class="mosaic wrap">
+  {
+    tiles.map((tile) => (
+      <div class="tile">
+        <Image src={tile.img} alt={tile.label} />
+        <div class="scrim" />
+        <div class="label">
+          {tile.label}
+          <span>{tile.sub}</span>
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .mosaic {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 96px;
+  }
+  .tile {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: var(--color-stone);
+  }
+  .tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .tile:hover img {
+    transform: scale(1.08);
+  }
+  .scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      transparent 40%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+  }
+  .label {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    z-index: 2;
+    color: #fff;
+    font-weight: 700;
+    font-size: 17px;
+  }
+  .label span {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  @media (max-width: 900px) {
+    .mosaic {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 460px) {
+    .mosaic {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

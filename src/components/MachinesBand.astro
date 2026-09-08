@@ -1,0 +1,85 @@
+---
+import { Image } from "astro:assets";
+import machinesImg from "../assets/machines.webp";
+---
+<section class="ml">
+  <div class="ml-grid wrap">
+    <div class="ml-text">
+      <span class="kicker">ÉQUIPEMENT INDUSTRIEL</span>
+      <h2>Machines pour votre ligne de production</h2>
+      <p>
+        Nice Emballage peut vous commander toute sorte de machines industrielles
+        du domaine de l'emballage : machines à sceller, machines à film, modules
+        d'injection et lignes complètes adaptées à vos besoins.
+      </p>
+      <a href="/contact" class="btn-primary">Nous contacter</a>
+    </div>
+    <div class="ml-visual">
+      <Image src={machinesImg} alt="Ligne de production industrielle" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .ml {
+    padding: 88px 0;
+    background: var(--color-paper-dim);
+    border-block: 1px solid var(--color-stone);
+  }
+  .ml-grid {
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .kicker {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-teal);
+  }
+  h2 {
+    margin-top: 10px;
+    max-width: 18ch;
+    font-family: var(--font-display);
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  p {
+    margin-top: 20px;
+    max-width: 44ch;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text-soft);
+  }
+  .btn-primary {
+    margin-top: 28px;
+  }
+  .ml-visual {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--color-stone);
+  }
+  .ml-visual :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  @media (max-width: 860px) {
+    .ml {
+      padding: 64px 0;
+    }
+    .ml-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .ml-visual {
+      max-width: 460px;
+      aspect-ratio: 4 / 3;
+    }
+  }
+</style>

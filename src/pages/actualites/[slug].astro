@@ -1,0 +1,169 @@
+---
+import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const articles = await getCollection("articles", ({ data }) => !data.draft);
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const { title, excerpt, date, category, cover } = article.data;
+
+const dateLabel = new Intl.DateTimeFormat("fr-FR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(date);
+const dateIso = date.toISOString().slice(0, 10);
+---
+<Layout title={`${title} — Nice Emballage`} description={excerpt}>
+  <article class="post">
+    <div class="wrap post-head">
+      <a href="/actualites" class="back">← Toutes les actualités</a>
+      <span class="post-cat">{category}</span>
+      <h1>{title}</h1>
+      <time datetime={dateIso}>{dateLabel}</time>
+    </div>
+
+    <div class="wrap post-cover">
+      <Image src={cover} alt={title} widths={[480, 800, 1200]} sizes="(max-width: 960px) 100vw, 960px" />
+    </div>
+
+    <div class="wrap post-body">
+      <Content />
+    </div>
+
+    <div class="wrap post-foot">
+      <p>Un projet d'emballage ou une ligne à équiper&nbsp;?</p>
+      <a href="/contact" class="btn-primary">Nous contacter</a>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .post {
+    padding-bottom: 96px;
+  }
+  .post .wrap {
+    max-width: 760px;
+  }
+
+  .post-head {
+    padding-top: 56px;
+  }
+  .back {
+    display: block;
+    width: fit-content;
+    margin-bottom: 28px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+  .back:hover {
+    color: var(--color-teal);
+  }
+  .post-cat {
+    display: inline-block;
+    padding: 5px 13px;
+    border-radius: var(--radius-pill);
+    background: var(--color-teal);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  h1 {
+    margin-top: 18px;
+    font-family: var(--font-display);
+    font-size: clamp(30px, 4.5vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  time {
+    display: block;
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--color-text-faint);
+  }
+
+  .post-cover {
+    margin-top: 40px;
+    margin-bottom: 44px;
+  }
+  .post-cover :global(img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    background: var(--color-stone);
+  }
+
+  /* --- Corps de l'article (markdown) --- */
+  .post-body {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--color-text-soft);
+  }
+  .post-body :global(h2) {
+    margin: 40px 0 12px;
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+  .post-body :global(h3) {
+    margin: 32px 0 10px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+  .post-body :global(p) {
+    margin: 0 0 20px;
+  }
+  .post-body :global(ul),
+  .post-body :global(ol) {
+    margin: 0 0 20px;
+    padding-left: 22px;
+  }
+  .post-body :global(li) {
+    margin-bottom: 8px;
+  }
+  .post-body :global(a) {
+    color: var(--color-teal);
+    text-underline-offset: 3px;
+  }
+  .post-body :global(strong) {
+    color: var(--color-ink);
+  }
+  .post-body :global(blockquote) {
+    margin: 24px 0;
+    padding-left: 20px;
+    border-left: 3px solid var(--color-yellow);
+    color: var(--color-ink);
+  }
+
+  .post-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-stone);
+  }
+  .post-foot p {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+</style>

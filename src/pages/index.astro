@@ -1,17 +1,37 @@
 ---
-
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import SectionHead from "../components/SectionHead.astro";
+import ProductMosaic from "../components/ProductMosaic.astro";
+import MachinesBand from "../components/MachinesBand.astro";
+import ContactPanel from "../components/ContactPanel.astro";
+import NewsSection from "../components/NewsSection.astro";
 ---
+<Layout>
+  <Hero />
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+  <div id="nos-emballages">
+    <SectionHead
+      kicker="NOS EMBALLAGES"
+      title="Ce que nous fabriquons pour vos produits"
+      align="center"
+    />
+    <ProductMosaic />
+  </div>
+
+  <MachinesBand />
+
+  <section id="contact">
+    <ContactPanel />
+  </section>
+
+  <div id="actualites">
+    <SectionHead
+      kicker="ACTUALITÉS"
+      title="Dernières nouvelles"
+      actionLabel="Toutes nos actualités"
+      actionHref="/actualites"
+    />
+    <NewsSection />
+  </div>
+</Layout>

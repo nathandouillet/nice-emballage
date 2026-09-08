@@ -1,0 +1,24 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.png";
+
+interface Props {
+  /** Variante agrandie (footer). */
+  large?: boolean;
+}
+const { large = false } = Astro.props;
+const cls = large ? "logo large" : "logo";
+---
+<Image class={cls} src={logo} alt="Nice Emballage" densities={[1, 2]} />
+
+<style>
+  .logo {
+    display: block;
+    width: auto;
+    height: 44px;
+    border-radius: 8px;
+  }
+  .logo.large {
+    height: 52px;
+  }
+</style>

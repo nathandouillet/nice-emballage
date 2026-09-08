@@ -1,0 +1,34 @@
+---
+interface Props {
+  /** Coordonnées "lat,lng" du point à afficher. */
+  coords?: string;
+  zoom?: number;
+}
+const { coords = "12.411808,-1.418128", zoom = 14 } = Astro.props;
+
+const src = `https://maps.google.com/maps?q=${coords}&hl=fr&z=${zoom}&output=embed`;
+---
+<div class="google-map" id="map">
+  <iframe
+    src={src}
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    title="Nice Emballage — Borgho, route de Fada, Ouagadougou"></iframe>
+</div>
+
+<style>
+  .google-map {
+    width: 100%;
+    min-height: 300px;
+    overflow: hidden;
+    line-height: 0;
+    background: var(--color-stone);
+  }
+  .google-map iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    border: 0;
+  }
+</style>

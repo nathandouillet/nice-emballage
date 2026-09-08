@@ -1,0 +1,319 @@
+---
+import WhatsAppButton from "./WhatsAppButton.astro";
+import MapEmbed from "./MapEmbed.astro";
+
+interface Props {
+  title?: string;
+  lead?: string;
+  /** Affiche la carte Google Maps sous le formulaire. */
+  showMap?: boolean;
+  /** "dark" = bande sombre (ancre de la home) · "light" = fond clair (page /contact). */
+  tone?: "dark" | "light";
+}
+const {
+  title = "Parlons de votre projet",
+  lead = "Un email, un coup de fil ou un message WhatsApp — on répond vite.",
+  showMap = true,
+  tone = "dark",
+} = Astro.props;
+
+const email = "infos@nice-emballage.com";
+const phone = "+226 64 98 66 66";
+const phoneHref = "tel:+22664986666";
+const address = "Borgho, sur la route de Fada";
+const coords = "12.411808,-1.418128";
+const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}`;
+---
+<section class:list={["contact-section", { "is-light": tone === "light" }]}>
+  <div class="wrap">
+    <div class="cu">
+      <div class="cu-head">
+        <h3>{title}</h3>
+        <p class="cu-lead">{lead}</p>
+        <div class="cu-direct">
+          <a href={phoneHref}>{phone}</a>
+          <a href={`mailto:${email}`}>{email}</a>
+          <WhatsAppButton />
+        </div>
+      </div>
+
+      <form class="contact-form" data-mailto={email}>
+        <div class="cu-row">
+          <label>
+            <span>Nom</span>
+            <input type="text" name="nom" autocomplete="name" required />
+          </label>
+          <label>
+            <span>Entreprise</span>
+            <input type="text" name="entreprise" autocomplete="organization" />
+          </label>
+        </div>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="3" required></textarea>
+        </label>
+        <button type="submit" class="btn-primary">Envoyer le message</button>
+      </form>
+    </div>
+
+    {
+      showMap && (
+        <div class="contact-find">
+          <div class="contact-find__info">
+            <span class="contact-find__kicker">Nous trouver</span>
+            <p class="contact-find__addr">
+              {address}
+              <br />
+              Ouagadougou, Burkina Faso
+            </p>
+            <p class="contact-find__meta">Ouvert tous les jours · 7h30 – 18h00</p>
+            <a
+              class="contact-find__dir"
+              href={directions}
+              target="_blank"
+              rel="noopener"
+            >
+              Itinéraire →
+            </a>
+          </div>
+          <div class="contact-find__map">
+            <MapEmbed coords={coords} />
+          </div>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>("form.contact-form").forEach((form) => {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const to = form.dataset.mailto ?? "";
+      const data = new FormData(form);
+      const nom = String(data.get("nom") ?? "").trim();
+      const entreprise = String(data.get("entreprise") ?? "").trim();
+      const from = String(data.get("email") ?? "").trim();
+      const message = String(data.get("message") ?? "").trim();
+
+      const subject = `Demande de ${nom}${entreprise ? ` — ${entreprise}` : ""}`;
+      const body = [
+        `Nom : ${nom}`,
+        entreprise ? `Entreprise : ${entreprise}` : null,
+        `Email : ${from}`,
+        "",
+        message,
+      ]
+        .filter((line) => line !== null)
+        .join("\n");
+
+      window.location.href = `mailto:${to}?subject=${encodeURIComponent(
+        subject,
+      )}&body=${encodeURIComponent(body)}`;
+    });
+  });
+</script>
+
+<style>
+  /* Bande sombre — l'ancre visuelle de la home.
+     Les couleurs "thémables" passent par des variables, surchargées en .is-light. */
+  .contact-section {
+    --cs-bg: var(--color-ink);
+    --cs-fg: var(--color-paper);
+    --cs-lead: var(--color-on-ink);
+    --cs-label: var(--color-on-ink-faint);
+    --cs-rule: rgba(245, 244, 240, 0.22);
+    --cs-accent: var(--color-yellow);
+    --cs-link-hover: var(--color-yellow);
+    --cs-find-border: transparent;
+
+    padding: 88px 0;
+    background: var(--cs-bg);
+    color: var(--cs-fg);
+  }
+  .contact-section.is-light {
+    --cs-bg: transparent;
+    --cs-fg: var(--color-ink);
+    --cs-lead: var(--color-text-muted);
+    --cs-label: var(--color-text-faint);
+    --cs-rule: var(--color-stone);
+    --cs-accent: var(--color-ink);
+    --cs-link-hover: var(--color-teal);
+    --cs-find-border: var(--color-stone);
+
+    padding-top: 8px;
+    padding-bottom: 96px;
+  }
+
+  .cu {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .cu-head h3 {
+    max-width: 16ch;
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .cu-lead {
+    margin-top: 14px;
+    max-width: 32ch;
+    font-size: 15px;
+    color: var(--cs-lead);
+  }
+  .cu-direct {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 28px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .cu-direct a {
+    color: var(--cs-fg);
+    text-decoration: none;
+  }
+  .cu-direct a:hover {
+    color: var(--cs-link-hover);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+  .cu-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+  }
+  .contact-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .contact-form label span {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cs-label);
+  }
+  .contact-form input,
+  .contact-form textarea {
+    border: 0;
+    border-bottom: 1.5px solid var(--cs-rule);
+    background: transparent;
+    padding: 8px 2px;
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--cs-fg);
+    caret-color: var(--cs-accent);
+    transition: border-color 0.2s ease;
+  }
+  .contact-form textarea {
+    resize: vertical;
+    min-height: 64px;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-bottom-color: var(--cs-accent);
+  }
+  .contact-form .btn-primary {
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+
+  /* --- Module "Nous trouver" : bloc clair posé sur la bande sombre --- */
+  .contact-find {
+    display: grid;
+    grid-template-columns: minmax(260px, 340px) 1fr;
+    min-height: 360px;
+    margin-top: 56px;
+    color: var(--color-ink);
+    border: 1px solid var(--cs-find-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .contact-find__info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+    padding: 36px 32px;
+    background: var(--color-paper-dim);
+  }
+  .contact-find__kicker {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-teal);
+  }
+  .contact-find__addr {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+  .contact-find__meta {
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+  .contact-find__dir {
+    margin-top: 8px;
+    padding: 10px 18px;
+    border-radius: var(--radius-pill);
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  .contact-find__dir:hover {
+    background: var(--color-ink-hover);
+  }
+  .contact-find__map {
+    position: relative;
+    min-height: 320px;
+    background: var(--color-stone);
+  }
+  .contact-find__map :global(#map),
+  .contact-find__map :global(#map iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+
+  @media (max-width: 860px) {
+    .cu {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .contact-find {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+    .contact-find__info {
+      justify-content: flex-start;
+    }
+  }
+  @media (max-width: 480px) {
+    .cu-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

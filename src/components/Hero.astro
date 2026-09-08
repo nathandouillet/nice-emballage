@@ -1,0 +1,82 @@
+---
+import { Image } from "astro:assets";
+import heroImg from "../assets/hero.webp";
+---
+<section class="hero wrap">
+  <div>
+    <h1>
+      Emballages plastique et machines industrielles, fabriqués au Burkina Faso.
+    </h1>
+    <p>
+      Depuis 16 ans, Nice Emballage conçoit et fabrique localement préformes,
+      bouchons, bouteilles et lignes de production pour l'industrie
+      ouest-africaine.
+    </p>
+    <div class="actions">
+      <a href="/#nos-emballages" class="btn-primary">Voir nos produits</a>
+      <a href="/contact" class="btn-ghost">Demander un devis</a>
+    </div>
+  </div>
+  <div class="hero-graphic">
+    <Image src={heroImg} alt="Bouteille en verre soufflé Nice Emballage" />
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+    padding-top: 90px;
+    padding-bottom: 70px;
+    border-bottom: 1px solid var(--color-stone);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: 58px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+  }
+  p {
+    margin-top: 22px;
+    max-width: 46ch;
+    font-size: 18px;
+    color: var(--color-text-soft);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 34px;
+  }
+  .hero-graphic {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: linear-gradient(160deg, #eceae3, #f7f6f2);
+  }
+  .hero-graphic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 860px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      padding-top: 64px;
+      padding-bottom: 48px;
+    }
+    h1 {
+      font-size: 40px;
+    }
+    .hero-graphic {
+      max-width: 420px;
+    }
+  }
+</style>
