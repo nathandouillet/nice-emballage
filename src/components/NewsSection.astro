@@ -46,5 +46,5 @@ const homeArticles = articles.slice(0, 4);
   .news-carousel__cta a { display:inline-block; padding:15px 24px; border-radius:var(--radius-pill); background:var(--color-yellow); color:var(--color-ink); font-size:14px; font-weight:700; text-decoration:none; }
   .news-carousel__cta a:hover { background:var(--color-ink); color:var(--color-paper); }
   @media(max-width:900px){ .news-grid { grid-template-columns:repeat(2, 1fr); gap:24px 16px; } }
-  @media(max-width:520px){ .news-carousel__head { padding-bottom:34px; }.news-grid { grid-template-columns:1fr; }.news-card__image { border-radius:18px; }.news-carousel__cta { padding-top:36px; } }
+  @media(max-width:640px){ .news-grid { grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:minmax(76vw, 300px); width:calc(100% + var(--gutter)); margin-right:calc(var(--gutter) * -1); padding-right:var(--gutter); overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scrollbar-width:none; }.news-grid::-webkit-scrollbar { display:none; }.news-card { scroll-snap-align:start; }.news-carousel__head { padding-bottom:34px; }.news-card__image { border-radius:18px; }.news-carousel__cta { padding-top:36px; } }
 </style>

@@ -1,105 +1,55 @@
 ---
 import { Image } from "astro:assets";
-import heroImg from "../assets/hero-bouteilles.png";
-import { rel } from "../lib/base";
+import heroImage from "../assets/hero-main-bouteille.png";
 ---
-<section class="hero">
-  <div class="hero-primary wrap">
-    <h1>L’emballage, fabriqué ici.</h1>
-    <div class="hero-graphic">
-      <Image src={heroImg} alt="Bouteilles en plastique Nice Emballage" />
-    </div>
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__image">
+    <Image
+      src={heroImage}
+      alt="Bouteille PET Nice Emballage tenue à la main"
+      widths={[800, 1200, 1600, 2000]}
+      sizes="100vw"
+    />
   </div>
-  <div class="hero-secondary wrap">
-    <p>Préformes, bouchons, bouteilles et emballages plastiques à Ouagadougou.</p>
-    <a href={rel("/contact")} class="btn-primary">Parlons de votre besoin</a>
+  <div class="hero__shade" aria-hidden="true"></div>
+
+  <div class="hero__content wrap">
+    <h1 id="hero-title">L’emballage, fabriqué ici.</h1>
   </div>
+  <a class="hero__scroll" href="#nos-emballages" aria-label="Faire défiler vers nos emballages">
+    <i aria-hidden="true"></i>
+  </a>
 </section>
 
 <style>
   .hero {
     position:relative;
     isolation:isolate;
+    display:grid;
+    min-height:clamp(610px, 78vh, 830px);
     overflow:hidden;
-    padding:88px 0 96px;
+    background:var(--color-ink);
+    color:var(--color-paper);
   }
-  .hero::before {
-    position:absolute;
-    z-index:-1;
-    top:156px;
-    left:-252px;
-    width:440px;
-    height:500px;
-    border:42px solid var(--color-yellow);
-    border-bottom:0;
-    border-radius:260px 260px 0 0;
-    content:"";
-  }
-  .hero::after {
-    position:absolute;
-    z-index:-1;
-    right:max(var(--gutter), 6vw);
-    bottom:86px;
-    width:84px;
-    height:98px;
-    border:13px solid var(--color-ink);
-    border-bottom:0;
-    border-radius:76px 76px 0 0;
-    content:"";
-  }
-  .hero-primary {
-    position:relative;
-    display: grid;
-    grid-template-columns: .82fr 1.18fr;
-    gap: clamp(36px, 5vw, 88px);
-    align-items: center;
-    min-height: 510px;
-  }
-  h1 {
-    font-family: var(--font-display);
-    max-width: 9ch;
-    font-size: clamp(56px, 6.2vw, 96px);
-    font-weight: 800;
-    letter-spacing: -0.06em;
-    line-height: .94;
-  }
-  .hero-graphic {
-    position: relative;
-    align-self: stretch;
-    min-height: 470px;
-    margin-right: calc(var(--gutter) * -1);
-    overflow: hidden;
-    border-radius: 22px;
-    background: var(--color-stone);
-  }
-  .hero-graphic img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .hero-secondary { margin-top:96px; text-align:center; }
-  .hero-secondary p { max-width:26ch; margin:0 auto; color:var(--color-ink); font-family:var(--font-display); font-size:clamp(28px,3.1vw,46px); font-weight:500; letter-spacing:-.05em; line-height:1.04; }
-  .hero-secondary a { display:inline-block; margin-top:30px; }
+  .hero__image, .hero__shade { grid-area:1 / 1; width:100%; height:100%; }
+  .hero__image :global(img) { display:block; width:100%; height:100%; object-fit:cover; object-position:center; }
+  .hero__shade { background:linear-gradient(90deg, rgba(10,12,12,.88) 0%, rgba(10,12,12,.72) 34%, rgba(10,12,12,.2) 58%, rgba(10,12,12,0) 76%); }
+  .hero__content { z-index:1; grid-area:1 / 1; align-self:center; width:100%; padding-top:38px; }
+  h1 { max-width:9ch; margin:0; font-family:var(--font-display); font-size:clamp(4rem,7.4vw,8.2rem); font-weight:800; letter-spacing:-.08em; line-height:.84; }
+  .hero__scroll { position:absolute; z-index:1; bottom:34px; left:50%; display:block; padding:8px; transform:translateX(-50%); color:rgba(245,244,240,.78); text-decoration:none; }
+  .hero__scroll i { display:block; width:1px; height:34px; background:currentColor; animation:scroll-hint 1.8s ease-in-out infinite; }
+  @keyframes scroll-hint { 0%, 100% { transform:scaleY(.45); transform-origin:top; opacity:.45; } 50% { transform:scaleY(1); transform-origin:top; opacity:1; } }
 
-  @media (max-width: 860px) {
-    .hero { padding-top:64px; padding-bottom:72px; }
-    .hero-primary {
-      grid-template-columns: 1fr;
-      gap: 36px;
-      min-height: 0;
-    }
-    h1 {
-      font-size: 40px;
-    }
-    .hero-graphic {
-      min-height: 0;
-      aspect-ratio: 4 / 3;
-      margin-right: 0;
-      max-width: 420px;
-    }
-    .hero-secondary { margin-top:56px; }
-    .hero::before { top:170px; left:-300px; opacity:.7; }
-    .hero::after { right:22px; bottom:54px; width:54px; height:64px; border-width:9px; }
+  @media (max-width:800px) {
+    .hero { min-height:660px; }
+    .hero__image :global(img) { object-position:78% center; }
+    .hero__shade { background:linear-gradient(90deg, rgba(10,12,12,.92) 0%, rgba(10,12,12,.74) 66%, rgba(10,12,12,.22) 100%); }
+    .hero__content { align-self:end; padding-bottom:68px; }
+    h1 { max-width:8ch; font-size:clamp(3.5rem,14vw,5.2rem); }
+    .hero__scroll { bottom:24px; }
+  }
+  @media (max-width:480px) {
+    .hero__image :global(img) { object-position:82% center; }
   }
 </style>

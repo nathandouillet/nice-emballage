@@ -1,0 +1,24 @@
+<section class="company-intro" aria-labelledby="company-intro-title">
+  <div class="wrap company-intro__inner">
+    <h2 id="company-intro-title">
+      16 ans à fabriquer les emballages qui font avancer les produits d’ici.
+    </h2>
+    <p class="company-intro__lead">
+      Nous accompagnons les professionnels avec des emballages plastiques, des
+      équipements et des solutions de recyclage, pensés pour les réalités du marché local.
+    </p>
+  </div>
+</section>
+
+<style>
+  .company-intro { position:relative; isolation:isolate; overflow:hidden; padding:126px 0 118px; background:var(--color-paper); text-align:center; }
+  .company-intro::before { position:absolute; z-index:-1; right:-126px; bottom:-140px; width:248px; height:286px; border:25px solid var(--color-yellow); border-bottom:0; border-radius:152px 152px 0 0; content:""; }
+  .company-intro__inner { max-width:1080px; }
+  .company-intro h2 { max-width:16ch; margin:0 auto; font-family:var(--font-display); font-size:clamp(2.8rem,5.6vw,6.2rem); font-weight:800; letter-spacing:-.08em; line-height:.88; }
+  .company-intro__lead { max-width:52ch; margin:34px auto 0; color:var(--color-text-soft); font-size:clamp(1.05rem,1.5vw,1.25rem); line-height:1.5; }
+
+  @media (max-width:800px) {
+    .company-intro { padding:82px 0 76px; }
+    .company-intro::before { right:-172px; bottom:-170px; opacity:.75; }
+  }
+</style>

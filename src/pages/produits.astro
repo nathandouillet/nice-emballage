@@ -1,47 +1,151 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
+import { rel } from "../lib/base";
 import preformes from "../assets/preformes-reelles-sombre.png";
 import bouchons from "../assets/bouchons-pyramide-sombre.png";
 import bouteilles from "../assets/bouteilles-reelles-sombre.png";
 import emballages from "../assets/film-emballage-sombre.png";
-import { rel } from "../lib/base";
+import recycling from "../assets/recyclage-plastique.jpeg";
+import machineMoule from "../assets/machine-atelier-unifiee.png";
+import machineFilm from "../assets/machine-film-unifiee-v2.png";
+import machineLigne from "../assets/machine-ligne-unifiee.png";
+import machineSceller from "../assets/machine-sceller-unifiee.png";
 
 const products = [
-  { image: preformes, name: "Préformes", text: "Différents formats pour vos projets de fabrication." },
-  { image: bouchons, name: "Bouchons", text: "Plusieurs modèles pour compléter vos contenants." },
+  { image: preformes, name: "Préformes", text: "Des préformes pour vos projets de soufflage et de conditionnement." },
+  { image: bouchons, name: "Bouchons", text: "Des bouchons pour compléter vos contenants et vos formats." },
   { image: bouteilles, name: "Bouteilles", text: "Des bouteilles adaptées à vos boissons et produits liquides." },
-  { image: emballages, name: "Emballages", text: "Des solutions pratiques pour le conditionnement de vos produits." },
+  { image: emballages, name: "Films d’emballage", text: "Des solutions de film plastique pour protéger et conditionner vos produits." },
+];
+
+const machines = [
+  { image: machineMoule, name: "Moule d’injection" },
+  { image: machineFilm, name: "Ligne de film plastique" },
+  { image: machineLigne, name: "Ligne de conditionnement" },
+  { image: machineSceller, name: "Machine à sceller" },
 ];
 ---
-<Layout title="Nos produits — Nice Emballage">
-  <main class="products-page wrap">
-    <header>
-      <p>NICE EMBALLAGE</p>
-      <h1>Nos produits</h1>
-      <a href={rel("/contact")}>Parlons de votre besoin</a>
+
+<Layout
+  title="Produits & services — Nice Emballage"
+  description="Découvrez les produits et services Nice Emballage : préformes, bouchons, bouteilles, films d’emballage, équipements et recyclage."
+>
+  <main class="catalogue">
+    <header class="catalogue-intro">
+      <div class="wrap">
+        <h1>Produits<br />& services.</h1>
+        <p>Des emballages fabriqués à Ouagadougou, des équipements et une solution de recyclage.</p>
+      </div>
     </header>
-    <div class="products-page__grid">
-      {products.map((product) => (
-        <article>
-          <Image src={product.image} alt={product.name} />
-          <h2>{product.name}</h2>
-          <p>{product.text}</p>
+
+    <section class="catalogue-section wrap" aria-labelledby="products-title">
+      <header class="catalogue-section__head">
+        <h2 id="products-title">Ce que nous fabriquons.</h2>
+        <p>Des produits pensés pour vos besoins de conditionnement.</p>
+      </header>
+      <div class="catalogue-grid">
+        {
+          products.map((product) => (
+            <article class="catalogue-card">
+              <div class="catalogue-card__image">
+                <Image src={product.image} alt={product.name} widths={[480, 720, 1000]} sizes="(max-width: 700px) 100vw, 50vw" />
+              </div>
+              <h3>{product.name}</h3>
+              <p>{product.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="machine-catalogue wrap" aria-labelledby="machines-title">
+      <header class="catalogue-section__head">
+        <h2 id="machines-title">Machines & équipements.</h2>
+        <p>Une sélection d’équipements pour accompagner votre production.</p>
+      </header>
+      <div class="machine-catalogue__grid">
+        {
+          machines.map((machine) => (
+            <article class="machine-catalogue__card">
+              <div>
+                <Image src={machine.image} alt={machine.name} widths={[480, 720, 1000]} sizes="(max-width: 700px) 100vw, 25vw" />
+              </div>
+              <h3>{machine.name}</h3>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <header class="catalogue-section__head">
+          <h2 id="services-title">Nos services.</h2>
+          <p>Une solution concrète pour prolonger la vie des plastiques.</p>
+        </header>
+        <article class="recycling-service">
+          <div class="recycling-service__image">
+            <Image src={recycling} alt="Bouteilles plastiques collectées pour le recyclage" widths={[640, 960, 1280]} sizes="(max-width: 800px) 100vw, 42vw" />
+          </div>
+          <div class="recycling-service__copy">
+            <h3>Recyclage du plastique</h3>
+            <p>Nous collectons les bouteilles plastiques usagées pour accompagner leur recyclage et leur valorisation.</p>
+            <a class="btn-primary" href={rel("/contact")}>Nous contacter</a>
+          </div>
         </article>
-      ))}
-    </div>
+      </div>
+    </section>
   </main>
 </Layout>
 
 <style>
-  .products-page { padding-top:96px; padding-bottom:112px; }
-  header { display:grid; grid-template-columns:1fr auto; gap:18px; align-items:end; margin-bottom:64px; }
-  header p { grid-column:1 / -1; font-size:11px; font-weight:800; letter-spacing:.12em; }
-  h1 { font-family:var(--font-display); font-size:clamp(54px,7vw,104px); letter-spacing:-.075em; line-height:.86; }
-  header a { padding:15px 24px; border-radius:var(--radius-pill); background:var(--color-yellow); color:var(--color-ink); font-size:14px; font-weight:700; text-decoration:none; }
-  .products-page__grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:48px 24px; }
-  article :global(img) { display:block; width:100%; aspect-ratio:1; object-fit:cover; border-radius:20px; }
-  h2 { margin-top:18px; font-family:var(--font-display); font-size:30px; letter-spacing:-.05em; }
-  article p { max-width:38ch; margin-top:6px; color:var(--color-text-soft); font-size:15px; }
-  @media(max-width:680px){ .products-page { padding-top:64px; }.products-page__grid { grid-template-columns:1fr; gap:38px; } header { grid-template-columns:1fr; align-items:start; margin-bottom:44px; } header a { justify-self:start; } }
+  .catalogue { overflow:hidden; background:var(--color-paper); }
+  .catalogue-intro { position:relative; isolation:isolate; padding:84px 0 72px; }
+  .catalogue-intro::before { position:absolute; z-index:-1; top:54px; left:-158px; width:276px; height:322px; border:29px solid var(--color-yellow); border-bottom:0; border-radius:175px 175px 0 0; content:""; }
+  .catalogue-intro h1 { max-width:8ch; margin:0; font-family:var(--font-display); font-size:clamp(4rem,8vw,8.8rem); font-weight:800; letter-spacing:-.085em; line-height:.8; }
+  .catalogue-intro p { max-width:35ch; margin:30px 0 0; color:var(--color-text-soft); font-size:clamp(1.06rem,1.6vw,1.3rem); line-height:1.45; }
+
+  .catalogue-section, .machine-catalogue { padding-bottom:84px; }
+  .catalogue-section__head { display:grid; grid-template-columns:1fr minmax(210px, .45fr); align-items:end; gap:30px; margin-bottom:52px; }
+  .catalogue-section__head h2 { max-width:13ch; margin:0; font-family:var(--font-display); font-size:clamp(2.7rem,5.1vw,5.8rem); font-weight:800; letter-spacing:-.075em; line-height:.88; }
+  .catalogue-section__head p { max-width:28ch; margin:0; color:var(--color-text-soft); font-size:1.05rem; line-height:1.45; }
+  .catalogue-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+  .catalogue-card__image { aspect-ratio:1; overflow:hidden; border-radius:22px; background:var(--color-stone); }
+  .catalogue-card__image :global(img) { display:block; width:100%; height:100%; object-fit:cover; }
+  .catalogue-card h3 { margin:16px 4px 0; font-family:var(--font-display); font-size:clamp(1.6rem,2.2vw,2.3rem); font-weight:800; letter-spacing:-.065em; line-height:.92; }
+  .catalogue-card p { max-width:34ch; margin:9px 4px 0; color:var(--color-text-soft); font-size:.94rem; line-height:1.4; }
+
+  .machine-catalogue__grid { display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+  .machine-catalogue__card > div { aspect-ratio:4/3; overflow:hidden; border-radius:22px; background:var(--color-stone); }
+  .machine-catalogue__card :global(img) { display:block; width:100%; height:100%; object-fit:cover; }
+  .machine-catalogue__card h3 { margin:15px 4px 0; font-family:var(--font-display); font-size:clamp(1.35rem,1.8vw,1.85rem); font-weight:800; letter-spacing:-.055em; line-height:.98; }
+
+  .services { padding:46px 0 52px; background:var(--color-paper-dim); }
+  .services .catalogue-section__head { grid-template-columns:1fr minmax(210px, .45fr); gap:30px; margin-bottom:25px; }
+  .services .catalogue-section__head h2 { max-width:8ch; font-size:clamp(2.2rem,3.6vw,4rem); }
+  .services .catalogue-section__head p { max-width:28ch; }
+  .recycling-service { display:grid; grid-template-columns:minmax(250px, 380px) 1fr; height:240px; overflow:hidden; border-radius:22px; background:var(--color-paper); }
+  .recycling-service__image { min-height:0; background:var(--color-stone); }
+  .recycling-service__image :global(img) { display:block; width:100%; height:100%; object-fit:cover; }
+  .recycling-service__copy { align-self:center; padding:22px clamp(24px,3vw,34px); }
+  .recycling-service h3 { margin:0; font-family:var(--font-display); font-size:clamp(1.65rem,2.5vw,2.6rem); font-weight:800; letter-spacing:-.07em; line-height:.9; }
+  .recycling-service p { max-width:44ch; margin:10px 0 0; color:var(--color-text-soft); font-size:.95rem; line-height:1.4; }
+  .recycling-service a { margin-top:16px; padding:12px 19px; font-size:13px; }
+
+  @media (max-width:800px) {
+    .catalogue-intro { padding:74px 0 72px; }
+    .catalogue-intro::before { top:35px; left:-204px; opacity:.75; }
+    .catalogue-section, .machine-catalogue { padding-bottom:64px; }
+    .catalogue-section__head { grid-template-columns:1fr; gap:22px; margin-bottom:38px; }
+    .services { padding:54px 0 62px; }
+    .services .catalogue-section__head { grid-template-columns:1fr; gap:12px; margin-bottom:24px; }
+    .services .catalogue-section__head p { justify-self:start; }
+    .catalogue-grid, .machine-catalogue__grid { grid-template-columns:repeat(2,1fr); }
+    .catalogue-grid { gap:38px 16px; }
+    .machine-catalogue__grid { gap:28px 16px; }
+    .recycling-service { grid-template-columns:1fr; height:auto; }
+    .recycling-service__image { min-height:0; aspect-ratio:4/3; }
+  }
+  @media (max-width:520px) { .catalogue-grid, .machine-catalogue__grid { grid-template-columns:1fr; } }
 </style>
