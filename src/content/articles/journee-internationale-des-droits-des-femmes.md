@@ -3,7 +3,7 @@ title: "Toute l'équipe vous souhaite une excellente journée internationale des
 excerpt: "Les femmes de Nice Emballage occupent des postes clés, de la production au contrôle qualité en passant par l'administration."
 date: 2026-03-08
 category: "Vie de l'entreprise"
-cover: "../../assets/produits-vitrine.png"
+cover: "../../assets/bouteilles-reelles-sombre.png"
 ---
 
 En cette journée internationale des droits des femmes, nous tenons à saluer
