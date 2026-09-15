@@ -81,8 +81,7 @@ const machines = [
 
 <style>
   .catalogue { overflow:hidden; background:var(--color-paper); }
-  .catalogue-intro { position:relative; isolation:isolate; padding:84px 0 72px; }
-  .catalogue-intro::before { position:absolute; z-index:-1; top:54px; left:-158px; width:276px; height:322px; border:29px solid var(--color-yellow); border-bottom:0; border-radius:175px 175px 0 0; content:""; }
+  .catalogue-intro { padding:84px 0 72px; }
   .catalogue-intro h1 { max-width:8ch; margin:0; font-family:var(--font-display); font-size:clamp(4rem,8vw,8.8rem); font-weight:800; letter-spacing:-.085em; line-height:.8; }
   .catalogue-intro p { max-width:35ch; margin:30px 0 0; color:var(--color-text-soft); font-size:clamp(1.06rem,1.6vw,1.3rem); line-height:1.45; }
 
@@ -103,7 +102,6 @@ const machines = [
 
   @media (max-width:800px) {
     .catalogue-intro { padding:74px 0 72px; }
-    .catalogue-intro::before { top:35px; left:-204px; opacity:.75; }
     .catalogue-section, .machine-catalogue { padding-bottom:64px; }
     .catalogue-section__head { grid-template-columns:1fr; gap:22px; margin-bottom:38px; }
     .catalogue-grid, .machine-catalogue__grid { grid-template-columns:repeat(2,1fr); }
