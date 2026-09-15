@@ -1,0 +1,47 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import preformes from "../assets/preformes-reelles-sombre.png";
+import bouchons from "../assets/bouchons-pyramide-sombre.png";
+import bouteilles from "../assets/bouteilles-reelles-sombre.png";
+import emballages from "../assets/film-emballage-sombre.png";
+import { rel } from "../lib/base";
+
+const products = [
+  { image: preformes, name: "Préformes", text: "Différents formats pour vos projets de fabrication." },
+  { image: bouchons, name: "Bouchons", text: "Plusieurs modèles pour compléter vos contenants." },
+  { image: bouteilles, name: "Bouteilles", text: "Des bouteilles adaptées à vos boissons et produits liquides." },
+  { image: emballages, name: "Emballages", text: "Des solutions pratiques pour le conditionnement de vos produits." },
+];
+---
+<Layout title="Nos produits — Nice Emballage">
+  <main class="products-page wrap">
+    <header>
+      <p>NICE EMBALLAGE</p>
+      <h1>Nos produits</h1>
+      <a href={rel("/contact")}>Parlons de votre besoin</a>
+    </header>
+    <div class="products-page__grid">
+      {products.map((product) => (
+        <article>
+          <Image src={product.image} alt={product.name} />
+          <h2>{product.name}</h2>
+          <p>{product.text}</p>
+        </article>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .products-page { padding-top:96px; padding-bottom:112px; }
+  header { display:grid; grid-template-columns:1fr auto; gap:18px; align-items:end; margin-bottom:64px; }
+  header p { grid-column:1 / -1; font-size:11px; font-weight:800; letter-spacing:.12em; }
+  h1 { font-family:var(--font-display); font-size:clamp(54px,7vw,104px); letter-spacing:-.075em; line-height:.86; }
+  header a { padding:15px 24px; border-radius:var(--radius-pill); background:var(--color-yellow); color:var(--color-ink); font-size:14px; font-weight:700; text-decoration:none; }
+  .products-page__grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:48px 24px; }
+  article :global(img) { display:block; width:100%; aspect-ratio:1; object-fit:cover; border-radius:20px; }
+  h2 { margin-top:18px; font-family:var(--font-display); font-size:30px; letter-spacing:-.05em; }
+  article p { max-width:38ch; margin-top:6px; color:var(--color-text-soft); font-size:15px; }
+  @media(max-width:680px){ .products-page { padding-top:64px; }.products-page__grid { grid-template-columns:1fr; gap:38px; } header { grid-template-columns:1fr; align-items:start; margin-bottom:44px; } header a { justify-self:start; } }
+</style>

@@ -3,7 +3,7 @@ title: "Nice Emballage, le choix de la qualité maîtrisée"
 excerpt: "De la matière première au produit fini, nous contrôlons chaque étape de la fabrication pour garantir des emballages fiables et constants."
 date: 2026-02-20
 category: "Vie de l'entreprise"
-cover: "../../assets/news-featured.webp"
+cover: "../../assets/bouteilles-reelles-carre.png"
 ---
 
 Fabriquer localement ne veut pas dire transiger sur la qualité. Depuis notre

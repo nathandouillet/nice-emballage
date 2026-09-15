@@ -3,7 +3,7 @@ title: "Nouveaux moules d'injection livrés à l'atelier"
 excerpt: "L'arrivée de nouveaux moules élargit notre gamme de préformes et réduit nos délais sur les formats les plus demandés."
 date: 2026-04-10
 category: "Équipement"
-cover: "../../assets/machines.webp"
+cover: "../../assets/machine-atelier-unifiee.png"
 ---
 
 Nous venons de réceptionner un jeu de nouveaux moules d'injection pour notre

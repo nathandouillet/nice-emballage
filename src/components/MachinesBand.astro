@@ -1,86 +1,67 @@
 ---
 import { Image } from "astro:assets";
-import machinesImg from "../assets/machines.webp";
+import machineMoule from "../assets/machine-atelier-unifiee.png";
+import machineConditionnement from "../assets/machine-sceller-unifiee.png";
 import { rel } from "../lib/base";
+
+const equipment = [
+  {
+    image: machineMoule,
+    title: "Moulage & fabrication",
+    detail: "Des équipements pour développer votre production.",
+  },
+  {
+    image: machineConditionnement,
+    title: "Film & conditionnement",
+    detail: "Des solutions adaptées à vos besoins et vos volumes.",
+  },
+];
 ---
-<section class="ml">
-  <div class="ml-grid wrap">
-    <div class="ml-text">
-      <span class="kicker">ÉQUIPEMENT INDUSTRIEL</span>
-      <h2>Machines pour votre ligne de production</h2>
-      <p>
-        Nice Emballage peut vous commander toute sorte de machines industrielles
-        du domaine de l'emballage : machines à sceller, machines à film, modules
-        d'injection et lignes complètes adaptées à vos besoins.
-      </p>
-      <a href={rel("/contact")} class="btn-primary">Nous contacter</a>
+
+<section class="machines" aria-labelledby="machines-title">
+  <div class="wrap">
+    <header class="machines__head">
+      <h2 id="machines-title">L’équipement pour aller plus loin.</h2>
+    </header>
+
+    <div class="machine-tiles">
+      {
+        equipment.map((item) => (
+          <article class="machine-tile">
+            <Image src={item.image} alt={item.title} widths={[760, 1200]} sizes="(max-width: 760px) 100vw, 60vw" />
+            <div class="machine-tile__shade" />
+            <div class="machine-tile__content">
+              <h3>{item.title}</h3>
+              <p>{item.detail}</p>
+            </div>
+          </article>
+        ))
+      }
     </div>
-    <div class="ml-visual">
-      <Image src={machinesImg} alt="Ligne de production industrielle" />
+
+    <div class="machines__cta">
+      <a href={rel("/contact")}>Parlons de votre besoin</a>
     </div>
   </div>
 </section>
 
 <style>
-  .ml {
-    padding: 88px 0;
-    background: var(--color-paper-dim);
-    border-block: 1px solid var(--color-stone);
-  }
-  .ml-grid {
-    display: grid;
-    grid-template-columns: 1fr 0.9fr;
-    gap: 64px;
-    align-items: center;
-  }
-  .kicker {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-teal);
-  }
-  h2 {
-    margin-top: 10px;
-    max-width: 18ch;
-    font-family: var(--font-display);
-    font-size: 34px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-  }
-  p {
-    margin-top: 20px;
-    max-width: 44ch;
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--color-text-soft);
-  }
-  .btn-primary {
-    margin-top: 28px;
-  }
-  .ml-visual {
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-    border-radius: var(--radius-lg);
-    background: var(--color-stone);
-  }
-  .ml-visual :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-  }
-
-  @media (max-width: 860px) {
-    .ml {
-      padding: 64px 0;
-    }
-    .ml-grid {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    .ml-visual {
-      max-width: 460px;
-      aspect-ratio: 4 / 3;
-    }
-  }
+  .machines { padding:112px 0; background:var(--color-paper); }
+  .machines__head { display:flex; justify-content:center; margin-bottom:62px; text-align:center; }
+  .machines__head h2 { max-width:13ch; font-family:var(--font-display); font-size:clamp(46px,5.7vw,88px); font-weight:800; letter-spacing:-.07em; line-height:.9; }
+  .machine-tiles { display:grid; grid-template-columns:1fr 1fr; gap:22px; min-height:500px; transition:grid-template-columns .55s cubic-bezier(.2,.75,.2,1); }
+  .machine-tiles:has(.machine-tile:first-child:hover) { grid-template-columns:1.45fr .55fr; }
+  .machine-tiles:has(.machine-tile:last-child:hover) { grid-template-columns:.55fr 1.45fr; }
+  .machine-tile { position:relative; min-width:0; overflow:hidden; border-radius:22px; background:var(--color-stone); cursor:default; }
+  .machine-tile :global(img) { display:block; width:100%; height:100%; object-fit:cover; transition:transform .65s ease; }
+  .machine-tile:hover :global(img) { transform:scale(1.035); }
+  .machine-tile__shade { position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,12,10,.08) 25%, rgba(10,12,10,.78) 100%); }
+  .machine-tile__content { position:absolute; right:clamp(22px,3vw,42px); bottom:clamp(22px,3vw,42px); left:clamp(22px,3vw,42px); color:#fff; }
+  .machine-tile h3 { max-width:14ch; font-family:var(--font-display); font-size:clamp(28px,3.1vw,48px); letter-spacing:-.06em; line-height:.95; }
+  .machine-tile p { max-width:32ch; margin-top:12px; color:rgba(255,255,255,.78); font-size:14px; line-height:1.45; opacity:0; transform:translateY(8px); transition:opacity .3s ease, transform .3s ease; }
+  .machine-tile:hover p { opacity:1; transform:translateY(0); }
+  .machines__cta { display:flex; justify-content:center; padding-top:48px; }
+  .machines__cta a { display:inline-block; padding:15px 24px; border-radius:var(--radius-pill); background:var(--color-yellow); color:var(--color-ink); font-size:14px; font-weight:700; text-decoration:none; }
+  .machines__cta a:hover { background:var(--color-ink); color:var(--color-paper); }
+  @media(max-width:760px){ .machines { padding:80px 0; }.machines__head { margin-bottom:40px; }.machine-tiles,.machine-tiles:has(.machine-tile:first-child:hover),.machine-tiles:has(.machine-tile:last-child:hover) { grid-template-columns:1fr; min-height:0; }.machine-tile { min-height:420px; border-radius:18px; }.machine-tile p { opacity:1; transform:none; }.machines__cta { padding-top:36px; } }
 </style>

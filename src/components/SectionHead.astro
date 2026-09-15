@@ -21,17 +21,7 @@ const { kicker, title, align = "left", actionLabel, actionHref } = Astro.props;
 
     {
       actionHref && (
-        <a class="sh-action" href={rel(actionHref)} aria-label={actionLabel ?? "Voir tout"}>
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path
-              d="M5 12h14M13 6l6 6-6 6"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </a>
+        <a class="sh-action" href={rel(actionHref)}>{actionLabel ?? "Voir tout"}</a>
       )
     }
   </div>
@@ -49,17 +39,19 @@ const { kicker, title, align = "left", actionLabel, actionHref } = Astro.props;
     gap: 24px;
   }
   .kicker {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-teal);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    color: var(--color-ink);
   }
   h2 {
     margin-top: 8px;
     max-width: 20ch;
     font-family: var(--font-display);
-    font-size: 34px;
+    font-size: clamp(34px, 3.3vw, 48px);
     font-weight: 800;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.05em;
+    line-height: .98;
   }
 
   /* Variante centrée */
@@ -77,37 +69,23 @@ const { kicker, title, align = "left", actionLabel, actionHref } = Astro.props;
 
   .sh-action {
     flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 54px;
-    height: 54px;
-    border: 1px solid var(--color-ink);
-    border-radius: 50%;
+    display: inline-block;
+    padding: 10px 0;
+    border-bottom: 1px solid currentColor;
     color: var(--color-ink);
+    font-size: 13px;
+    font-weight: 700;
     text-decoration: none;
-    transition: background 0.2s ease, color 0.2s ease;
-  }
-  .sh-action svg {
-    width: 20px;
-    height: 20px;
-    transition: transform 0.2s ease;
+    transition: color 0.2s ease;
   }
   .sh-action:hover {
-    background: var(--color-ink);
-    color: var(--color-paper);
-  }
-  .sh-action:hover svg {
-    transform: translateX(3px);
+    color: var(--color-ink);
+    border-bottom-color: var(--color-yellow);
   }
 
   @media (max-width: 640px) {
     h2 {
       font-size: 28px;
-    }
-    .sh-action {
-      width: 46px;
-      height: 46px;
     }
   }
 </style>

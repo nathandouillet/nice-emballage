@@ -42,7 +42,7 @@ a {
   display: inline-block;
   padding: 15px 26px;
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-pill);
   font-family: inherit;
   font-weight: 700;
   font-size: 15px;
@@ -71,14 +71,14 @@ a {
 .nav-cta {
   display: inline-block;
   padding: 9px 20px;
-  background: var(--color-ink);
-  color: var(--color-paper);
-  border-radius: var(--radius-pill);
+  background: var(--color-yellow);
+  color: var(--color-ink);
+  border-radius: var(--radius-sm);
   font-size: 13.5px;
   font-weight: 600;
   text-decoration: none;
   transition: background 0.2s ease;
 }
 .nav-cta:hover {
-  background: var(--color-ink-hover);
+  background: var(--color-yellow-hover);
 }

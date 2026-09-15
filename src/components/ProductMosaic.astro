@@ -1,92 +1,57 @@
 ---
 import { Image } from "astro:assets";
-import preformes from "../assets/preformes.webp";
-import bouchons from "../assets/bouchons.webp";
-import bouteilles from "../assets/bouteilles.webp";
-import emballages from "../assets/emballages.webp";
+import preformes from "../assets/preformes-reelles-sombre.png";
+import bouchons from "../assets/bouchons-pyramide-sombre.png";
+import bouteilles from "../assets/bouteilles-reelles-sombre.png";
+import emballages from "../assets/film-emballage-sombre.png";
+import { rel } from "../lib/base";
 
-const tiles = [
-  { img: preformes, label: "Préformes", sub: "PET, tous formats" },
-  { img: bouchons, label: "Bouchons", sub: "Moules sur-mesure" },
-  { img: bouteilles, label: "Bouteilles", sub: "Soufflage PET" },
-  { img: emballages, label: "Emballages", sub: "Film & conditionnement" },
+const products = [
+  { image: preformes, label: "Préformes" },
+  { image: bouchons, label: "Bouchons" },
+  { image: bouteilles, label: "Bouteilles" },
+  { image: emballages, label: "Emballages" },
 ];
 ---
 
-<div class="mosaic wrap">
-  {
-    tiles.map((tile) => (
-      <div class="tile">
-        <Image src={tile.img} alt={tile.label} />
-        <div class="scrim" />
-        <div class="label">
-          {tile.label}
-          <span>{tile.sub}</span>
-        </div>
-      </div>
-    ))
-  }
+<div class="product-showcase">
+  <header class="product-showcase__head wrap">
+    <h2>Ce que nous fabriquons</h2>
+  </header>
+
+  <div class="product-grid wrap">
+    {
+      products.map((product) => (
+        <article class="product-card">
+          <div class="product-card__image">
+            <Image src={product.image} alt={product.label} />
+          </div>
+          <h3>{product.label}</h3>
+        </article>
+      ))
+    }
+  </div>
+
+  <p class="product-showcase__lead">Des solutions d’emballage pensées pour vos produits et vos volumes.</p>
+  <div class="product-showcase__cta">
+    <a href={rel("/produits")}>Découvrir nos produits</a>
+  </div>
 </div>
 
 <style>
-  .mosaic {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-bottom: 96px;
-  }
-  .tile {
-    position: relative;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-    border-radius: var(--radius-md);
-    background: var(--color-stone);
-  }
-  .tile img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.5s ease;
-  }
-  .tile:hover img {
-    transform: scale(1.08);
-  }
-  .scrim {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(
-      180deg,
-      transparent 40%,
-      rgba(0, 0, 0, 0.55) 100%
-    );
-  }
-  .label {
-    position: absolute;
-    left: 18px;
-    bottom: 18px;
-    z-index: 2;
-    color: #fff;
-    font-weight: 700;
-    font-size: 17px;
-  }
-  .label span {
-    display: block;
-    margin-top: 2px;
-    font-size: 12px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.75);
-  }
-
-  @media (max-width: 900px) {
-    .mosaic {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (max-width: 460px) {
-    .mosaic {
-      grid-template-columns: 1fr;
-    }
-  }
+  .product-showcase { overflow:hidden; }
+  .product-showcase__head { padding-top:0; padding-bottom:52px; text-align:center; }
+  .product-showcase__head h2 { max-width:13ch; margin:0 auto; font-family:var(--font-display); font-size:clamp(46px,5.4vw,82px); font-weight:800; letter-spacing:-.07em; line-height:.9; }
+  .product-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:22px; align-items:start; }
+  .product-card { position:relative; }
+  .product-card:nth-child(1),.product-card:nth-child(3) { margin-top:64px; }
+  .product-card__image { aspect-ratio:1; overflow:hidden; border-radius:22px; background:var(--color-stone); }
+  .product-card__image :global(img) { display:block; width:100%; height:100%; object-fit:cover; }
+  .product-card h3 { margin:14px 4px 0; font-family:var(--font-display); font-size:clamp(20px,1.8vw,27px); letter-spacing:-.05em; line-height:1; }
+  .product-showcase__lead { max-width:44ch; margin:52px auto 0; padding:0 var(--gutter); text-align:center; font-size:15px; font-weight:600; line-height:1.45; }
+  .product-showcase__cta { display:flex; justify-content:center; padding-top:24px; }
+  .product-showcase__cta a { display:inline-block; padding:15px 24px; border-radius:var(--radius-pill); background:var(--color-yellow); color:var(--color-ink); font-size:14px; font-weight:700; text-decoration:none; }
+  .product-showcase__cta a:hover { background:var(--color-ink); color:var(--color-paper); }
+  @media(max-width:900px){ .product-grid { grid-template-columns:repeat(2, 1fr); gap:16px; }.product-card:nth-child(1),.product-card:nth-child(3) { margin-top:0; }.product-card:nth-child(2) { margin-top:48px; }.product-showcase__lead { margin-top:40px; } }
+  @media(max-width:520px){ .product-grid { grid-template-columns:1fr; }.product-card:nth-child(2) { margin-top:0; } }
 </style>

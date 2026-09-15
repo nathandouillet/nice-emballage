@@ -1,0 +1,75 @@
+---
+import { Image } from "astro:assets";
+import recyclingImage from "../assets/recyclage-plastique.jpeg";
+import { rel } from "../lib/base";
+---
+
+<section class="recycling" aria-labelledby="recycling-title">
+  <div class="recycling__layout wrap">
+    <div class="recycling__copy">
+      <h2 id="recycling-title">Recyclage de bouteilles plastiques.</h2>
+      <p>
+        Nous collectons les bouteilles plastiques usagées pour accompagner leur
+        recyclage et leur valorisation.
+      </p>
+      <a class="btn-primary" href={rel("/contact")}>Nous contacter</a>
+    </div>
+
+    <div class="recycling__image">
+      <Image
+        src={recyclingImage}
+        alt="Bouteilles plastiques collectées pour le recyclage"
+        widths={[640, 960, 1280]}
+        sizes="(max-width: 800px) 100vw, 52vw"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .recycling { padding: 112px 0; background: var(--color-paper); }
+
+  .recycling__layout {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.82fr) minmax(26rem, 1.18fr);
+    align-items: center;
+    gap: clamp(3rem, 8vw, 10rem);
+  }
+
+  .recycling__copy h2 {
+    max-width: 9ch;
+    margin: 0;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    line-height: 0.96;
+    letter-spacing: -0.065em;
+  }
+
+  .recycling__copy p {
+    max-width: 32ch;
+    margin: 2rem 0 2.4rem;
+    color: var(--color-ink-muted);
+    font-size: clamp(1.08rem, 1.5vw, 1.3rem);
+    line-height: 1.5;
+  }
+
+  .recycling__image {
+    overflow: hidden;
+    aspect-ratio: 5 / 4;
+    border-radius: 22px;
+    background: #d9cbb5;
+  }
+
+  .recycling__image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 45%;
+  }
+
+  @media (max-width: 800px) {
+    .recycling { padding: 76px 0; }
+    .recycling__layout { grid-template-columns: 1fr; gap: 2.6rem; }
+    .recycling__copy h2 { max-width: 11ch; }
+    .recycling__image { aspect-ratio: 4 / 3; }
+  }
+</style>

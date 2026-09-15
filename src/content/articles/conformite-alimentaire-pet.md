@@ -3,7 +3,7 @@ title: "Comment nous garantissons la conformité alimentaire de nos préformes P
 excerpt: "Matière vierge tracée, atelier maîtrisé, contrôles réguliers : le point sur nos pratiques pour le contact alimentaire."
 date: 2025-11-05
 category: "Technique"
-cover: "../../assets/preformes.webp"
+cover: "../../assets/preformes-polies.png"
 ---
 
 Une grande partie de nos préformes finit au contact d'une boisson ou d'un

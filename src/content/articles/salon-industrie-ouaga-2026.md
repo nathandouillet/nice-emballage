@@ -3,7 +3,7 @@ title: "Retour sur le salon de l'industrie de Ouagadougou 2026"
 excerpt: "Trois jours d'échanges avec des industriels de toute la sous-région. Merci à celles et ceux qui sont passés nous voir."
 date: 2026-05-22
 category: "Événement"
-cover: "../../assets/bouteilles.webp"
+cover: "../../assets/hero-bouteilles.png"
 ---
 
 Nous étions présents au salon de l'industrie de Ouagadougou, aux côtés d'autres

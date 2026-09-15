@@ -1,63 +1,46 @@
 ---
 import { Image } from "astro:assets";
-import heroImg from "../assets/hero.webp";
+import heroImg from "../assets/hero-bouteilles.png";
 import { rel } from "../lib/base";
 ---
-<section class="hero wrap">
-  <div>
-    <h1>
-      Emballages plastique et machines industrielles, fabriqués au Burkina Faso.
-    </h1>
-    <p>
-      Depuis 16 ans, Nice Emballage conçoit et fabrique localement préformes,
-      bouchons, bouteilles et lignes de production pour l'industrie
-      ouest-africaine.
-    </p>
-    <div class="actions">
-      <a href={rel("/#nos-emballages")} class="btn-primary">Voir nos produits</a>
-      <a href={rel("/contact")} class="btn-ghost">Demander un devis</a>
+<section class="hero">
+  <div class="hero-primary wrap">
+    <h1>L’emballage, fabriqué ici.</h1>
+    <div class="hero-graphic">
+      <Image src={heroImg} alt="Bouteilles en plastique Nice Emballage" />
     </div>
   </div>
-  <div class="hero-graphic">
-    <Image src={heroImg} alt="Bouteille en verre soufflé Nice Emballage" />
+  <div class="hero-secondary wrap">
+    <p>Préformes, bouchons, bouteilles et emballages plastiques à Ouagadougou.</p>
+    <a href={rel("/contact")} class="btn-primary">Parlons de votre besoin</a>
   </div>
 </section>
 
 <style>
-  .hero {
+  .hero { padding:88px 0 96px; }
+  .hero-primary {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 48px;
+    grid-template-columns: .82fr 1.18fr;
+    gap: clamp(36px, 5vw, 88px);
     align-items: center;
-    padding-top: 90px;
-    padding-bottom: 70px;
-    border-bottom: 1px solid var(--color-stone);
+    min-height: 510px;
   }
   h1 {
     font-family: var(--font-display);
-    font-size: 58px;
+    max-width: 9ch;
+    font-size: clamp(56px, 6.2vw, 96px);
     font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.02;
-  }
-  p {
-    margin-top: 22px;
-    max-width: 46ch;
-    font-size: 18px;
-    color: var(--color-text-soft);
-  }
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 34px;
+    letter-spacing: -0.06em;
+    line-height: .94;
   }
   .hero-graphic {
     position: relative;
-    aspect-ratio: 1 / 1;
-    border-radius: var(--radius-lg);
+    align-self: stretch;
+    min-height: 470px;
+    margin-right: calc(var(--gutter) * -1);
     overflow: hidden;
-    background: linear-gradient(160deg, #eceae3, #f7f6f2);
+    border-radius: 22px;
+    background: var(--color-stone);
   }
   .hero-graphic img {
     width: 100%;
@@ -65,19 +48,26 @@ import { rel } from "../lib/base";
     object-fit: cover;
     display: block;
   }
+  .hero-secondary { margin-top:96px; text-align:center; }
+  .hero-secondary p { max-width:26ch; margin:0 auto; color:var(--color-ink); font-family:var(--font-display); font-size:clamp(28px,3.1vw,46px); font-weight:500; letter-spacing:-.05em; line-height:1.04; }
+  .hero-secondary a { display:inline-block; margin-top:30px; }
 
   @media (max-width: 860px) {
-    .hero {
+    .hero { padding-top:64px; padding-bottom:72px; }
+    .hero-primary {
       grid-template-columns: 1fr;
       gap: 36px;
-      padding-top: 64px;
-      padding-bottom: 48px;
+      min-height: 0;
     }
     h1 {
       font-size: 40px;
     }
     .hero-graphic {
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+      margin-right: 0;
       max-width: 420px;
     }
+    .hero-secondary { margin-top:56px; }
   }
 </style>

@@ -3,7 +3,7 @@ title: "Des solutions sur mesure, pensées pour vos produits"
 excerpt: "Chaque produit a ses contraintes : format, contenance, bouchage, étiquetage. Nous concevons l'emballage qui s'y adapte."
 date: 2026-01-15
 category: "Savoir-faire"
-cover: "../../assets/news-2.webp"
+cover: "../../assets/film-emballage-poli.png"
 ---
 
 Un jus de fruit, une eau minérale, un produit d'entretien ou une huile

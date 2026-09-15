@@ -1,37 +1,30 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
-import SectionHead from "../components/SectionHead.astro";
 import ProductMosaic from "../components/ProductMosaic.astro";
 import MachinesBand from "../components/MachinesBand.astro";
-import ContactPanel from "../components/ContactPanel.astro";
+import RecyclingService from "../components/RecyclingService.astro";
 import NewsSection from "../components/NewsSection.astro";
 ---
 <Layout>
   <Hero />
 
-  <div id="nos-emballages">
-    <SectionHead
-      kicker="NOS EMBALLAGES"
-      title="Ce que nous fabriquons pour vos produits"
-      align="center"
-    />
+  <section id="nos-emballages" class="product-field">
     <ProductMosaic />
-  </div>
-
-  <MachinesBand />
-
-  <section id="contact">
-    <ContactPanel />
   </section>
 
-  <div id="actualites">
-    <SectionHead
-      kicker="ACTUALITÉS"
-      title="Dernières nouvelles"
-      actionLabel="Toutes nos actualités"
-      actionHref="/actualites"
-    />
+  <MachinesBand />
+  <RecyclingService />
+
+  <section id="actualites" class="news-field">
     <NewsSection />
-  </div>
+  </section>
 </Layout>
+
+<style>
+  .product-field { padding:88px 0 112px; background:var(--color-paper); }
+  .product-field :global(.section-head) { padding-top:0; }
+  .news-field { padding:72px 0 112px; background:var(--color-paper); }
+  .news-field :global(.section-head) { max-width:1360px; padding-top:0; }
+  @media(max-width:800px){ .product-field,.news-field { padding:72px 0; } }
+</style>
