@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import preformes from "../assets/preformes-reelles-sombre.png";
+import preformes from "../assets/preformes-reelles-sombre-v3.png";
 import bouchons from "../assets/bouchons-pyramide-sombre.png";
 import bouteilles from "../assets/bouteilles-reelles-sombre.png";
 import emballages from "../assets/film-emballage-sombre.png";
@@ -9,6 +9,10 @@ import machineMoule from "../assets/machine-atelier-unifiee.png";
 import machineFilm from "../assets/machine-film-unifiee-v2.png";
 import machineLigne from "../assets/machine-ligne-unifiee.png";
 import machineSceller from "../assets/machine-sceller-unifiee.png";
+import machineMarquage from "../assets/machine-marquage-industriel-v2.png";
+import machineRemplissage from "../assets/machine-ligne-remplissage-v2.png";
+import machineTraitementEau from "../assets/machine-traitement-eau.png";
+import machineEtiquetage from "../assets/machine-etiquetage-retraction.png";
 
 const products = [
   { image: preformes, name: "Préformes", text: "Des préformes pour vos projets de soufflage et de conditionnement." },
@@ -22,6 +26,10 @@ const machines = [
   { image: machineFilm, name: "Ligne de film plastique" },
   { image: machineLigne, name: "Ligne de conditionnement" },
   { image: machineSceller, name: "Machine à sceller" },
+  { image: machineMarquage, name: "Machine de marquage industriel" },
+  { image: machineRemplissage, name: "Ligne de remplissage" },
+  { image: machineTraitementEau, name: "Système de traitement d’eau" },
+  { image: machineEtiquetage, name: "Machine d’étiquetage et tunnel de rétraction" },
 ];
 ---
 
@@ -66,7 +74,7 @@ const machines = [
         {
           machines.map((machine) => (
             <article class="machine-catalogue__card">
-              <div>
+              <div class:list={{ "is-contain": machine.contain }}>
                 <Image src={machine.image} alt={machine.name} widths={[480, 720, 1000]} sizes="(max-width: 700px) 100vw, 25vw" />
               </div>
               <h3>{machine.name}</h3>
@@ -98,6 +106,8 @@ const machines = [
   .machine-catalogue__grid { display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
   .machine-catalogue__card > div { aspect-ratio:4/3; overflow:hidden; border-radius:22px; background:var(--color-stone); }
   .machine-catalogue__card :global(img) { display:block; width:100%; height:100%; object-fit:cover; }
+  .machine-catalogue__card .is-contain { background:var(--color-ink); }
+  .machine-catalogue__card .is-contain :global(img) { object-fit:contain; }
   .machine-catalogue__card h3 { margin:15px 4px 0; font-family:var(--font-display); font-size:clamp(1.35rem,1.8vw,1.85rem); font-weight:800; letter-spacing:-.055em; line-height:.98; }
 
   @media (max-width:800px) {
