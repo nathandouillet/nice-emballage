@@ -27,9 +27,39 @@ import { rel } from "../lib/base";
 </section>
 
 <style>
-  .recycling { padding: 112px 0; background: var(--color-paper); }
+  .recycling {
+    position:relative;
+    isolation:isolate;
+    overflow:hidden;
+    padding:112px 0;
+    background:var(--color-paper);
+  }
+  .recycling::before {
+    position:absolute;
+    z-index:-1;
+    bottom:-190px;
+    left:-160px;
+    width:310px;
+    height:370px;
+    border:31px solid var(--color-yellow);
+    border-bottom:0;
+    border-radius:190px 190px 0 0;
+    content:"";
+  }
+  .recycling::after {
+    position:absolute;
+    z-index:-1;
+    right:max(var(--gutter), 6vw);
+    bottom:104px;
+    width:66px;
+    height:66px;
+    border:12px solid var(--color-ink);
+    border-left:0;
+    content:"";
+  }
 
   .recycling__layout {
+    position:relative;
     display: grid;
     grid-template-columns: minmax(16rem, 0.82fr) minmax(26rem, 1.18fr);
     align-items: center;
@@ -71,5 +101,7 @@ import { rel } from "../lib/base";
     .recycling__layout { grid-template-columns: 1fr; gap: 2.6rem; }
     .recycling__copy h2 { max-width: 11ch; }
     .recycling__image { aspect-ratio: 4 / 3; }
+    .recycling::before { left:-220px; }
+    .recycling::after { right:22px; width:48px; height:48px; border-width:9px; }
   }
 </style>

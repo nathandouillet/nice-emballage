@@ -17,8 +17,38 @@ import { rel } from "../lib/base";
 </section>
 
 <style>
-  .hero { padding:88px 0 96px; }
+  .hero {
+    position:relative;
+    isolation:isolate;
+    overflow:hidden;
+    padding:88px 0 96px;
+  }
+  .hero::before {
+    position:absolute;
+    z-index:-1;
+    top:156px;
+    left:-252px;
+    width:440px;
+    height:500px;
+    border:42px solid var(--color-yellow);
+    border-bottom:0;
+    border-radius:260px 260px 0 0;
+    content:"";
+  }
+  .hero::after {
+    position:absolute;
+    z-index:-1;
+    right:max(var(--gutter), 6vw);
+    bottom:86px;
+    width:84px;
+    height:98px;
+    border:13px solid var(--color-ink);
+    border-bottom:0;
+    border-radius:76px 76px 0 0;
+    content:"";
+  }
   .hero-primary {
+    position:relative;
     display: grid;
     grid-template-columns: .82fr 1.18fr;
     gap: clamp(36px, 5vw, 88px);
@@ -69,5 +99,7 @@ import { rel } from "../lib/base";
       max-width: 420px;
     }
     .hero-secondary { margin-top:56px; }
+    .hero::before { top:170px; left:-300px; opacity:.7; }
+    .hero::after { right:22px; bottom:54px; width:54px; height:64px; border-width:9px; }
   }
 </style>

@@ -17,16 +17,16 @@
   --color-whatsapp-hover: #1ebd5a;
 
   /* --- Textes secondaires --- */
-  --color-text-soft: #4a4d4a;   /* paragraphes sur fond clair */
-  --color-text-muted: #5c5f59;  /* légendes sur fond clair */
-  --color-text-faint: #8a8d89;  /* tagline, méta */
-  --color-on-ink: #b7b9b3;      /* texte courant sur fond sombre */
-  --color-on-ink-faint: #8f938a;/* titres de colonnes sur fond sombre */
+  --color-text-soft: #4a4d4a; /* paragraphes sur fond clair */
+  --color-text-muted: #5c5f59; /* légendes sur fond clair */
+  --color-text-faint: #8a8d89; /* tagline, méta */
+  --color-on-ink: #b7b9b3; /* texte courant sur fond sombre */
+  --color-on-ink-faint: #8f938a; /* titres de colonnes sur fond sombre */
   --color-on-ink-strong: #d7d8d3;
 
   /* --- Typographie --- */
-  --font-sans: "Archivo", "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
-  --font-display: "Space Grotesk", "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Nunito", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Nunito", "Helvetica Neue", Arial, sans-serif;
 
   /* --- Mise en page --- */
   --container: 1320px;
