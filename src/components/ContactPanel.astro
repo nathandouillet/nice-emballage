@@ -145,23 +145,8 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
     --cs-link-hover: var(--color-text-soft);
     --cs-find-border: transparent;
 
-    position:relative;
-    isolation:isolate;
-    overflow:hidden;
     padding-top:104px;
     padding-bottom:120px;
-  }
-  .contact-section.is-light::before {
-    position:absolute;
-    z-index:-1;
-    top:56px;
-    left:-164px;
-    width:282px;
-    height:328px;
-    border:29px solid var(--color-yellow);
-    border-bottom:0;
-    border-radius:176px 176px 0 0;
-    content:"";
   }
 
   .cu {
@@ -323,7 +308,6 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
 
   @media (max-width: 860px) {
     .contact-section.is-light { padding-top:74px; padding-bottom:76px; }
-    .contact-section.is-light::before { top:38px; left:-205px; opacity:.75; }
     .cu {
       grid-template-columns: 1fr;
       gap: 40px;

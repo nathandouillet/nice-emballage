@@ -42,12 +42,12 @@ import heroImage from "../assets/hero-main-bouteille.png";
   @keyframes scroll-hint { 0%, 100% { transform:scaleY(.45); transform-origin:top; opacity:.45; } 50% { transform:scaleY(1); transform-origin:top; opacity:1; } }
 
   @media (max-width:800px) {
-    .hero { min-height:660px; }
+    .hero { min-height:100vh; min-height:100svh; }
     .hero__image :global(img) { object-position:78% center; }
     .hero__shade { background:linear-gradient(90deg, rgba(10,12,12,.92) 0%, rgba(10,12,12,.74) 66%, rgba(10,12,12,.22) 100%); }
     .hero__content { align-self:end; padding-bottom:68px; }
     h1 { max-width:8ch; font-size:clamp(3.5rem,14vw,5.2rem); }
-    .hero__scroll { bottom:24px; }
+    .hero__scroll { display:none; }
   }
   @media (max-width:480px) {
     .hero__image :global(img) { object-position:82% center; }

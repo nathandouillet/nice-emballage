@@ -6,7 +6,7 @@ import wordmark from "../assets/logo-wordmark-v1.png";
 const path = Astro.url.pathname.replace(/\/$/, "");
 const isHome = path === rel("/").replace(/\/$/, "");
 const links = [
-  { href: "/produits", label: "Produits & services" },
+  { href: "/produits", label: "Produits" },
   { href: "/actualites", label: "Actualités" },
 ];
 const isActive = (href: string) => {
