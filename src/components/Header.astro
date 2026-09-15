@@ -5,7 +5,7 @@ import wordmark from "../assets/logo-wordmark-v1.png";
 
 const path = Astro.url.pathname.replace(/\/$/, "");
 const links = [
-  { href: "/produits", label: "Produits" },
+  // { href: "/produits", label: "Produits" },
   { href: "/actualites", label: "Actualités" },
 ];
 const isActive = (href: string) => {
@@ -24,7 +24,10 @@ const isActive = (href: string) => {
         {
           links.map((link) => (
             <li>
-              <a href={rel(link.href)} aria-current={isActive(link.href) ? "page" : undefined}>
+              <a
+                href={rel(link.href)}
+                aria-current={isActive(link.href) ? "page" : undefined}
+              >
                 {link.label}
               </a>
             </li>
@@ -34,63 +37,207 @@ const isActive = (href: string) => {
     </nav>
     <a class="contact-link" href={rel("/contact")}>Nous contacter</a>
     <details class="mobile-menu">
-      <summary aria-label="Ouvrir le menu"><span aria-hidden="true"></span></summary>
+      <summary aria-label="Ouvrir le menu"
+        ><span aria-hidden="true"></span></summary
+      >
       <nav aria-label="Navigation mobile">
         <ul>
           {
             links.map((link) => (
               <li>
-                <a href={rel(link.href)} aria-current={isActive(link.href) ? "page" : undefined}>
+                <a
+                  href={rel(link.href)}
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                >
                   {link.label}
                 </a>
               </li>
             ))
           }
         </ul>
-        <a class="mobile-menu__contact" href={rel("/contact")}>Nous contacter</a>
+        <a class="mobile-menu__contact" href={rel("/contact")}>Nous contacter</a
+        >
       </nav>
     </details>
   </header>
 </div>
 
 <style>
-  .header-outer { position:sticky; top:0; z-index:50; background:rgba(245,244,240,.94); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); }
-  header { display:flex; align-items:center; min-height:94px; }
-  .brand { justify-self:start; display:block; line-height:0; }
-  .brand :global(img) { display:block; width:auto; height:64px; }
-  nav { display:flex; align-items:center; margin-left:auto; }
-  ul { display:flex; align-items:center; gap:clamp(22px,3vw,46px); list-style:none; }
-  a { display:inline-block; padding:8px 0; color:var(--color-ink); font-size:13px; font-weight:700; text-decoration:none; }
-  a[aria-current="page"] { font-weight:800; }
-  a:hover { color:var(--color-text-soft); }
-  .contact-link { margin-left:28px; padding:13px 19px; border-radius:var(--radius-pill); background:var(--color-yellow); color:var(--color-ink); font-size:13px; white-space:nowrap; }
-  .contact-link:hover { background:var(--color-yellow-hover); color:var(--color-ink); }
-  .mobile-menu { display:none; }
-
-  @media(max-width:720px){
-    header { position:relative; min-height:76px; justify-content:space-between; }
-    .brand :global(img) { height:46px; }
-    header > nav, .contact-link { display:none; }
-    .mobile-menu { display:block; }
-    .mobile-menu summary { display:flex; align-items:center; justify-content:center; width:44px; height:44px; padding:0; border-radius:50%; background:var(--color-yellow); color:var(--color-ink); cursor:pointer; list-style:none; }
-    .mobile-menu summary::-webkit-details-marker { display:none; }
-    .mobile-menu summary span, .mobile-menu summary span::before, .mobile-menu summary span::after { display:block; width:17px; height:1.5px; background:currentColor; transition:transform .2s ease, opacity .2s ease; content:""; }
-    .mobile-menu summary span { position:relative; }
-    .mobile-menu summary span::before, .mobile-menu summary span::after { position:absolute; left:0; }
-    .mobile-menu summary span::before { top:-6px; }
-    .mobile-menu summary span::after { top:6px; }
-    .mobile-menu[open] summary span { transform:rotate(45deg); }
-    .mobile-menu[open] summary span::before { top:0; transform:rotate(90deg); }
-    .mobile-menu[open] summary span::after { opacity:0; }
-    .mobile-menu > nav { position:absolute; top:calc(100% + 1px); right:0; left:0; display:block; padding:24px max(20px, calc((100vw - var(--container)) / 2)); background:var(--color-paper); box-shadow:0 18px 28px rgba(20,24,22,.1); }
-    .mobile-menu ul { display:grid; gap:0; margin:0; }
-    .mobile-menu nav a { display:block; padding:17px 0; font-size:20px; letter-spacing:-.035em; }
-    .mobile-menu__contact { width:100%; margin-top:18px; padding:15px !important; border-radius:var(--radius-pill); background:var(--color-yellow); text-align:center; font-size:14px !important; }
+  .header-outer {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(245, 244, 240, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  header {
+    display: flex;
+    align-items: center;
+    min-height: 94px;
+  }
+  .brand {
+    justify-self: start;
+    display: block;
+    line-height: 0;
+  }
+  .brand :global(img) {
+    display: block;
+    width: auto;
+    height: 64px;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+  ul {
+    display: flex;
+    align-items: center;
+    gap: clamp(22px, 3vw, 46px);
+    list-style: none;
+  }
+  a {
+    display: inline-block;
+    padding: 8px 0;
+    color: var(--color-ink);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  a[aria-current="page"] {
+    font-weight: 800;
+  }
+  a:hover {
+    color: var(--color-text-soft);
+  }
+  .contact-link {
+    margin-left: 28px;
+    padding: 13px 19px;
+    border-radius: var(--radius-pill);
+    background: var(--color-yellow);
+    color: var(--color-ink);
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .contact-link:hover {
+    background: var(--color-yellow-hover);
+    color: var(--color-ink);
+  }
+  .mobile-menu {
+    display: none;
   }
 
-  @media(max-width:520px){
-    header { min-height:68px; }
-    .wrap { padding-right:20px; padding-left:20px; }
-    .brand :global(img) { height:40px; }
+  @media (max-width: 720px) {
+    header {
+      position: relative;
+      min-height: 76px;
+      justify-content: space-between;
+    }
+    .brand :global(img) {
+      height: 46px;
+    }
+    header > nav,
+    .contact-link {
+      display: none;
+    }
+    .mobile-menu {
+      display: block;
+    }
+    .mobile-menu summary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border-radius: 50%;
+      background: var(--color-yellow);
+      color: var(--color-ink);
+      cursor: pointer;
+      list-style: none;
+    }
+    .mobile-menu summary::-webkit-details-marker {
+      display: none;
+    }
+    .mobile-menu summary span,
+    .mobile-menu summary span::before,
+    .mobile-menu summary span::after {
+      display: block;
+      width: 17px;
+      height: 1.5px;
+      background: currentColor;
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+      content: "";
+    }
+    .mobile-menu summary span {
+      position: relative;
+    }
+    .mobile-menu summary span::before,
+    .mobile-menu summary span::after {
+      position: absolute;
+      left: 0;
+    }
+    .mobile-menu summary span::before {
+      top: -6px;
+    }
+    .mobile-menu summary span::after {
+      top: 6px;
+    }
+    .mobile-menu[open] summary span {
+      transform: rotate(45deg);
+    }
+    .mobile-menu[open] summary span::before {
+      top: 0;
+      transform: rotate(90deg);
+    }
+    .mobile-menu[open] summary span::after {
+      opacity: 0;
+    }
+    .mobile-menu > nav {
+      position: absolute;
+      top: calc(100% + 1px);
+      right: 0;
+      left: 0;
+      display: block;
+      padding: 24px max(20px, calc((100vw - var(--container)) / 2));
+      background: var(--color-paper);
+      box-shadow: 0 18px 28px rgba(20, 24, 22, 0.1);
+    }
+    .mobile-menu ul {
+      display: grid;
+      gap: 0;
+      margin: 0;
+    }
+    .mobile-menu nav a {
+      display: block;
+      padding: 17px 0;
+      font-size: 20px;
+      letter-spacing: -0.035em;
+    }
+    .mobile-menu__contact {
+      width: 100%;
+      margin-top: 18px;
+      padding: 15px !important;
+      border-radius: var(--radius-pill);
+      background: var(--color-yellow);
+      text-align: center;
+      font-size: 14px !important;
+    }
+  }
+
+  @media (max-width: 520px) {
+    header {
+      min-height: 68px;
+    }
+    .wrap {
+      padding-right: 20px;
+      padding-left: 20px;
+    }
+    .brand :global(img) {
+      height: 40px;
+    }
   }
 </style>

@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 
 const { article } = Astro.props;
 const { Content } = await render(article);
-const { title, excerpt, date, category, cover } = article.data;
+const { title, excerpt, date, cover } = article.data;
 
 const dateLabel = new Intl.DateTimeFormat("fr-FR", {
   day: "numeric",
@@ -23,102 +23,121 @@ const dateLabel = new Intl.DateTimeFormat("fr-FR", {
 }).format(date);
 const dateIso = date.toISOString().slice(0, 10);
 ---
+
 <Layout title={`${title} — Nice Emballage`} description={excerpt}>
   <article class="post">
-    <div class="wrap post-head">
-      <a href={rel("/actualites")} class="back">Toutes les actualités</a>
-      <span class="post-cat">{category}</span>
-      <h1>{title}</h1>
-      <time datetime={dateIso}>{dateLabel}</time>
-    </div>
+    <header class="post-head">
+      <div class="wrap">
+        <a href={rel("/actualites")} class="back">Toutes les actualités</a>
+        <time datetime={dateIso}>{dateLabel}</time>
+        <h1>{title}</h1>
+      </div>
+    </header>
 
     <div class="wrap post-cover">
-      <Image src={cover} alt={title} widths={[480, 800, 1200]} sizes="(max-width: 960px) 100vw, 960px" />
+      <Image
+        src={cover}
+        alt={title}
+        widths={[480, 800, 1200]}
+        sizes="(max-width: 960px) 100vw, 960px"
+      />
     </div>
 
     <div class="wrap post-body">
       <Content />
     </div>
-
+    <!--
     <div class="wrap post-foot">
       <p>Un projet d'emballage ou une ligne à équiper&nbsp;?</p>
       <a href={rel("/contact")} class="btn-primary">Nous contacter</a>
-    </div>
+    </div> -->
   </article>
 </Layout>
 
 <style>
   .post {
-    padding-bottom: 96px;
+    overflow: hidden;
+    padding-bottom: 120px;
+    background: var(--color-paper);
   }
-  .post .wrap {
-    max-width: 760px;
-  }
-
   .post-head {
-    padding-top: 56px;
+    position: relative;
+    isolation: isolate;
+    padding: 96px 0 72px;
+  }
+  .post-head::before {
+    position: absolute;
+    z-index: -1;
+    top: 66px;
+    left: -176px;
+    width: 286px;
+    height: 332px;
+    border: 29px solid var(--color-yellow);
+    border-bottom: 0;
+    border-radius: 180px 180px 0 0;
+    content: "";
+  }
+  .post-head > .wrap,
+  .post-cover {
+    max-width: 1040px;
+  }
+  .post-body,
+  .post-foot {
+    max-width: 760px;
   }
   .back {
     display: block;
     width: fit-content;
-    margin-bottom: 28px;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--color-text-muted);
+    margin-bottom: 40px;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--color-ink);
     text-decoration: none;
   }
   .back:hover {
-    color: var(--color-teal);
-  }
-  .post-cat {
-    display: inline-block;
-    padding: 5px 13px;
-    border-radius: var(--radius-pill);
-    background: var(--color-teal);
-    color: #fff;
-    font-size: 12px;
-    font-weight: 700;
+    color: var(--color-text-soft);
   }
   h1 {
-    margin-top: 18px;
+    max-width: 14ch;
+    margin: 18px 0 0;
     font-family: var(--font-display);
-    font-size: clamp(30px, 4.5vw, 44px);
+    font-size: clamp(3.2rem, 6.5vw, 7rem);
     font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    letter-spacing: -0.075em;
+    line-height: 0.9;
   }
   time {
     display: block;
-    margin-top: 16px;
     font-size: 14px;
+    font-weight: 700;
     color: var(--color-text-faint);
   }
 
   .post-cover {
-    margin-top: 40px;
-    margin-bottom: 44px;
+    margin-bottom: 72px;
   }
   .post-cover :global(img) {
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
-    border-radius: var(--radius-lg);
+    border-radius: 22px;
     background: var(--color-stone);
   }
 
   /* --- Corps de l'article (markdown) --- */
   .post-body {
-    font-size: 17px;
+    font-size: clamp(1.05rem, 1.5vw, 1.18rem);
     line-height: 1.7;
     color: var(--color-text-soft);
   }
   .post-body :global(h2) {
-    margin: 40px 0 12px;
+    margin: 56px 0 15px;
     font-family: var(--font-display);
-    font-size: 22px;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
     font-weight: 800;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.055em;
+    line-height: 1;
     color: var(--color-ink);
   }
   .post-body :global(h3) {
@@ -139,7 +158,7 @@ const dateIso = date.toISOString().slice(0, 10);
     margin-bottom: 8px;
   }
   .post-body :global(a) {
-    color: var(--color-teal);
+    color: var(--color-ink);
     text-underline-offset: 3px;
   }
   .post-body :global(strong) {
@@ -153,18 +172,45 @@ const dateIso = date.toISOString().slice(0, 10);
   }
 
   .post-foot {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 16px 24px;
-    margin-top: 56px;
-    padding-top: 32px;
-    border-top: 1px solid var(--color-stone);
+    margin-top: 84px;
+    text-align: center;
   }
   .post-foot p {
+    max-width: 16ch;
+    margin: 0 auto;
     font-family: var(--font-display);
-    font-size: 20px;
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
     font-weight: 800;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.065em;
+    line-height: 0.95;
+  }
+  .post-foot a {
+    margin-top: 28px;
+  }
+
+  @media (max-width: 800px) {
+    .post {
+      padding-bottom: 76px;
+    }
+    .post-head {
+      padding: 72px 0 52px;
+    }
+    .post-head::before {
+      top: 38px;
+      left: -204px;
+      opacity: 0.75;
+    }
+    .post-cover {
+      margin-bottom: 52px;
+    }
+    .post-cover :global(img) {
+      aspect-ratio: 4/3;
+    }
+    .post-body :global(h2) {
+      margin-top: 42px;
+    }
+    .post-foot {
+      margin-top: 64px;
+    }
   }
 </style>

@@ -7,7 +7,7 @@ interface Props {
   article: CollectionEntry<"articles">;
 }
 const { article } = Astro.props;
-const { title, excerpt, date, category, cover } = article.data;
+const { title, date, cover } = article.data;
 
 const dateLabel = new Intl.DateTimeFormat("fr-FR", {
   day: "numeric",
@@ -20,13 +20,8 @@ const dateLabel = new Intl.DateTimeFormat("fr-FR", {
     <Image src={cover} alt={title} widths={[300, 500, 700]} sizes="(max-width: 640px) 100vw, 380px" />
   </div>
   <div class="card-body">
-    <div class="card-meta">
-      <span class="card-cat">{category}</span>
-      <time>{dateLabel}</time>
-    </div>
+    <time>{dateLabel}</time>
     <h3>{title}</h3>
-    <p>{excerpt}</p>
-    <span class="card-more">Lire l'article</span>
   </div>
 </a>
 
@@ -38,9 +33,9 @@ const dateLabel = new Intl.DateTimeFormat("fr-FR", {
     color: inherit;
   }
   .card-media {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 1;
     overflow: hidden;
-    border-radius: 0;
+    border-radius: 22px;
     background: var(--color-stone);
   }
   .card-media :global(img) {
@@ -48,50 +43,23 @@ const dateLabel = new Intl.DateTimeFormat("fr-FR", {
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.5s ease;
-  }
-  .card:hover .card-media :global(img) {
-    transform: scale(1.05);
   }
 
   .card-body {
-    padding-top: 16px;
+    padding: 18px 4px 0;
   }
-  .card-meta {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
-  .card-cat {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--color-teal);
-  }
-  .card-meta time {
-    font-size: 12.5px;
+  time {
+    display:block;
+    font-size:13px;
+    font-weight:700;
     color: var(--color-text-faint);
   }
   h3 {
-    font-size: 19px;
-    font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-  }
-  p {
-    margin-top: 8px;
-    font-size: 14.5px;
-    line-height: 1.55;
-    color: var(--color-text-muted);
-  }
-  .card-more {
-    display: inline-block;
-    margin-top: 14px;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--color-ink);
-  }
-  .card:hover .card-more {
-    color: var(--color-teal);
+    margin-top:9px;
+    font-family:var(--font-display);
+    font-size:clamp(21px,2vw,29px);
+    font-weight:800;
+    line-height:1.02;
+    letter-spacing:-.055em;
   }
 </style>

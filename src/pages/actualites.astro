@@ -1,41 +1,78 @@
 ---
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import SectionHead from "../components/SectionHead.astro";
 import ArticleCard from "../components/ArticleCard.astro";
+import { rel } from "../lib/base";
 
 const articles = (
   await getCollection("articles", ({ data }) => !data.draft)
 ).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const [featured, ...remainingArticles] = articles;
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(date);
 ---
+
 <Layout
   title="Actualités — Nice Emballage"
   description="Les dernières nouvelles de Nice Emballage, fabricant d'emballage plastique et de machines industrielles au Burkina Faso."
 >
-  <SectionHead kicker="ACTUALITÉS" title="Toutes nos actualités" />
+  <main class="news-page">
+    <section class="news-intro" aria-labelledby="news-title">
+      <div class="wrap">
+        <h1 id="news-title">Les nouvelles de Nice Emballage.</h1>
+        <p>La vie de nos ateliers, de nos équipes et de nos projets à Ouagadougou.</p>
+      </div>
+    </section>
 
-  <div class="articles-grid wrap">
-    {articles.map((article) => <ArticleCard article={article} />)}
-  </div>
+    {
+      featured && (
+        <section class="featured-story wrap" aria-label="À la une">
+          <a href={rel(`/actualites/${featured.id}`)}>
+            <div class="featured-story__image">
+              <Image src={featured.data.cover} alt={featured.data.title} widths={[600, 900, 1200]} sizes="(max-width: 800px) 100vw, 54vw" />
+            </div>
+            <div class="featured-story__copy">
+              <time datetime={featured.data.date.toISOString()}>{formatDate(featured.data.date)}</time>
+              <h2>{featured.data.title}</h2>
+              <p>{featured.data.excerpt}</p>
+              <span>Lire l’article</span>
+            </div>
+          </a>
+        </section>
+      )
+    }
+
+    <section class="articles-list wrap" aria-label="Toutes les actualités">
+      {remainingArticles.map((article) => <ArticleCard article={article} />)}
+    </section>
+  </main>
 </Layout>
 
 <style>
-  .articles-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 44px 28px;
-    margin-bottom: 96px;
-  }
+  .news-page { overflow:hidden; background:var(--color-paper); }
+  .news-intro { position:relative; isolation:isolate; padding:104px 0 84px; text-align:center; }
+  .news-intro::before { position:absolute; z-index:-1; top:54px; left:-155px; width:270px; height:315px; border:29px solid var(--color-yellow); border-bottom:0; border-radius:170px 170px 0 0; content:""; }
+  .news-intro h1 { max-width:13ch; margin:0 auto; font-family:var(--font-display); font-size:clamp(3.5rem,7.3vw,7.5rem); font-weight:800; letter-spacing:-.075em; line-height:.88; }
+  .news-intro p { max-width:39ch; margin:28px auto 0; color:var(--color-text-soft); font-size:clamp(1.05rem,1.6vw,1.3rem); line-height:1.45; }
 
-  @media (max-width: 900px) {
-    .articles-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (max-width: 560px) {
-    .articles-grid {
-      grid-template-columns: 1fr;
-      gap: 36px;
-    }
-  }
+  .featured-story { padding-bottom:112px; }
+  .featured-story > a { display:grid; grid-template-columns:1.08fr .92fr; align-items:center; gap:clamp(2.5rem,7vw,9rem); color:var(--color-ink); text-decoration:none; }
+  .featured-story__image { aspect-ratio:1; overflow:hidden; border-radius:22px; background:var(--color-stone); }
+  .featured-story__image :global(img) { display:block; width:100%; height:100%; object-fit:cover; }
+  .featured-story__copy { padding-right:clamp(0rem,3vw,3rem); }
+  .featured-story time { color:var(--color-text-faint); font-size:14px; font-weight:700; }
+  .featured-story h2 { max-width:12ch; margin:18px 0 0; font-family:var(--font-display); font-size:clamp(2.3rem,4.4vw,5rem); font-weight:800; letter-spacing:-.07em; line-height:.92; }
+  .featured-story p { max-width:35ch; margin:24px 0 0; color:var(--color-text-soft); font-size:clamp(1rem,1.4vw,1.2rem); line-height:1.5; }
+  .featured-story span { display:inline-block; margin-top:30px; padding:14px 23px; border-radius:var(--radius-pill); background:var(--color-yellow); font-size:14px; font-weight:800; }
+  .featured-story > a:hover span { background:var(--color-yellow-hover); }
+
+  .articles-list { display:grid; grid-template-columns:repeat(3,1fr); gap:64px 28px; padding-bottom:120px; }
+  @media (max-width:900px) { .articles-list { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:800px) { .news-intro { padding:74px 0 62px; } .news-intro::before { top:35px; left:-190px; opacity:.75; } .featured-story { padding-bottom:76px; } .featured-story > a { grid-template-columns:1fr; gap:30px; } .featured-story__copy { padding-right:0; } }
+  @media (max-width:560px) { .articles-list { grid-template-columns:1fr; gap:44px; padding-bottom:76px; } }
 </style>
