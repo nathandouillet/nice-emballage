@@ -137,6 +137,9 @@ const isActive = (href: string) => {
   }
 
   @media (max-width: 720px) {
+    .header-outer {
+      padding-top: env(safe-area-inset-top);
+    }
     header {
       position: relative;
       z-index: 2;
