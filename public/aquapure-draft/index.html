@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aquapure — Draft de direction</title>
+    <style>
+      :root {
+        --ink: #17221e;
+        --paper: #f4f3ed;
+        --aqua: #8cc8d2;
+        --deep-water: #0d3134;
+        --line: rgba(23, 34, 30, 0.22);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      img { display: block; width: 100%; }
+      .page { overflow: hidden; }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 3.5vw;
+        font-size: 13px;
+        letter-spacing: 0.02em;
+      }
+
+      .brand { font-size: 21px; font-weight: 700; letter-spacing: -0.08em; }
+      .brand small { font-size: 10px; letter-spacing: 0.1em; font-weight: 400; margin-left: 10px; }
+      .nav-links { display: flex; gap: 32px; }
+
+      .hero { min-height: 94vh; padding: 8vh 3.5vw 3vw; display: grid; grid-template-columns: 1fr 1.28fr; gap: 4vw; align-items: end; }
+      .hero-copy { align-self: center; padding: 6vw 0; }
+      .eyebrow { margin: 0 0 20px; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; }
+      h1 { max-width: 600px; margin: 0; font-size: clamp(58px, 7.3vw, 132px); letter-spacing: -0.085em; line-height: 0.86; font-weight: 500; }
+      .hero-copy p { max-width: 300px; margin: 36px 0 0 auto; font-size: 17px; line-height: 1.35; }
+      .hero-image { height: min(76vh, 900px); overflow: hidden; background: #92c3d0; }
+      .hero-image img { height: 100%; object-fit: cover; object-position: center; mix-blend-mode: luminosity; opacity: .9; }
+      .hero-caption { margin-top: 12px; display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+
+      .manifesto { padding: 15vw 15vw 13vw; text-align: center; }
+      .manifesto p { margin: 0; font-size: clamp(33px, 4.4vw, 72px); line-height: .98; letter-spacing: -.065em; font-weight: 500; }
+      .manifesto span { color: #5faaa9; }
+
+      .formats { padding: 0 3.5vw 12vw; }
+      .section-head { display: flex; justify-content: space-between; align-items: end; padding-bottom: 17px; border-bottom: 1px solid var(--line); }
+      .section-head h2 { font-size: clamp(32px, 4vw, 64px); letter-spacing: -.075em; font-weight: 500; margin: 0; }
+      .section-head p { max-width: 245px; margin: 0; font-size: 14px; line-height: 1.35; }
+      .formats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5vw; padding-top: 48px; }
+      .format:nth-child(2) { margin-top: 90px; }
+      .format:nth-child(3) { margin-top: 22px; }
+      .format-image { aspect-ratio: .78; background: #dcebf0; overflow: hidden; }
+      .format-image img { height: 100%; object-fit: cover; object-position: center; }
+      .format-name { display: flex; justify-content: space-between; padding-top: 15px; font-size: 17px; }
+      .format-meta { padding-top: 5px; font-size: 13px; opacity: .65; }
+
+      .water-story { position: relative; min-height: 92vh; background: var(--deep-water); color: white; display: grid; grid-template-columns: 1.1fr .9fr; align-items: end; padding: 5vw 3.5vw; }
+      .water-story::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8, 34, 37, .52), rgba(8, 34, 37, .06)); pointer-events: none; }
+      .water-story img { position: absolute; inset: 0; height: 100%; object-fit: cover; object-position: center; opacity: .68; mix-blend-mode: screen; }
+      .water-copy { position: relative; z-index: 1; }
+      .water-copy h2 { max-width: 740px; margin: 0; font-size: clamp(58px, 8vw, 138px); line-height: .83; letter-spacing: -.09em; font-weight: 500; }
+      .water-copy p { max-width: 300px; margin: 36px 0 0; font-size: 16px; line-height: 1.4; }
+      .water-note { position: relative; z-index: 1; align-self: start; justify-self: end; font-size: 12px; line-height: 1.35; max-width: 180px; }
+
+      .maker { padding: 12vw 3.5vw 4vw; display: grid; grid-template-columns: .75fr 1.25fr; gap: 8vw; }
+      .maker-statement { font-size: 13px; line-height: 1.35; }
+      .maker-statement strong { display: block; font-size: 24px; letter-spacing: -.04em; margin-bottom: 16px; }
+      .maker-visual { display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px; align-items: end; }
+      .maker-visual img:first-child { aspect-ratio: .76; object-fit: cover; }
+      .maker-visual img:last-child { aspect-ratio: 1.25; object-fit: cover; }
+
+      footer { margin: 7vw 3.5vw 0; padding: 26px 0; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 30px; font-size: 12px; }
+
+      @media (max-width: 760px) {
+        .nav { padding: 20px; }
+        .nav-links { gap: 14px; font-size: 11px; }
+        .nav-links a:not(:last-child) { display: none; }
+        .brand small { display: none; }
+        .hero { min-height: auto; padding: 11vh 20px 20px; display: block; }
+        .hero-copy { padding: 0 0 56px; }
+        h1 { font-size: clamp(56px, 17vw, 88px); }
+        .hero-copy p { margin: 28px 0 0; }
+        .hero-image { height: 74vh; }
+        .manifesto { padding: 28vw 8vw; }
+        .manifesto p { font-size: 38px; }
+        .formats { padding: 0 20px 30vw; }
+        .section-head { display: block; }
+        .section-head p { margin-top: 18px; }
+        .formats-grid { display: flex; overflow-x: auto; gap: 18px; margin-right: -20px; padding: 32px 20px 10px 0; scroll-snap-type: x mandatory; }
+        .format { min-width: 76vw; scroll-snap-align: start; }
+        .format:nth-child(n) { margin-top: 0; }
+        .water-story { min-height: 88vh; display: block; padding: 28vh 20px 28px; }
+        .water-copy h2 { font-size: 66px; }
+        .water-note { display: none; }
+        .maker { padding: 28vw 20px 20px; display: block; }
+        .maker-visual { margin-top: 46px; gap: 12px; }
+        footer { margin: 18vw 20px 0; display: block; line-height: 1.8; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <nav class="nav">
+        <a class="brand" href="#top">AQUAPURE <small>par Nice Emballage</small></a>
+        <div class="nav-links"><a href="#formats">Formats</a><a href="#source">Notre eau</a><a href="#nice">Nice Emballage</a></div>
+      </nav>
+
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow">Aquapure · Ouagadougou</p>
+          <h1>Clair,<br />tout<br />simplement.</h1>
+          <p>Une eau pensée pour accompagner les journées qui comptent, ici.</p>
+        </div>
+        <div>
+          <div class="hero-image"><img src="assets/9a4c8168-cc07-4d05-941b-9428de8d4fda.webp" alt="Paysage d'eau" /></div>
+          <div class="hero-caption"><span>Aquapure</span><span>01 — L’eau en mouvement</span></div>
+        </div>
+      </section>
+
+      <section class="manifesto">
+        <p>De l’eau <span>pure</span>,<br />dans des formats<br />faits pour <span>vivre dehors.</span></p>
+      </section>
+
+      <section class="formats" id="formats">
+        <div class="section-head">
+          <h2>Une bouteille<br />pour chaque rythme.</h2>
+          <p>Une gamme simple, fabriquée localement et disponible dans les formats du quotidien.</p>
+        </div>
+        <div class="formats-grid">
+          <article class="format"><div class="format-image"><img src="assets/f50ea17b-1802-4198-a524-8b68636f063d.webp" alt="Détail d'une bouteille" /></div><div class="format-name"><span>33 cl</span><span>01</span></div><div class="format-meta">Pour une pause fraîche.</div></article>
+          <article class="format"><div class="format-image"><img src="assets/1acb399f-17c3-42d0-a4be-7a5a38a4bb8c.webp" alt="Bouteille transparente dans le ciel" /></div><div class="format-name"><span>50 cl</span><span>02</span></div><div class="format-meta">Toujours à portée de main.</div></article>
+          <article class="format"><div class="format-image"><img src="assets/e8b80080-f326-4d51-9fd9-e628367e0c1c.webp" alt="Bouteilles transparentes" /></div><div class="format-name"><span>1,5 L</span><span>03</span></div><div class="format-meta">À partager, sans compter.</div></article>
+        </div>
+      </section>
+
+      <section class="water-story" id="source">
+        <img src="assets/a2b802fb-25a3-4af5-a687-544f00fb5cac.webp" alt="Cascade" />
+        <div class="water-copy"><h2>L’eau<br />nous relie.</h2><p>De la source aux gestes les plus simples, Aquapure célèbre ce qui circule, ce qui rafraîchit, ce qui rassemble.</p></div>
+        <p class="water-note">Une image plus sensible de l’eau, sans codes publicitaires inutiles.</p>
+      </section>
+
+      <section class="maker" id="nice">
+        <div class="maker-statement"><strong>Aquapure est une marque de Nice Emballage.</strong>Depuis plus de 16 ans, Nice Emballage fabrique à Ouagadougou des emballages plastiques pour les produits qui circulent au Burkina Faso.</div>
+        <div class="maker-visual"><img src="assets/85b3a7de-0291-4b89-9331-e01384fabe32.webp" alt="Bouteilles produites" /><img src="assets/e4071b41-58e0-4c09-806e-7f51e4ea88d3.webp" alt="Ligne de production" /></div>
+      </section>
+
+      <footer><span>© 2026 Aquapure · Nice Emballage</span><span>Ouagadougou, Burkina Faso</span></footer>
+    </main>
+  </body>
+</html>
