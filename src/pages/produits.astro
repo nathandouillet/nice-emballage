@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import filmsStudio from "../assets/films-emballage-studio-v1.png";
 import capsStudio from "../assets/bouchons-studio-couleurs-v2.png";
-import preformsStudio from "../assets/preformes-gamme-mineral-v2.png";
+import preformsStudio from "../assets/preformes-macro-editorial-v1.png";
 import bouteilles250ml from "../assets/bouteille-250ml-studio-v2.png";
 import bouteilles300ml from "../assets/bouteille-300ml-studio-v2.png";
 import bouteilles330ml from "../assets/bouteille-330ml-studio-v3.png";
@@ -83,8 +83,9 @@ const bottleFormats = [
         </button>
       </div>
       <p class="bottle-range__note">
-        D’autres modèles sont disponibles. <a href={rel("/contact")}>Contactez-nous</a> pour
-        découvrir l’ensemble de la gamme.
+        D’autres modèles sont disponibles. <a class="cta-link" href={rel("/contact")}
+          >Contactez-nous</a
+        > pour découvrir l’ensemble de la gamme.
       </p>
     </section>
 
@@ -131,15 +132,7 @@ const bottleFormats = [
     </section>
 
     <section class="preforms-feature" aria-labelledby="preforms-title">
-      <div class="preforms-feature__visual wrap">
-        <div class="preforms-feature__main">
-          <Image
-            src={preformsStudio}
-            alt="Préformes PET de différents formats et coloris"
-            widths={[960, 1280, 1536]}
-            sizes="100vw"
-          />
-        </div>
+      <div class="preforms-feature__layout wrap">
         <div class="preforms-feature__copy">
           <p class="preforms-feature__eyebrow">Préformes</p>
           <h2 id="preforms-title">Formats<br />et coloris</h2>
@@ -147,9 +140,14 @@ const bottleFormats = [
             Des préformes PET de plusieurs hauteurs et teintes, à choisir selon
             votre projet.
           </p>
-          <p class="preforms-feature__note">
-            Spécifications et disponibilités sur demande.
-          </p>
+        </div>
+        <div class="preforms-feature__main">
+          <Image
+            src={preformsStudio}
+            alt="Préformes PET de différents formats et coloris"
+            widths={[560, 840, 1122]}
+            sizes="(max-width: 800px) 100vw, 42vw"
+          />
         </div>
       </div>
     </section>
@@ -168,21 +166,22 @@ const bottleFormats = [
     max-width: 8ch;
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(4rem, 8vw, 8.8rem);
-    font-weight: 800;
-    letter-spacing: -0.085em;
-    line-height: 0.8;
-  }
+    font-size: var(--text-h1);
+    font-weight: var(--fw-display);
+    letter-spacing: var(--ls-display-xl);
+    line-height: var(--lh-display-xl);
+    }
   .catalogue-intro p {
     max-width: 35ch;
     margin: 30px 0 0;
     color: var(--color-text-soft);
-    font-size: clamp(1.06rem, 1.6vw, 1.3rem);
+    font-size: var(--text-lead);
     line-height: 1.45;
   }
 
   .bottle-range {
-    padding: 7vw 0 10vw;
+    padding-top: 7vw;
+    padding-bottom: 10vw;
   }
   .bottle-range__head {
     display: grid;
@@ -195,20 +194,20 @@ const bottleFormats = [
     align-self: start;
     margin: 8px 0 0;
     color: var(--color-ink);
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-size: var(--kicker-size);
+    font-weight: var(--kicker-weight);
+    letter-spacing: var(--kicker-ls);
     text-transform: uppercase;
-  }
+    }
   .bottle-range__head h2 {
     max-width: 11ch;
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(3.1rem, 5.4vw, 6.3rem);
-    font-weight: 800;
-    letter-spacing: -0.08em;
-    line-height: 0.86;
-  }
+    font-size: var(--text-h2);
+    font-weight: var(--fw-display);
+    letter-spacing: var(--ls-display-xl);
+    line-height: var(--lh-display-xl);
+    }
   .bottle-range__intro {
     max-width: 23ch;
     margin: 0;
@@ -294,22 +293,23 @@ const bottleFormats = [
   .bottle-range__card h3 {
     margin: 15px 0 0;
     font-family: var(--font-display);
-    font-size: clamp(1.5rem, 2vw, 2.15rem);
-    font-weight: 800;
-    letter-spacing: -0.065em;
-    line-height: 0.92;
+    font-size: var(--text-h3);
+    font-weight: var(--fw-display);
+    letter-spacing: var(--ls-display-md);
+    line-height: var(--lh-display-md);
     text-align: center;
   }
   .bottle-range__note {
     margin: 32px auto 0;
     color: var(--color-text-soft);
-    font-size: 0.95rem;
+    font-size: var(--text-small);
     text-align: center;
   }
   .bottle-range__note a {
+    display: inline;
+    font-size: inherit;
     color: var(--color-ink);
-    font-weight: 700;
-    text-underline-offset: 3px;
+    white-space: nowrap; /* évite « Contactez-/nous » sur mobile */
   }
 
   .film-feature {
@@ -321,21 +321,24 @@ const bottleFormats = [
     gap: clamp(32px, 6vw, 110px);
     align-items: center;
   }
-  .film-feature__eyebrow {
+  .film-feature__copy > .film-feature__eyebrow {
     margin: 0 0 22px;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-size: var(--kicker-size);
+    font-weight: var(--kicker-weight);
+    letter-spacing: var(--kicker-ls);
     text-transform: uppercase;
+    max-width: none;
+    color: var(--color-ink);
+    line-height: 1.5;
   }
   .film-feature__copy h2 {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(3rem, 4.6vw, 5.4rem);
-    font-weight: 800;
-    letter-spacing: -0.08em;
-    line-height: 0.85;
-  }
+    font-size: var(--text-h2-sm);
+    font-weight: var(--fw-display);
+    letter-spacing: var(--ls-display-xl);
+    line-height: var(--lh-display-xl);
+    }
   .film-feature__copy > p {
     max-width: 27ch;
     margin: 28px 0 0;
@@ -366,6 +369,7 @@ const bottleFormats = [
     display: grid;
     grid-template-columns: minmax(0, 1.28fr) minmax(250px, 0.72fr);
     gap: clamp(32px, 6vw, 110px);
+
     align-items: center;
   }
   .caps-feature__copy {
@@ -374,21 +378,24 @@ const bottleFormats = [
   .caps-feature__main {
     order: 1;
   }
-  .caps-feature__eyebrow {
+  .caps-feature__copy > .caps-feature__eyebrow {
     margin: 0 0 22px;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-size: var(--kicker-size);
+    font-weight: var(--kicker-weight);
+    letter-spacing: var(--kicker-ls);
     text-transform: uppercase;
+    max-width: none;
+    color: var(--color-ink);
+    line-height: 1.5;
   }
   .caps-feature__copy h2 {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(3rem, 4.6vw, 5.4rem);
-    font-weight: 800;
-    letter-spacing: -0.08em;
-    line-height: 0.85;
-  }
+    font-size: var(--text-h2-sm);
+    font-weight: var(--fw-display);
+    letter-spacing: var(--ls-display-xl);
+    line-height: var(--lh-display-xl);
+    }
   .caps-feature__copy > p {
     max-width: 27ch;
     margin: 28px 0 0;
@@ -412,48 +419,32 @@ const bottleFormats = [
     height: auto;
   }
 
-  .preforms-feature {
-    padding: 6vw 0 9vw;
+  .preforms-feature { padding: 6vw 0 9vw; }
+  /* Même grille que les sections films/bouchons : texte à gauche, image à droite. */
+  .preforms-feature__layout {
+    display: grid;
+    grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(32px, 6vw, 110px);
+    align-items: center;
   }
-  .preforms-feature__visual {
-    position: relative;
-    width: 100vw;
-    max-width: none;
-    margin-left: calc(50% - 50vw);
-    padding: 0;
-    overflow: hidden;
-    background: #f6f7f5;
-  }
-  .preforms-feature__main :global(img) {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  .preforms-feature__copy {
-    position: absolute;
-    top: 50%;
-    left: max(
-      var(--gutter),
-      calc((100vw - var(--container)) / 2 + var(--gutter))
-    );
-    width: min(27%, 340px);
-    transform: translateY(-50%);
-  }
-  .preforms-feature__eyebrow {
+  .preforms-feature__copy > .preforms-feature__eyebrow {
     margin: 0 0 22px;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-size: var(--kicker-size);
+    font-weight: var(--kicker-weight);
+    letter-spacing: var(--kicker-ls);
     text-transform: uppercase;
+    max-width: none;
+    color: var(--color-ink);
+    line-height: 1.5;
   }
   .preforms-feature__copy h2 {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(3rem, 4.6vw, 5.4rem);
-    font-weight: 800;
-    letter-spacing: -0.08em;
-    line-height: 0.85;
-  }
+    font-size: var(--text-h2-sm);
+    font-weight: var(--fw-display);
+    letter-spacing: var(--ls-display-xl);
+    line-height: var(--lh-display-xl);
+    }
   .preforms-feature__copy > p {
     max-width: 29ch;
     margin: 28px 0 0;
@@ -461,15 +452,16 @@ const bottleFormats = [
     font-size: 1rem;
     line-height: 1.45;
   }
-  .preforms-feature__copy .preforms-feature__note {
-    margin-top: 14px;
-    font-size: 0.88rem;
+  .preforms-feature__main {
+    overflow: hidden;
+    background: #f6f7f5;
   }
-  .preforms-feature__copy a {
-    display: inline-block;
-    margin-top: 25px;
-    font-weight: 700;
-    text-underline-offset: 3px;
+  .preforms-feature__main :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
   }
 
   @media (max-width: 800px) {
@@ -478,6 +470,9 @@ const bottleFormats = [
     }
     .bottle-range {
       padding-bottom: 64px;
+    }
+    .bottle-range__note {
+      text-wrap: balance;
     }
     .bottle-range__head {
       grid-template-columns: 1fr;
@@ -502,17 +497,13 @@ const bottleFormats = [
     .caps-feature__main {
       order: initial;
     }
-    .preforms-feature__copy {
-      left: var(--gutter);
-      width: 32%;
-    }
+    .preforms-feature__layout { grid-template-columns: 1fr; gap: 32px; }
+    .preforms-feature__main :global(img) { aspect-ratio: 4 / 3; object-fit: cover; }
     .bottle-range__carousel {
-      grid-template-columns: 36px minmax(0, 1fr) 36px;
-      gap: 10px;
+      grid-template-columns: 44px minmax(0, 1fr) 44px;
+      gap: 8px;
     }
     .bottle-range__control {
-      width: 36px;
-      height: 36px;
       font-size: 2.7rem;
     }
     .bottle-range__track {
@@ -552,20 +543,6 @@ const bottleFormats = [
     .caps-feature,
     .preforms-feature {
       padding: 72px 0;
-    }
-    .preforms-feature__visual {
-      display: flex;
-      flex-direction: column;
-    }
-    .preforms-feature__copy {
-      position: static;
-      width: auto;
-      padding: 32px var(--gutter) 0;
-      transform: none;
-      order: -1;
-    }
-    .preforms-feature__main {
-      margin-top: 26px;
     }
   }
 </style>

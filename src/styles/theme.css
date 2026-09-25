@@ -30,7 +30,7 @@
 
   /* --- Mise en page --- */
   --container: 1540px;
-  --gutter: 40px;
+  --gutter: 40px; /* réduit sur mobile, voir plus bas */
 
   /* --- Rayons --- */
   --radius-sm: 4px;
@@ -41,6 +41,39 @@
 
   /* --- Ombres --- */
   --shadow-float: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+/* --- Typographie d'affichage : un seul système pour tous les titres --- */
+:root {
+  --fw-display: 560; /* Archivo variable (400–700) : 560 = graisse « éditoriale » */
+  --ls-display-xl: -0.075em; /* grands titres (≥ 60px) */
+  --ls-display-md: -0.06em; /* titres moyens / libellés : un peu plus ouvert pour rester lisible */
+  --lh-display-xl: 0.85;
+  --lh-display-md: 1;
+
+  --text-h1: clamp(4rem, 8vw, 8.8rem); /* titre de page */
+  --text-h2: clamp(3rem, 5.6vw, 6.2rem); /* titre de section */
+  --text-h2-sm: clamp(2.6rem, 4.6vw, 5.4rem); /* titre de « feature » / de une */
+  --text-h3: clamp(1.5rem, 2vw, 2.15rem); /* titre de carte */
+
+  --text-lead: clamp(1.06rem, 1.6vw, 1.3rem); /* introduction de page */
+  --text-body: 1rem; /* paragraphe de section */
+  --text-small: 0.94rem; /* note, mention */
+
+  /* sur-titres (kickers) */
+  --kicker-size: 0.76rem;
+  --kicker-weight: 600;
+  --kicker-ls: 0.12em;
+
+  /* coins des images : carrés sur tout le site */
+  --radius-media: 0;
+}
+
+/* --- Gouttières responsive : une seule valeur pour tout le site --- */
+@media (max-width: 760px) {
+  :root {
+    --gutter: 20px;
+  }
 }
 
 /* #f0ffd2 */

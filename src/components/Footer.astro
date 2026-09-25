@@ -29,7 +29,7 @@ import wordmark from "../assets/logo-wordmark-black-v1.png";
 
 <style>
   .site-footer {
-    padding: 48px 0 24px;
+    padding: 48px 0 calc(24px + env(safe-area-inset-bottom));
     color: var(--color-ink);
   }
   .footer-top {
@@ -64,16 +64,19 @@ import wordmark from "../assets/logo-wordmark-black-v1.png";
     gap: 30px;
     margin-top: 56px;
     padding-top: 16px;
-    color: #68706c;
+    color: var(--color-text-muted);
     font-size: 11px;
+  }
+  @media (pointer: coarse) {
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
   }
   @media (max-width: 760px) {
     .site-footer {
-      padding: 44px 0 22px;
-    }
-    .footer-inner {
-      padding-left: 20px;
-      padding-right: 20px;
+      padding: 44px 0 calc(22px + env(safe-area-inset-bottom));
     }
     .footer-top {
       flex-direction: column;
@@ -90,7 +93,13 @@ import wordmark from "../assets/logo-wordmark-black-v1.png";
     }
     .footer-links {
       flex-wrap: wrap;
-      gap: 12px 20px;
+      gap: 0 22px;
+    }
+    /* zone tactile confortable (≥ 44px) sans changer le rendu visuel */
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
     }
   }
 </style>

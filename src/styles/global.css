@@ -33,7 +33,9 @@ a {
 .wrap {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 var(--gutter);
+  /* max() : respecte l'encoche des iPhone en paysage (viewport-fit=cover) */
+  padding-left: max(var(--gutter), env(safe-area-inset-left));
+  padding-right: max(var(--gutter), env(safe-area-inset-right));
 }
 
 /* --- Boutons --- */
@@ -81,4 +83,30 @@ a {
 }
 .nav-cta:hover {
   background: var(--color-yellow-hover);
+}
+
+/* --- Lien d'action (texte) : gras, souligné — un seul style pour tout le site --- */
+.cta-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-ink);
+  font: inherit;
+  font-size: var(--text-small);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.cta-link:hover {
+  color: var(--color-teal);
+}
+
+/* --- Focus clavier visible et identique partout --- */
+:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 3px;
 }

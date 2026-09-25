@@ -62,7 +62,7 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
           ><span>Votre message</span><textarea name="message" rows="4" required
           ></textarea></label
         >
-        <button type="submit">Envoyer le message</button>
+        <button class="cta-link" type="submit">Envoyer le message</button>
       </form>
     </section>
 
@@ -75,7 +75,7 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
             Borgho, sur la route de Fada<br />Ouagadougou, Burkina Faso
           </p>
           <p class="location__hours">Ouvert tous les jours · 7h30 – 18h00</p>
-          <a href={directions} target="_blank" rel="noopener"
+          <a class="cta-link" href={directions} target="_blank" rel="noopener"
             >Ouvrir dans Google Maps</a
           >
         </div>
@@ -125,26 +125,26 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
   }
   .contact-kicker {
     margin: 0;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-size: var(--kicker-size);
+    font-weight: var(--kicker-weight);
+    letter-spacing: var(--kicker-ls);
     text-transform: uppercase;
   }
   .contact-hero h1 {
     grid-column: 2;
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(4.2rem, 8vw, 9rem);
-    font-weight: 800;
-    letter-spacing: -0.09em;
-    line-height: 0.78;
-  }
+    font-size: var(--text-h1);
+    font-weight: var(--fw-display);
+    letter-spacing: var(--ls-display-xl);
+    line-height: var(--lh-display-xl);
+    }
   .contact-hero__lead {
     grid-column: 3;
     max-width: 24ch;
     margin: 0;
     color: var(--color-text-soft);
-    font-size: 1.05rem;
+    font-size: var(--text-lead);
     line-height: 1.45;
   }
 
@@ -165,15 +165,14 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
   }
   .contact-direct a {
     font-family: var(--font-display);
-    font-size: clamp(1.35rem, 2.2vw, 2rem);
-    font-weight: 800;
-    letter-spacing: -0.055em;
-    line-height: 1;
+    font-size: var(--text-h3);
+    font-weight: var(--fw-display);
+    letter-spacing: var(--ls-display-md);
+    line-height: var(--lh-display-md);
     text-decoration: none;
   }
-  .contact-direct a:hover,
-  .contact-form button:hover {
-    color: var(--color-text-soft);
+  .contact-direct a:hover {
+    color: var(--color-teal);
   }
   .contact-form {
     display: flex;
@@ -191,9 +190,9 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
     gap: 11px;
   }
   .contact-form label span {
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+    font-size: var(--kicker-size);
+    font-weight: var(--kicker-weight);
+    letter-spacing: var(--kicker-ls);
     text-transform: uppercase;
   }
   .contact-form input,
@@ -220,15 +219,7 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
   .contact-form button {
     align-self: flex-start;
     margin-top: 8px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: var(--color-ink);
-    font: inherit;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-  }
+    }
 
   .location {
     position: relative;
@@ -262,22 +253,34 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
     margin: 22px 0 0;
     font-family: var(--font-display);
     font-size: clamp(1.6rem, 2.7vw, 2.7rem);
-    font-weight: 800;
-    letter-spacing: -0.065em;
+    font-weight: var(--fw-display);
+    letter-spacing: var(--ls-display-md);
     line-height: 0.95;
   }
   .location__hours {
     margin: 22px 0 0;
     color: var(--color-text-soft);
-    font-size: 0.94rem;
-  }
+    font-size: var(--text-small);
+    }
   .location__info a {
-    display: inline-block;
     margin-top: 28px;
-    font-weight: 700;
-    text-underline-offset: 3px;
-  }
+    }
 
+  /* écrans tactiles (tablettes comprises) : zones cliquables ≥ 44px */
+  @media (pointer: coarse) {
+    .contact-direct a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+    .contact-form button {
+      min-height: 44px;
+      padding: 10px 0;
+    }
+    .location__info a {
+      padding: 10px 0;
+    }
+  }
   @media (max-width: 800px) {
     .contact-hero {
       grid-template-columns: 1fr;
@@ -297,19 +300,42 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
       gap: 64px;
       padding-bottom: 80px;
     }
+    /* zones tactiles confortables (≥ 44px) */
+    .contact-direct {
+      gap: 4px;
+    }
+    .contact-direct .contact-kicker {
+      margin-bottom: 14px;
+    }
+    .contact-direct a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+    .contact-form button {
+      min-height: 44px;
+      padding: 10px 0;
+    }
+    .location__info a {
+      margin-top: 12px;
+      padding: 10px 0;
+    }
+  }
+  @media (max-width: 380px) {
+    .contact-hero h1 { font-size: 3.2rem; } /* « votre projet » tient sur une ligne en 320px */
   }
   @media (max-width: 560px) {
     .contact-form__row {
       grid-template-columns: 1fr;
       gap: 26px;
     }
-    .location__info {
-      align-items: flex-end;
-      padding-bottom: 0;
-    }
+    .location { display:flex; flex-direction:column; min-height:0; }
+    .location__map, .location__map :global(.google-map), .location__map :global(iframe) { position:relative; height:360px; }
+    .location__info { position:static; display:block; width:100%; min-height:0; padding-top:0; padding-bottom:0; } /* width:100% : sinon les marges auto de .wrap rétrécissent le bloc dans le flex */
     .location__info > div {
       max-width: none;
       width: 100%;
+      padding: 32px 0 56px; /* aligné sur la gouttière du reste de la page */
     }
   }
 </style>

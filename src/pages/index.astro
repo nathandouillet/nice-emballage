@@ -50,7 +50,7 @@ import { rel } from "../lib/base";
     </div>
     <div class="collection-foot">
       <p>Films d’emballage, formats et solutions spécifiques sur demande.</p><a
-        class="collection-link"
+        class="collection-link cta-link"
         href={rel("/produits")}>Découvrir les emballages</a
       >
     </div>
@@ -62,7 +62,7 @@ import { rel } from "../lib/base";
         <span>Machines</span><h2>Pour aller plus loin</h2><p>
           Des équipements pour fabriquer, conditionner et développer vos
           capacités de production.
-        </p><a href={rel("/machines")}>Voir les machines</a>
+        </p><a class="cta-link" href={rel("/machines")}>Voir les machines</a>
       </div><figure>
         <Image src={machine} alt="Machine de fabrication industrielle" />
       </figure>
@@ -72,17 +72,19 @@ import { rel } from "../lib/base";
 
 <style>
   .intro {
-    min-height: 92vh;
-    padding: 8vh var(--gutter) 4vw;
+    /* 56vw ≈ hauteur de l'image 16/9 : évite un grand vide sur tablette portrait */
+    min-height: min(92vh, 56vw);
+    padding-top: 8vh;
+    padding-bottom: 4vw;
   }
   h1,
   h2 {
     margin: 0;
     font-family: var(--font-display);
-    font-weight: 560;
-    letter-spacing: -0.075em;
-    line-height: 0.82;
-  }
+    font-weight: var(--fw-display);
+    letter-spacing: var(--ls-display-xl);
+    line-height: var(--lh-display-xl);
+    }
   .intro-side {
     display: flex;
     flex-direction: column;
@@ -106,9 +108,10 @@ import { rel } from "../lib/base";
   .collection-head > span,
   .machines-copy > span {
     display: block;
-    font-size: 11px;
-    letter-spacing: 0.11em;
+    font-size: var(--kicker-size);
+    letter-spacing: var(--kicker-ls);
     text-transform: uppercase;
+    font-weight: var(--kicker-weight);
   }
   .statement {
     padding: 6vw 0 6vw 0;
@@ -121,8 +124,8 @@ import { rel } from "../lib/base";
     margin: auto;
     font-family: var(--font-display);
     font-size: clamp(36px, 5.1vw, 82px);
-    font-weight: 560;
-    letter-spacing: -0.06em;
+    font-weight: var(--fw-display);
+    letter-spacing: var(--ls-display-md);
     line-height: 0.96;
   }
   .statement em {
@@ -143,15 +146,15 @@ import { rel } from "../lib/base";
     margin: 8px 0 0;
   }
   .collection-head h2 {
-    font-size: clamp(46px, 6vw, 95px);
-    line-height: 0.86;
-  }
+    font-size: var(--text-h2);
+    }
   .collection-head p {
     align-self: end;
     max-width: 22ch;
     margin: 0;
-    font-size: 14px;
+    font-size: var(--text-body);
     line-height: 1.4;
+    color: var(--color-text-soft);
   }
   .collection-showcase {
     display: grid;
@@ -201,14 +204,12 @@ import { rel } from "../lib/base";
   .collection-foot p {
     margin: 0;
     color: var(--color-text-soft);
-    font-size: 0.94rem;
-  }
+    font-size: var(--text-small);
+    }
   .collection-link {
     display: inline-flex;
     flex: none;
-    font-size: 14px;
-    font-weight: 700;
-  }
+    }
   .machines {
     padding: 6vw 0;
     color: var(--color-ink);
@@ -230,23 +231,20 @@ import { rel } from "../lib/base";
   }
   .machines h2 {
     max-width: 9ch;
-    font-size: clamp(56px, 6.5vw, 104px);
-    line-height: 0.85;
-  }
+    font-size: var(--text-h2);
+    }
   .machines-copy p {
     max-width: 28ch;
     margin: 30px 0 0;
-    color: var(--color-text-muted);
-    font-size: 15px;
+    color: var(--color-text-soft);
+    font-size: var(--text-body);
     line-height: 1.4;
   }
   .machines-copy a {
     display: inline-flex;
     width: max-content;
     margin-top: 28px;
-    font-size: 14px;
-    font-weight: 700;
-  }
+    }
   .machines figure {
     display: grid;
     min-height: min(44vw, 650px);
@@ -259,11 +257,19 @@ import { rel } from "../lib/base";
     object-fit: cover;
     object-position: right center;
   }
+  @media (pointer: coarse) {
+    .collection-link,
+    .machines-copy a {
+      align-items: center;
+      min-height: 44px;
+    }
+  }
   @media (max-width: 760px) {
     .intro {
       min-height: auto;
       display: block;
-      padding: 16vh 20px 24vw;
+      padding-top: 48px;
+      padding-bottom: 64px;
     }
     .intro-side {
       display: block;
@@ -273,27 +279,32 @@ import { rel } from "../lib/base";
       aspect-ratio: 1.25;
     }
     .statement {
-      padding: 14vw 0;
+      padding-block: 14vw;
     }
     .statement p {
-      font-size: 42px;
+      font-size: clamp(32px, 10.2vw, 44px); /* tient dans la gouttière dès 360px */
     }
-    .collection { padding: 14vw 0; }
+    .collection { padding-block: 14vw; }
     .collection-head {
       grid-template-columns: 1fr;
       gap: 20px;
     }
     .collection-head h2 {
-      font-size: clamp(48px, 14vw, 76px);
+      font-size: clamp(40px, 12.2vw, 76px);
     }
     .collection-showcase {
       display: flex;
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      padding: 42px 20px 0;
+      width: calc(100vw - var(--gutter));
+      margin-left: 0;
+      padding: 42px 0 0;
       overflow-x: auto;
       gap: 14px;
       scroll-snap-type: x mandatory;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+    }
+    .collection-showcase::-webkit-scrollbar {
+      display: none;
     }
     .collection-showcase figure,
     .collection-showcase figure:nth-child(n) {
@@ -309,7 +320,13 @@ import { rel } from "../lib/base";
       margin-top: 34px;
     }
     .collection-link {
-      margin-top: 18px;
+      margin-top: 6px;
+      align-items: center;
+      min-height: 44px;
+    }
+    .machines-copy a {
+      align-items: center;
+      min-height: 44px;
     }
     .machines {
       padding: 24vw 0;
@@ -325,8 +342,15 @@ import { rel } from "../lib/base";
       font-size: clamp(56px, 16vw, 82px);
     }
     .machines figure {
-      min-height: 88vw;
+      display: block;
+      min-height: 0;
       margin-top: 48px;
+    }
+    .machines figure :global(img) {
+      display: block;
+      height: auto;
+      object-fit: cover;
+      object-position: center;
     }
   }
 </style>

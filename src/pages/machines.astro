@@ -46,10 +46,10 @@ const machines = [
 <style>
   .machines-page { overflow:hidden; background:var(--color-paper); color:var(--color-ink); }
   .machines-intro { display:grid; grid-template-columns:.7fr 1.25fr .65fr; gap:5vw; align-items:end; padding-top:10vw; padding-bottom:11vw; }
-  .machines-intro > span { align-self:start; font-size:11px; letter-spacing:.11em; text-transform:uppercase; }
-  .machines-intro h1, .machine-item h2 { margin:0; font-family:var(--font-display); font-weight:560; letter-spacing:-.075em; line-height:.84; }
-  .machines-intro h1 { font-size:clamp(70px,9vw,150px); }
-  .machines-intro p { max-width:26ch; margin:0 0 4px; color:var(--color-text-soft); font-size:15px; line-height:1.42; }
+  .machines-intro > span { align-self:start; font-size: var(--kicker-size); letter-spacing: var(--kicker-ls); text-transform:uppercase; font-weight: var(--kicker-weight); }
+  .machines-intro h1, .machine-item h2 { margin:0; font-family:var(--font-display); font-weight: var(--fw-display); letter-spacing: var(--ls-display-xl); line-height: var(--lh-display-xl); }
+  .machines-intro h1 { font-size: var(--text-h1); }
+  .machines-intro p { max-width:26ch; margin:0 0 4px; color:var(--color-text-soft); font-size: var(--text-body); line-height:1.42; }
   .machines-list { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:7vw 24px; padding-bottom:14vw; align-items:start; }
   .machine-item { grid-column:span 4; }
   .machine-item.featured { grid-column:span 8; }
@@ -59,7 +59,11 @@ const machines = [
   .machine-item:last-child { grid-column:4 / span 6; }
   .machine-image { position:relative; overflow:hidden; background:#d9d9d6; }
   .machine-image :global(img) { display:block; width:100%; height:auto; }
-  .machine-item h2 { position:absolute; z-index:1; left:18px; bottom:18px; max-width:13ch; padding:9px 11px 8px; background:rgba(242,243,240,.9); color:var(--color-ink); font-size:clamp(20px,1.8vw,33px); }
+  .machine-item h2 { position:absolute; z-index:1; left:18px; bottom:18px; max-width:13ch; padding:9px 11px 8px; background:rgba(242,243,240,.9); color:var(--color-ink); font-size:clamp(20px,1.8vw,33px); letter-spacing: var(--ls-display-md); line-height: 0.95; }
+  /* Tablette étroite : étiquettes plus compactes sur les petites vignettes */
+  @media (max-width:1000px) {
+    .machine-item h2 { left:12px; bottom:12px; padding:7px 9px 6px; font-size:clamp(16px,2.3vw,20px); }
+  }
   @media (max-width:760px) {
     .machines-intro { display:block; padding-top:16vh; padding-bottom:22vw; }
     .machines-intro > span { display:block; margin-bottom:42px; }
@@ -67,5 +71,13 @@ const machines = [
     .machines-intro p { margin-top:32px; }
     .machines-list { display:grid; grid-template-columns:1fr; gap:16vw; padding-bottom:28vw; }
     .machine-item, .machine-item.featured, .machine-item.wide, .machine-item.tall, .machine-item.hero-tall, .machine-item:last-child { grid-column:1; }
+    .machine-item h2 { left:14px; bottom:14px; font-size:clamp(18px,5vw,24px); }
+  }
+  /* Grand mobile / petite tablette : 2 colonnes « maçonnerie » plutôt qu'une pile d'images géantes
+     (les colonnes CSS se remplissent sans trous malgré les formats mixtes) */
+  @media (min-width:561px) and (max-width:760px) {
+    .machines-list { display:block; column-count:2; column-gap:20px; }
+    .machine-item, .machine-item.wide, .machine-item.tall, .machine-item.hero-tall { margin-bottom:9vw; break-inside:avoid; }
+    .machine-item.featured { column-span:all; }
   }
 </style>

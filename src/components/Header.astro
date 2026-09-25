@@ -7,7 +7,10 @@ import wordmark from "../assets/logo-wordmark-black-v1.png";
 <header class="site-header">
   <div class="header-inner wrap">
     <a class="wordmark" href={rel("/")} aria-label="Nice Emballage — accueil"><Image src={wordmark} alt="Nice Emballage" /></a>
-    <nav aria-label="Navigation principale">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Ouvrir le menu">
+      <span></span><span></span>
+    </button>
+    <nav id="site-navigation" aria-label="Navigation principale">
       <a href={rel("/produits")}>Emballages</a>
       <a href={rel("/machines")}>Machines</a>
       <a href={rel("/contact")}>Nous trouver</a>
@@ -15,10 +18,41 @@ import wordmark from "../assets/logo-wordmark-black-v1.png";
   </div>
 </header>
 
+<script>
+  const header = document.querySelector<HTMLElement>(".site-header");
+  const toggle = header?.querySelector<HTMLButtonElement>(".menu-toggle");
+  const nav = header?.querySelector<HTMLElement>("#site-navigation");
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = header?.classList.toggle("menu-open") ?? false;
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    toggle.setAttribute("aria-label", isOpen ? "Fermer le menu" : "Ouvrir le menu");
+  });
+
+  nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+    header?.classList.remove("menu-open");
+    toggle?.setAttribute("aria-expanded", "false");
+    toggle?.setAttribute("aria-label", "Ouvrir le menu");
+  }));
+</script>
+
 <style>
-  .site-header { background:var(--color-paper); font-size:13px; }
+  .site-header { position:relative; z-index:10; background:var(--color-paper); font-size:13px; }
   .header-inner { display:flex; justify-content:space-between; align-items:center; padding-top:27px; padding-bottom:27px; }
   .wordmark { display:block; line-height:0; }.wordmark :global(img) { display:block; width:auto; height:58px; }
   nav { display:flex; gap:32px; } nav a { color:var(--color-ink); text-decoration:none; } nav a:hover { color:var(--color-teal); }
-  @media(max-width:760px) { .header-inner { padding:22px 20px; }.wordmark :global(img) { height:46px; } nav a:not(:last-child) { display:none; } }
+  .menu-toggle { display:none; }
+  /* tablettes tactiles : agrandir la zone cliquable des liens sans bouger la mise en page */
+  @media (pointer:coarse) and (min-width:761px) { nav a { padding:12px 0; } }
+  @media(max-width:760px) {
+    .header-inner { padding-top:20px; padding-bottom:20px; }
+    .wordmark :global(img) { height:46px; }
+    .menu-toggle { display:grid; width:44px; height:44px; place-content:center; gap:7px; border:0; background:transparent; color:var(--color-ink); cursor:pointer; }
+    .menu-toggle span { display:block; width:24px; height:1.5px; background:currentColor; transition:transform .2s ease; }
+    .menu-open .menu-toggle span:first-child { transform:translateY(4px) rotate(45deg); }
+    .menu-open .menu-toggle span:last-child { transform:translateY(-4px) rotate(-45deg); }
+    nav { position:absolute; top:100%; left:0; right:0; display:none; flex-direction:column; gap:0; padding:8px var(--gutter) 24px; background:var(--color-paper); border-top:1px solid var(--color-paper-dim); }
+    nav a { padding:15px 0; font-size:16px; }
+    .menu-open nav { display:flex; }
+  }
 </style>
