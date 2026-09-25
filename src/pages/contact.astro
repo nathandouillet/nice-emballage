@@ -1,14 +1,315 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ContactPanel from "../components/ContactPanel.astro";
+import MapEmbed from "../components/MapEmbed.astro";
+
+const email = "emballagenice@gmail.com";
+const phone = "+226 64 98 66 66";
+const phoneHref = "tel:+22664986666";
+const whatsapp = "https://wa.me/22664986666";
+const coords = "12.411808,-1.418128";
+const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}`;
 ---
+
 <Layout
-  title="Contact — Nice Emballage"
-  description="Contactez Nice Emballage : téléphone, WhatsApp ou email. Devis rapide pour vos emballages plastique et vos lignes de production."
+  title="Nous trouver — Nice Emballage"
+  description="Contactez Nice Emballage à Ouagadougou par téléphone, WhatsApp ou email."
 >
-  <ContactPanel
-    tone="light"
-    title="Parlons de votre projet."
-    lead="Une question, un besoin d’emballage ou un projet d’équipement&nbsp;? Écrivez-nous ou appelez-nous."
-  />
+  <main class="contact-page">
+    <header class="contact-hero wrap">
+      <p class="contact-kicker">Nous trouver</p>
+      <h1>Parlons de<br />votre projet</h1>
+      <p class="contact-hero__lead">
+        Pour un besoin d’emballage, une ligne de production ou une demande
+        spécifique, notre équipe est à votre écoute.
+      </p>
+    </header>
+
+    <section class="contact-main wrap" aria-label="Prendre contact">
+      <div class="contact-direct">
+        <p class="contact-kicker">Nous contacter</p>
+        <a href={phoneHref}>{phone}</a>
+        <a href={`mailto:${email}`}>{email}</a>
+        <a href={whatsapp} target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+
+      <form class="contact-form" data-mailto={email}>
+        <div class="contact-form__row">
+          <label
+            ><span>Nom</span><input
+              type="text"
+              name="nom"
+              autocomplete="name"
+              required
+            /></label
+          >
+          <label
+            ><span>Entreprise</span><input
+              type="text"
+              name="entreprise"
+              autocomplete="organization"
+            /></label
+          >
+        </div>
+        <label
+          ><span>Email</span><input
+            type="email"
+            name="email"
+            autocomplete="email"
+            required
+          /></label
+        >
+        <label
+          ><span>Votre message</span><textarea name="message" rows="4" required
+          ></textarea></label
+        >
+        <button type="submit">Envoyer le message</button>
+      </form>
+    </section>
+
+    <section class="location" aria-labelledby="location-title">
+      <div class="location__map"><MapEmbed coords={coords} /></div>
+      <div class="location__info wrap">
+        <div>
+          <p class="contact-kicker" id="location-title">Notre atelier</p>
+          <p class="location__address">
+            Borgho, sur la route de Fada<br />Ouagadougou, Burkina Faso
+          </p>
+          <p class="location__hours">Ouvert tous les jours · 7h30 – 18h00</p>
+          <a href={directions} target="_blank" rel="noopener"
+            >Ouvrir dans Google Maps</a
+          >
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
+
+<script>
+  document
+    .querySelectorAll<HTMLFormElement>("form.contact-form")
+    .forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const data = new FormData(form);
+        const name = String(data.get("nom") ?? "").trim();
+        const company = String(data.get("entreprise") ?? "").trim();
+        const from = String(data.get("email") ?? "").trim();
+        const message = String(data.get("message") ?? "").trim();
+        const subject = `Demande de ${name}${company ? ` — ${company}` : ""}`;
+        const body = [
+          `Nom : ${name}`,
+          company ? `Entreprise : ${company}` : null,
+          `Email : ${from}`,
+          "",
+          message,
+        ]
+          .filter((line) => line !== null)
+          .join("\n");
+        window.location.href = `mailto:${form.dataset.mailto ?? ""}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      });
+    });
+</script>
+
+<style>
+  .contact-page {
+    overflow: hidden;
+    background: var(--color-paper);
+  }
+  .contact-hero {
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 1.45fr) minmax(220px, 0.56fr);
+    gap: 28px;
+    align-items: end;
+    padding-top: 9vw;
+    padding-bottom: 8vw;
+  }
+  .contact-kicker {
+    margin: 0;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .contact-hero h1 {
+    grid-column: 2;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(4.2rem, 8vw, 9rem);
+    font-weight: 800;
+    letter-spacing: -0.09em;
+    line-height: 0.78;
+  }
+  .contact-hero__lead {
+    grid-column: 3;
+    max-width: 24ch;
+    margin: 0;
+    color: var(--color-text-soft);
+    font-size: 1.05rem;
+    line-height: 1.45;
+  }
+
+  .contact-main {
+    display: grid;
+    grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(42px, 9vw, 150px);
+    padding-bottom: 9vw;
+  }
+  .contact-direct {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  .contact-direct .contact-kicker {
+    margin-bottom: 18px;
+  }
+  .contact-direct a {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.2vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.055em;
+    line-height: 1;
+    text-decoration: none;
+  }
+  .contact-direct a:hover,
+  .contact-form button:hover {
+    color: var(--color-text-soft);
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+  .contact-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .contact-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .contact-form label span {
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--color-ink);
+    border-radius: 0;
+    background: transparent;
+    padding: 10px 0;
+    color: var(--color-ink);
+    font: inherit;
+    font-size: 1rem;
+    outline: none;
+  }
+  .contact-form textarea {
+    resize: vertical;
+    min-height: 112px;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-color: var(--color-teal);
+  }
+  .contact-form button {
+    align-self: flex-start;
+    margin-top: 8px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-ink);
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .location {
+    position: relative;
+    min-height: clamp(420px, 54vw, 720px);
+  }
+  .location__map,
+  .location__map :global(.google-map),
+  .location__map :global(iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+  .location__info {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    min-height: clamp(420px, 54vw, 720px);
+    padding-bottom: clamp(36px, 5vw, 80px);
+    pointer-events: none;
+  }
+  .location__info > div {
+    max-width: 400px;
+    padding: clamp(25px, 3vw, 42px);
+    background: var(--color-paper);
+    pointer-events: auto;
+  }
+  .location__address {
+    margin: 22px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.7vw, 2.7rem);
+    font-weight: 800;
+    letter-spacing: -0.065em;
+    line-height: 0.95;
+  }
+  .location__hours {
+    margin: 22px 0 0;
+    color: var(--color-text-soft);
+    font-size: 0.94rem;
+  }
+  .location__info a {
+    display: inline-block;
+    margin-top: 28px;
+    font-weight: 700;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 800px) {
+    .contact-hero {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding-top: 92px;
+      padding-bottom: 72px;
+    }
+    .contact-hero h1,
+    .contact-hero__lead {
+      grid-column: auto;
+    }
+    .contact-hero__lead {
+      max-width: 33ch;
+    }
+    .contact-main {
+      grid-template-columns: 1fr;
+      gap: 64px;
+      padding-bottom: 80px;
+    }
+  }
+  @media (max-width: 560px) {
+    .contact-form__row {
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+    .location__info {
+      align-items: flex-end;
+      padding-bottom: 0;
+    }
+    .location__info > div {
+      max-width: none;
+      width: 100%;
+    }
+  }
+</style>

@@ -17,13 +17,14 @@ const {
   tone = "dark",
 } = Astro.props;
 
-const email = "infos@nice-emballage.com";
+const email = "emballagenice@gmail.com";
 const phone = "+226 64 98 66 66";
 const phoneHref = "tel:+22664986666";
 const address = "Borgho, sur la route de Fada";
 const coords = "12.411808,-1.418128";
 const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}`;
 ---
+
 <section class:list={["contact-section", { "is-light": tone === "light" }]}>
   <div class="wrap">
     <div class="cu">
@@ -70,7 +71,9 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
               <br />
               Ouagadougou, Burkina Faso
             </p>
-            <p class="contact-find__meta">Ouvert tous les jours · 7h30 – 18h00</p>
+            <p class="contact-find__meta">
+              Ouvert tous les jours · 7h30 – 18h00
+            </p>
             <a
               class="contact-find__dir"
               href={directions}
@@ -90,32 +93,34 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
 </section>
 
 <script>
-  document.querySelectorAll<HTMLFormElement>("form.contact-form").forEach((form) => {
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const to = form.dataset.mailto ?? "";
-      const data = new FormData(form);
-      const nom = String(data.get("nom") ?? "").trim();
-      const entreprise = String(data.get("entreprise") ?? "").trim();
-      const from = String(data.get("email") ?? "").trim();
-      const message = String(data.get("message") ?? "").trim();
+  document
+    .querySelectorAll<HTMLFormElement>("form.contact-form")
+    .forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const to = form.dataset.mailto ?? "";
+        const data = new FormData(form);
+        const nom = String(data.get("nom") ?? "").trim();
+        const entreprise = String(data.get("entreprise") ?? "").trim();
+        const from = String(data.get("email") ?? "").trim();
+        const message = String(data.get("message") ?? "").trim();
 
-      const subject = `Demande de ${nom}${entreprise ? ` — ${entreprise}` : ""}`;
-      const body = [
-        `Nom : ${nom}`,
-        entreprise ? `Entreprise : ${entreprise}` : null,
-        `Email : ${from}`,
-        "",
-        message,
-      ]
-        .filter((line) => line !== null)
-        .join("\n");
+        const subject = `Demande de ${nom}${entreprise ? ` — ${entreprise}` : ""}`;
+        const body = [
+          `Nom : ${nom}`,
+          entreprise ? `Entreprise : ${entreprise}` : null,
+          `Email : ${from}`,
+          "",
+          message,
+        ]
+          .filter((line) => line !== null)
+          .join("\n");
 
-      window.location.href = `mailto:${to}?subject=${encodeURIComponent(
-        subject,
-      )}&body=${encodeURIComponent(body)}`;
+        window.location.href = `mailto:${to}?subject=${encodeURIComponent(
+          subject,
+        )}&body=${encodeURIComponent(body)}`;
+      });
     });
-  });
 </script>
 
 <style>
@@ -145,40 +150,40 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
     --cs-link-hover: var(--color-text-soft);
     --cs-find-border: transparent;
 
-    padding-top:104px;
-    padding-bottom:120px;
+    padding-top: 104px;
+    padding-bottom: 120px;
   }
 
   .cu {
     display: grid;
-    grid-template-columns: .82fr 1.18fr;
-    gap: clamp(48px,8vw,120px);
+    grid-template-columns: 0.82fr 1.18fr;
+    gap: clamp(48px, 8vw, 120px);
     align-items: start;
   }
 
   .cu-head h3 {
     max-width: 11ch;
     font-family: var(--font-display);
-    font-size:clamp(3.3rem,6.3vw,6.5rem);
+    font-size: clamp(3.3rem, 6.3vw, 6.5rem);
     font-weight: 800;
-    letter-spacing:-.075em;
-    line-height:.9;
+    letter-spacing: -0.075em;
+    line-height: 0.9;
   }
   .cu-lead {
-    margin-top:28px;
-    max-width:31ch;
-    font-size:clamp(1.05rem,1.5vw,1.25rem);
-    line-height:1.45;
+    margin-top: 28px;
+    max-width: 31ch;
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    line-height: 1.45;
     color: var(--cs-lead);
   }
   .cu-direct {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap:10px;
-    margin-top:36px;
-    font-size:clamp(1rem,1.5vw,1.18rem);
-    font-weight:700;
+    gap: 10px;
+    margin-top: 36px;
+    font-size: clamp(1rem, 1.5vw, 1.18rem);
+    font-weight: 700;
   }
   .cu-direct a {
     color: var(--cs-fg);
@@ -191,20 +196,20 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
   .contact-form {
     display: flex;
     flex-direction: column;
-    gap:24px;
-    padding:clamp(28px,4vw,48px);
-    border-radius:22px;
-    background:var(--color-paper-dim);
+    gap: 24px;
+    padding: clamp(28px, 4vw, 48px);
+    border-radius: 22px;
+    background: var(--color-paper-dim);
   }
   .cu-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap:20px;
+    gap: 20px;
   }
   .contact-form label {
     display: flex;
     flex-direction: column;
-    gap:10px;
+    gap: 10px;
   }
   .contact-form label span {
     font-size: 12px;
@@ -216,11 +221,11 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
   .contact-form input,
   .contact-form textarea {
     border: 0;
-    border:0;
-    border-radius:0;
-    border-bottom:1.5px solid var(--cs-rule);
-    background:transparent;
-    padding:10px 2px;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1.5px solid var(--cs-rule);
+    background: transparent;
+    padding: 10px 2px;
     font-family: inherit;
     font-size: 16px;
     color: var(--cs-fg);
@@ -229,7 +234,7 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
   }
   .contact-form textarea {
     resize: vertical;
-    min-height:80px;
+    min-height: 80px;
   }
   .contact-form input:focus,
   .contact-form textarea:focus {
@@ -238,18 +243,18 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
   }
   .contact-form .btn-primary {
     align-self: flex-start;
-    margin-top:6px;
+    margin-top: 6px;
   }
 
   /* --- Module "Nous trouver" : carte intégrée à la prise de contact --- */
   .contact-find {
     display: grid;
-    grid-template-columns:minmax(280px,.72fr) 1.28fr;
-    min-height:440px;
-    margin-top:112px;
+    grid-template-columns: minmax(280px, 0.72fr) 1.28fr;
+    min-height: 440px;
+    margin-top: 112px;
     color: var(--color-ink);
-    border:0;
-    border-radius:22px;
+    border: 0;
+    border-radius: 22px;
     overflow: hidden;
   }
   .contact-find__info {
@@ -257,8 +262,8 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap:12px;
-    padding:clamp(32px,4vw,54px);
+    gap: 12px;
+    padding: clamp(32px, 4vw, 54px);
     background: var(--color-paper-dim);
   }
   .contact-find__kicker {
@@ -266,13 +271,13 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color:var(--color-ink);
+    color: var(--color-ink);
   }
   .contact-find__addr {
-    font-size:clamp(1.2rem,2vw,1.55rem);
-    font-weight:800;
-    letter-spacing:-.035em;
-    line-height:1.2;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.2;
   }
   .contact-find__meta {
     font-size: 14px;
@@ -280,12 +285,12 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
   }
   .contact-find__dir {
     margin-top: 8px;
-    padding:13px 20px;
-    border-radius:var(--radius-pill);
+    padding: 13px 20px;
+    border-radius: var(--radius-pill);
     background: var(--color-yellow);
     color: var(--color-ink);
-    font-size:14px;
-    font-weight:800;
+    font-size: 14px;
+    font-weight: 800;
     text-decoration: none;
     transition: background 0.2s ease;
   }
@@ -294,7 +299,7 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
   }
   .contact-find__map {
     position: relative;
-    min-height:440px;
+    min-height: 440px;
     background: var(--color-stone);
   }
   .contact-find__map :global(#map),
@@ -307,7 +312,10 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
   }
 
   @media (max-width: 860px) {
-    .contact-section.is-light { padding-top:74px; padding-bottom:76px; }
+    .contact-section.is-light {
+      padding-top: 74px;
+      padding-bottom: 76px;
+    }
     .cu {
       grid-template-columns: 1fr;
       gap: 40px;
@@ -315,12 +323,14 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
     .contact-find {
       grid-template-columns: 1fr;
       min-height: 0;
-      margin-top:76px;
+      margin-top: 76px;
     }
     .contact-find__info {
       justify-content: flex-start;
     }
-    .contact-find__map { min-height:340px; }
+    .contact-find__map {
+      min-height: 340px;
+    }
   }
   @media (max-width: 480px) {
     .cu-row {

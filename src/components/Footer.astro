@@ -13,15 +13,10 @@ import wordmark from "../assets/logo-wordmark-black-v1.png";
         aria-label="Nice Emballage — accueil"
         ><Image src={wordmark} alt="Nice Emballage" /></a
       >
-      <p class="footer-location">
-        Ouagadougou, Burkina Faso<br />Depuis 16 ans
-      </p>
       <nav class="footer-links" aria-label="Navigation du pied de page">
-        <a href={rel("/produits")}>Emballages</a><a href={rel("/aquapur")}
-          >Aquapur</a
-        ><a href={rel("/machines")}>Machines</a><a
-          href={rel("/contact")}>Nous trouver</a
-        >
+        <a href={rel("/produits")}>Emballages</a><a href={rel("/machines")}
+          >Machines</a
+        ><a href={rel("/contact")}>Nous trouver</a>
       </nav>
     </div>
     <div class="footer-bottom">
@@ -38,10 +33,9 @@ import wordmark from "../assets/logo-wordmark-black-v1.png";
     color: var(--color-ink);
   }
   .footer-top {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr auto;
     gap: 30px;
-    align-items: start;
+    display: flex;
+    justify-content: space-between;
   }
   .footer-name {
     display: block;
@@ -51,12 +45,6 @@ import wordmark from "../assets/logo-wordmark-black-v1.png";
     display: block;
     width: auto;
     height: 62px;
-  }
-  .footer-location {
-    margin: 0;
-    color: #505a55;
-    font-size: 13px;
-    line-height: 1.35;
   }
   .footer-links {
     display: flex;
@@ -88,7 +76,8 @@ import wordmark from "../assets/logo-wordmark-black-v1.png";
       padding-right: 20px;
     }
     .footer-top {
-      grid-template-columns: 1fr;
+      flex-direction: column;
+      align-items: flex-start;
       gap: 26px;
     }
     .footer-bottom {

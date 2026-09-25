@@ -10,6 +10,7 @@ import bouteilles330ml from "../assets/bouteille-330ml-studio-v3.png";
 import bouteilles500ml from "../assets/bouteille-500ml-studio-v2.png";
 import bouteilles1l from "../assets/bouteille-1l-studio-v2.png";
 import bouteilles15l from "../assets/bouteille-15l-studio-v2.png";
+import { rel } from "../lib/base";
 
 const bottleFormats = [
   { image: bouteilles250ml, size: "250 ml", className: "format-250" },
@@ -19,7 +20,6 @@ const bottleFormats = [
   { image: bouteilles1l, size: "1 L", className: "format-1l" },
   { image: bouteilles15l, size: "1,5 L", className: "format-15l" },
 ];
-
 ---
 
 <Layout
@@ -29,8 +29,11 @@ const bottleFormats = [
   <main class="catalogue">
     <header class="catalogue-intro">
       <div class="wrap">
-        <h1>Produits.</h1>
-        <p>Des emballages fabriqués à Ouagadougou et des équipements pour accompagner votre production.</p>
+        <h1>Produits</h1>
+        <p>
+          Des emballages fabriqués à Ouagadougou et des équipements pour
+          accompagner votre production.
+        </p>
       </div>
     </header>
 
@@ -38,10 +41,17 @@ const bottleFormats = [
       <header class="bottle-range__head">
         <p class="bottle-range__eyebrow">Bouteilles PET</p>
         <h2 id="bottle-range-title">Une forme pour chaque format</h2>
-        <p class="bottle-range__intro">De 250 ml à 1,5 L, des formats pensés pour s’adapter à votre produit.</p>
+        <p class="bottle-range__intro">
+          De 250 ml à 1,5 L, des formats pensés pour s’adapter à votre produit.
+        </p>
       </header>
       <div class="bottle-range__carousel" data-bottle-carousel>
-        <button class="bottle-range__control" type="button" aria-label="Voir les formats précédents" data-carousel-previous>
+        <button
+          class="bottle-range__control"
+          type="button"
+          aria-label="Voir les formats précédents"
+          data-carousel-previous
+        >
           <span aria-hidden="true">‹</span>
         </button>
         <div class="bottle-range__viewport" data-carousel-viewport>
@@ -50,7 +60,12 @@ const bottleFormats = [
               bottleFormats.map((bottle) => (
                 <article class={`bottle-range__card ${bottle.className}`}>
                   <div>
-                    <Image src={bottle.image} alt={`Bouteilles PET ${bottle.size}`} widths={[480, 720, 1000]} sizes="(max-width: 700px) 76vw, 33vw" />
+                    <Image
+                      src={bottle.image}
+                      alt={`Bouteilles PET ${bottle.size}`}
+                      widths={[480, 720, 1000]}
+                      sizes="(max-width: 700px) 76vw, 33vw"
+                    />
                   </div>
                   <h3>{bottle.size}</h3>
                 </article>
@@ -58,11 +73,19 @@ const bottleFormats = [
             }
           </div>
         </div>
-        <button class="bottle-range__control" type="button" aria-label="Voir les formats suivants" data-carousel-next>
+        <button
+          class="bottle-range__control"
+          type="button"
+          aria-label="Voir les formats suivants"
+          data-carousel-next
+        >
           <span aria-hidden="true">›</span>
         </button>
       </div>
-      <p class="bottle-range__note">D’autres modèles sont disponibles. <a href="/contact">Contactez-nous</a> pour découvrir l’ensemble de la gamme.</p>
+      <p class="bottle-range__note">
+        D’autres modèles sont disponibles. <a href={rel("/contact")}>Contactez-nous</a> pour
+        découvrir l’ensemble de la gamme.
+      </p>
     </section>
 
     <section class="film-feature" aria-labelledby="film-title">
@@ -70,11 +93,18 @@ const bottleFormats = [
         <div class="film-feature__copy">
           <p class="film-feature__eyebrow">Films d’emballage</p>
           <h2 id="film-title">Protéger le produit<br />jusqu’au bout</h2>
-          <p>Des films plastiques pensés pour regrouper, stabiliser et conditionner vos produits.</p>
-          <a href="/contact">Parler de votre projet</a>
+          <p>
+            Des films plastiques pensés pour regrouper, stabiliser et
+            conditionner vos produits.
+          </p>
         </div>
         <div class="film-feature__main">
-          <Image src={filmsStudio} alt="Rouleaux de film d’emballage transparent" widths={[960, 1280, 1536]} sizes="(max-width: 800px) 100vw, 58vw" />
+          <Image
+            src={filmsStudio}
+            alt="Rouleaux de film d’emballage transparent"
+            widths={[960, 1280, 1536]}
+            sizes="(max-width: 800px) 100vw, 58vw"
+          />
         </div>
       </div>
     </section>
@@ -84,11 +114,18 @@ const bottleFormats = [
         <div class="caps-feature__copy">
           <p class="caps-feature__eyebrow">Bouchons</p>
           <h2 id="caps-title">La couleur<br />qui vous ressemble</h2>
-          <p>Une palette de bouchons pour adapter chaque bouteille à votre identité.</p>
-          <a href="/contact">Voir les possibilités</a>
+          <p>
+            Une palette de bouchons pour adapter chaque bouteille à votre
+            identité.
+          </p>
         </div>
         <div class="caps-feature__main">
-          <Image src={capsStudio} alt="Bouchons striés en plusieurs couleurs" widths={[960, 1280, 1536]} sizes="(max-width: 800px) 100vw, 58vw" />
+          <Image
+            src={capsStudio}
+            alt="Bouchons striés en plusieurs couleurs"
+            widths={[960, 1280, 1536]}
+            sizes="(max-width: 800px) 100vw, 58vw"
+          />
         </div>
       </div>
     </section>
@@ -96,111 +133,463 @@ const bottleFormats = [
     <section class="preforms-feature" aria-labelledby="preforms-title">
       <div class="preforms-feature__visual wrap">
         <div class="preforms-feature__main">
-          <Image src={preformsStudio} alt="Préformes PET de différents formats et coloris" widths={[960, 1280, 1536]} sizes="100vw" />
+          <Image
+            src={preformsStudio}
+            alt="Préformes PET de différents formats et coloris"
+            widths={[960, 1280, 1536]}
+            sizes="100vw"
+          />
         </div>
         <div class="preforms-feature__copy">
           <p class="preforms-feature__eyebrow">Préformes</p>
           <h2 id="preforms-title">Formats<br />et coloris</h2>
-          <p>Des préformes PET de plusieurs hauteurs et teintes, à choisir selon votre projet.</p>
-          <p class="preforms-feature__note">Spécifications et disponibilités sur demande.</p>
-          <a href="/contact">Échanger sur votre projet</a>
+          <p>
+            Des préformes PET de plusieurs hauteurs et teintes, à choisir selon
+            votre projet.
+          </p>
+          <p class="preforms-feature__note">
+            Spécifications et disponibilités sur demande.
+          </p>
         </div>
       </div>
     </section>
-
   </main>
 </Layout>
 
 <style>
-  .catalogue { overflow:hidden; background:var(--color-paper); }
-  .catalogue-intro { padding:84px 0 72px; }
-  .catalogue-intro h1 { max-width:8ch; margin:0; font-family:var(--font-display); font-size:clamp(4rem,8vw,8.8rem); font-weight:800; letter-spacing:-.085em; line-height:.8; }
-  .catalogue-intro p { max-width:35ch; margin:30px 0 0; color:var(--color-text-soft); font-size:clamp(1.06rem,1.6vw,1.3rem); line-height:1.45; }
-
-  .bottle-range { padding:7vw 0 10vw; }
-  .bottle-range__head { display:grid; grid-template-columns:1fr minmax(0, 1.35fr) minmax(190px, .55fr); gap:28px; align-items:end; margin-bottom:58px; }
-  .bottle-range__eyebrow { align-self:start; margin:8px 0 0; color:var(--color-ink); font-size:.76rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
-  .bottle-range__head h2 { max-width:11ch; margin:0; font-family:var(--font-display); font-size:clamp(3.1rem,5.4vw,6.3rem); font-weight:800; letter-spacing:-.08em; line-height:.86; }
-  .bottle-range__intro { max-width:23ch; margin:0; color:var(--color-text-soft); font-size:1rem; line-height:1.45; }
-  .bottle-range__carousel { display:grid; grid-template-columns:44px minmax(0, 1fr) 44px; align-items:center; gap:22px; }
-  .bottle-range__viewport { overflow:hidden; }
-  .bottle-range__track { display:grid; grid-auto-flow:column; grid-auto-columns:calc((100% - 48px) / 3); gap:24px; transition:transform .45s cubic-bezier(.2,.7,.2,1); }
-  .bottle-range__control { display:grid; width:44px; height:44px; place-items:center; padding:0; border:0; background:transparent; color:var(--color-ink); cursor:pointer; font:inherit; font-size:3.2rem; font-weight:300; line-height:1; transition:opacity .2s ease; }
-  .bottle-range__control:hover { opacity:.55; }
-  .bottle-range__control:focus-visible { outline:1px solid var(--color-ink); outline-offset:4px; }
-  .bottle-range__card > div { position:relative; height:clamp(280px, 32vw, 480px); overflow:hidden; background:#fff; }
-  .bottle-range__card :global(img) { position:absolute; top:50%; left:50%; display:block; width:auto; height:var(--bottle-height); max-width:88%; max-height:calc(100% - 48px); object-fit:contain; transform:translate(-50%, -50%); }
-  .format-250 { --bottle-height:84%; }
-  .format-300 { --bottle-height:72%; }
-  .format-330 { --bottle-height:70%; }
-  .format-500 { --bottle-height:72%; }
-  .format-1l { --bottle-height:80%; }
-  .format-15l { --bottle-height:89%; }
-  .bottle-range__card h3 { margin:15px 0 0; font-family:var(--font-display); font-size:clamp(1.5rem,2vw,2.15rem); font-weight:800; letter-spacing:-.065em; line-height:.92; text-align:center; }
-  .bottle-range__note { margin:32px auto 0; color:var(--color-text-soft); font-size:.95rem; text-align:center; }
-  .bottle-range__note a { color:var(--color-ink); font-weight:700; text-underline-offset:3px; }
-
-  .film-feature { padding:6vw 0; }
-  .film-feature__layout { display:grid; grid-template-columns:minmax(250px, .72fr) minmax(0, 1.28fr); gap:clamp(32px,6vw,110px); align-items:center; }
-  .film-feature__eyebrow { margin:0 0 22px; font-size:.76rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
-  .film-feature__copy h2 { margin:0; font-family:var(--font-display); font-size:clamp(3rem,4.6vw,5.4rem); font-weight:800; letter-spacing:-.08em; line-height:.85; }
-  .film-feature__copy > p { max-width:27ch; margin:28px 0 0; color:var(--color-text-soft); font-size:1rem; line-height:1.45; }
-  .film-feature__copy a { display:inline-block; margin-top:25px; font-weight:700; text-underline-offset:3px; }
-  .film-feature__main { overflow:hidden; background:#f6f7f5; }
-  .film-feature__main :global(img) { display:block; width:100%; height:auto; }
-
-  .caps-feature { padding:6vw 0 8vw; }
-  .caps-feature__layout { display:grid; grid-template-columns:minmax(0, 1.28fr) minmax(250px, .72fr); gap:clamp(32px,6vw,110px); align-items:center; }
-  .caps-feature__copy { order:2; }
-  .caps-feature__main { order:1; }
-  .caps-feature__eyebrow { margin:0 0 22px; font-size:.76rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
-  .caps-feature__copy h2 { margin:0; font-family:var(--font-display); font-size:clamp(3rem,4.6vw,5.4rem); font-weight:800; letter-spacing:-.08em; line-height:.85; }
-  .caps-feature__copy > p { max-width:27ch; margin:28px 0 0; color:var(--color-text-soft); font-size:1rem; line-height:1.45; }
-  .caps-feature__copy a { display:inline-block; margin-top:25px; font-weight:700; text-underline-offset:3px; }
-  .caps-feature__main { overflow:hidden; background:#fff; }
-  .caps-feature__main :global(img) { display:block; width:100%; height:auto; }
-
-  .preforms-feature { padding:6vw 0 9vw; }
-  .preforms-feature__visual { position:relative; width:100vw; max-width:none; margin-left:calc(50% - 50vw); padding:0; overflow:hidden; background:#f6f7f5; }
-  .preforms-feature__main :global(img) { display:block; width:100%; height:auto; }
-  .preforms-feature__copy { position:absolute; top:50%; left:max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter))); width:min(27%, 340px); transform:translateY(-50%); }
-  .preforms-feature__eyebrow { margin:0 0 22px; font-size:.76rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
-  .preforms-feature__copy h2 { margin:0; font-family:var(--font-display); font-size:clamp(3rem,4.6vw,5.4rem); font-weight:800; letter-spacing:-.08em; line-height:.85; }
-  .preforms-feature__copy > p { max-width:29ch; margin:28px 0 0; color:var(--color-text-soft); font-size:1rem; line-height:1.45; }
-  .preforms-feature__copy .preforms-feature__note { margin-top:14px; font-size:.88rem; }
-  .preforms-feature__copy a { display:inline-block; margin-top:25px; font-weight:700; text-underline-offset:3px; }
-
-  @media (max-width:800px) {
-    .catalogue-intro { padding:74px 0 72px; }
-    .bottle-range { padding-bottom:64px; }
-    .bottle-range__head { grid-template-columns:1fr; gap:22px; margin-bottom:38px; }
-    .bottle-range__eyebrow { margin-top:0; }
-    .film-feature__layout { grid-template-columns:1fr; gap:32px; }
-    .film-feature__eyebrow { margin-top:0; }
-    .caps-feature__layout { grid-template-columns:1fr; gap:32px; }
-    .caps-feature__copy, .caps-feature__main { order:initial; }
-    .preforms-feature__copy { left:var(--gutter); width:32%; }
-    .bottle-range__carousel { grid-template-columns:36px minmax(0, 1fr) 36px; gap:10px; }
-    .bottle-range__control { width:36px; height:36px; font-size:2.7rem; }
-    .bottle-range__track { grid-auto-columns:calc((100% - 16px) / 2); gap:16px; }
+  .catalogue {
+    overflow: hidden;
+    background: var(--color-paper);
   }
-  @media (max-width:640px) { .bottle-range__carousel { grid-template-columns:1fr; }.bottle-range__control { display:none; }.bottle-range__viewport { width:100vw; margin-left:calc(50% - 50vw); padding:0 var(--gutter); overflow-x:auto; overscroll-behavior-x:contain; scroll-padding-inline:var(--gutter); scroll-snap-type:x mandatory; scrollbar-width:none; }.bottle-range__viewport::-webkit-scrollbar { display:none; }.bottle-range__track { grid-auto-columns:minmax(76vw, 300px); gap:16px; transition:none; }.bottle-range__card { scroll-snap-align:start; }.film-feature, .caps-feature, .preforms-feature { padding:72px 0; }.preforms-feature__visual { display:flex; flex-direction:column; }.preforms-feature__copy { position:static; width:auto; padding:32px var(--gutter) 0; transform:none; order:-1; }.preforms-feature__main { margin-top:26px; } }
+  .catalogue-intro {
+    padding: 84px 0 72px;
+  }
+  .catalogue-intro h1 {
+    max-width: 8ch;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 8vw, 8.8rem);
+    font-weight: 800;
+    letter-spacing: -0.085em;
+    line-height: 0.8;
+  }
+  .catalogue-intro p {
+    max-width: 35ch;
+    margin: 30px 0 0;
+    color: var(--color-text-soft);
+    font-size: clamp(1.06rem, 1.6vw, 1.3rem);
+    line-height: 1.45;
+  }
+
+  .bottle-range {
+    padding: 7vw 0 10vw;
+  }
+  .bottle-range__head {
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 1.35fr) minmax(190px, 0.55fr);
+    gap: 28px;
+    align-items: end;
+    margin-bottom: 58px;
+  }
+  .bottle-range__eyebrow {
+    align-self: start;
+    margin: 8px 0 0;
+    color: var(--color-ink);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .bottle-range__head h2 {
+    max-width: 11ch;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3.1rem, 5.4vw, 6.3rem);
+    font-weight: 800;
+    letter-spacing: -0.08em;
+    line-height: 0.86;
+  }
+  .bottle-range__intro {
+    max-width: 23ch;
+    margin: 0;
+    color: var(--color-text-soft);
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+  .bottle-range__carousel {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    align-items: center;
+    gap: 22px;
+  }
+  .bottle-range__viewport {
+    overflow: hidden;
+  }
+  .bottle-range__track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 48px) / 3);
+    gap: 24px;
+    transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .bottle-range__control {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-ink);
+    cursor: pointer;
+    font: inherit;
+    font-size: 3.2rem;
+    font-weight: 300;
+    line-height: 1;
+    transition: opacity 0.2s ease;
+  }
+  .bottle-range__control:hover {
+    opacity: 0.55;
+  }
+  .bottle-range__control:focus-visible {
+    outline: 1px solid var(--color-ink);
+    outline-offset: 4px;
+  }
+  .bottle-range__card > div {
+    position: relative;
+    height: clamp(280px, 32vw, 480px);
+    overflow: hidden;
+    background: #fff;
+  }
+  .bottle-range__card :global(img) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: auto;
+    height: var(--bottle-height);
+    max-width: 88%;
+    max-height: calc(100% - 48px);
+    object-fit: contain;
+    transform: translate(-50%, -50%);
+  }
+  .format-250 {
+    --bottle-height: 84%;
+  }
+  .format-300 {
+    --bottle-height: 72%;
+  }
+  .format-330 {
+    --bottle-height: 70%;
+  }
+  .format-500 {
+    --bottle-height: 72%;
+  }
+  .format-1l {
+    --bottle-height: 80%;
+  }
+  .format-15l {
+    --bottle-height: 89%;
+  }
+  .bottle-range__card h3 {
+    margin: 15px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2vw, 2.15rem);
+    font-weight: 800;
+    letter-spacing: -0.065em;
+    line-height: 0.92;
+    text-align: center;
+  }
+  .bottle-range__note {
+    margin: 32px auto 0;
+    color: var(--color-text-soft);
+    font-size: 0.95rem;
+    text-align: center;
+  }
+  .bottle-range__note a {
+    color: var(--color-ink);
+    font-weight: 700;
+    text-underline-offset: 3px;
+  }
+
+  .film-feature {
+    padding: 6vw 0;
+  }
+  .film-feature__layout {
+    display: grid;
+    grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(32px, 6vw, 110px);
+    align-items: center;
+  }
+  .film-feature__eyebrow {
+    margin: 0 0 22px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .film-feature__copy h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 4.6vw, 5.4rem);
+    font-weight: 800;
+    letter-spacing: -0.08em;
+    line-height: 0.85;
+  }
+  .film-feature__copy > p {
+    max-width: 27ch;
+    margin: 28px 0 0;
+    color: var(--color-text-soft);
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+  .film-feature__copy a {
+    display: inline-block;
+    margin-top: 25px;
+    font-weight: 700;
+    text-underline-offset: 3px;
+  }
+  .film-feature__main {
+    overflow: hidden;
+    background: #f6f7f5;
+  }
+  .film-feature__main :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .caps-feature {
+    padding: 6vw 0 8vw;
+  }
+  .caps-feature__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.28fr) minmax(250px, 0.72fr);
+    gap: clamp(32px, 6vw, 110px);
+    align-items: center;
+  }
+  .caps-feature__copy {
+    order: 2;
+  }
+  .caps-feature__main {
+    order: 1;
+  }
+  .caps-feature__eyebrow {
+    margin: 0 0 22px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .caps-feature__copy h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 4.6vw, 5.4rem);
+    font-weight: 800;
+    letter-spacing: -0.08em;
+    line-height: 0.85;
+  }
+  .caps-feature__copy > p {
+    max-width: 27ch;
+    margin: 28px 0 0;
+    color: var(--color-text-soft);
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+  .caps-feature__copy a {
+    display: inline-block;
+    margin-top: 25px;
+    font-weight: 700;
+    text-underline-offset: 3px;
+  }
+  .caps-feature__main {
+    overflow: hidden;
+    background: #fff;
+  }
+  .caps-feature__main :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .preforms-feature {
+    padding: 6vw 0 9vw;
+  }
+  .preforms-feature__visual {
+    position: relative;
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    padding: 0;
+    overflow: hidden;
+    background: #f6f7f5;
+  }
+  .preforms-feature__main :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .preforms-feature__copy {
+    position: absolute;
+    top: 50%;
+    left: max(
+      var(--gutter),
+      calc((100vw - var(--container)) / 2 + var(--gutter))
+    );
+    width: min(27%, 340px);
+    transform: translateY(-50%);
+  }
+  .preforms-feature__eyebrow {
+    margin: 0 0 22px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .preforms-feature__copy h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 4.6vw, 5.4rem);
+    font-weight: 800;
+    letter-spacing: -0.08em;
+    line-height: 0.85;
+  }
+  .preforms-feature__copy > p {
+    max-width: 29ch;
+    margin: 28px 0 0;
+    color: var(--color-text-soft);
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+  .preforms-feature__copy .preforms-feature__note {
+    margin-top: 14px;
+    font-size: 0.88rem;
+  }
+  .preforms-feature__copy a {
+    display: inline-block;
+    margin-top: 25px;
+    font-weight: 700;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 800px) {
+    .catalogue-intro {
+      padding: 74px 0 72px;
+    }
+    .bottle-range {
+      padding-bottom: 64px;
+    }
+    .bottle-range__head {
+      grid-template-columns: 1fr;
+      gap: 22px;
+      margin-bottom: 38px;
+    }
+    .bottle-range__eyebrow {
+      margin-top: 0;
+    }
+    .film-feature__layout {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .film-feature__eyebrow {
+      margin-top: 0;
+    }
+    .caps-feature__layout {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .caps-feature__copy,
+    .caps-feature__main {
+      order: initial;
+    }
+    .preforms-feature__copy {
+      left: var(--gutter);
+      width: 32%;
+    }
+    .bottle-range__carousel {
+      grid-template-columns: 36px minmax(0, 1fr) 36px;
+      gap: 10px;
+    }
+    .bottle-range__control {
+      width: 36px;
+      height: 36px;
+      font-size: 2.7rem;
+    }
+    .bottle-range__track {
+      grid-auto-columns: calc((100% - 16px) / 2);
+      gap: 16px;
+    }
+  }
+  @media (max-width: 640px) {
+    .bottle-range__carousel {
+      grid-template-columns: 1fr;
+    }
+    .bottle-range__control {
+      display: none;
+    }
+    .bottle-range__viewport {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      padding: 0 var(--gutter);
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-padding-inline: var(--gutter);
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    .bottle-range__viewport::-webkit-scrollbar {
+      display: none;
+    }
+    .bottle-range__track {
+      grid-auto-columns: minmax(76vw, 300px);
+      gap: 16px;
+      transition: none;
+    }
+    .bottle-range__card {
+      scroll-snap-align: start;
+    }
+    .film-feature,
+    .caps-feature,
+    .preforms-feature {
+      padding: 72px 0;
+    }
+    .preforms-feature__visual {
+      display: flex;
+      flex-direction: column;
+    }
+    .preforms-feature__copy {
+      position: static;
+      width: auto;
+      padding: 32px var(--gutter) 0;
+      transform: none;
+      order: -1;
+    }
+    .preforms-feature__main {
+      margin-top: 26px;
+    }
+  }
 </style>
 
 <script>
-  document.querySelectorAll('[data-bottle-carousel]').forEach((carousel) => {
-    const track = carousel.querySelector('[data-carousel-viewport]');
-    const previous = carousel.querySelector('[data-carousel-previous]');
-    const next = carousel.querySelector('[data-carousel-next]');
+  document.querySelectorAll("[data-bottle-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector("[data-carousel-viewport]");
+    const previous = carousel.querySelector("[data-carousel-previous]");
+    const next = carousel.querySelector("[data-carousel-next]");
 
     const move = (direction) => {
-      const card = track.querySelector('.bottle-range__card');
+      const card = track.querySelector(".bottle-range__card");
       if (!card) return;
-      const gap = Number.parseFloat(getComputedStyle(track.querySelector('.bottle-range__track')).gap) || 0;
-      track.scrollBy({ left: direction * (card.getBoundingClientRect().width + gap), behavior: 'smooth' });
+      const gap =
+        Number.parseFloat(
+          getComputedStyle(track.querySelector(".bottle-range__track")).gap,
+        ) || 0;
+      track.scrollBy({
+        left: direction * (card.getBoundingClientRect().width + gap),
+        behavior: "smooth",
+      });
     };
 
-    previous?.addEventListener('click', () => move(-1));
-    next?.addEventListener('click', () => move(1));
+    previous?.addEventListener("click", () => move(-1));
+    next?.addEventListener("click", () => move(1));
   });
 </script>
