@@ -1,13 +1,13 @@
 ---
 import { Image } from "astro:assets";
-import heroImage from "../assets/hero-main-bouteille.png";
+import heroImage from "../assets/hero-ligne-production-v3.png";
 ---
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero__image">
     <Image
       src={heroImage}
-      alt="Bouteille PET Nice Emballage tenue à la main"
+      alt="Bouteilles PET Nice Emballage sur une ligne de production"
       widths={[800, 1200, 1600, 2000]}
       sizes="100vw"
     />
@@ -27,7 +27,7 @@ import heroImage from "../assets/hero-main-bouteille.png";
     position:relative;
     isolation:isolate;
     display:grid;
-    min-height:clamp(610px, 78vh, 830px);
+    min-height:clamp(610px, 82vh, 920px);
     overflow:hidden;
     background:var(--color-ink);
     color:var(--color-paper);

@@ -1,51 +1,25 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import preformes from "../assets/preformes-reelles-sombre-v3.png";
-import bouchons from "../assets/bouchons-pyramide-sombre.png";
-import bouteilles from "../assets/bouteilles-reelles-sombre.png";
-import emballages from "../assets/film-emballage-sombre.png";
-import bouteilles250ml from "../assets/bouteilles-250ml.png";
-import bouteilles300ml from "../assets/bouteilles-300ml.png";
-import bouteilles330ml from "../assets/bouteilles-330ml.png";
-import bouteilles500ml from "../assets/bouteilles-500ml.png";
-import bouteilles1l from "../assets/bouteilles-1l.png";
-import bouteilles15l from "../assets/bouteilles-15l.png";
-import machineMoule from "../assets/machine-atelier-unifiee.png";
-import machineFilm from "../assets/machine-film-unifiee-v2.png";
-import machineLigne from "../assets/machine-ligne-unifiee.png";
-import machineSceller from "../assets/machine-sceller-unifiee.png";
-import machineMarquage from "../assets/machine-marquage-industriel-v2.png";
-import machineRemplissage from "../assets/machine-ligne-remplissage-v2.png";
-import machineTraitementEau from "../assets/machine-traitement-eau.png";
-import machineEtiquetage from "../assets/machine-etiquetage-retraction.png";
-
-const products = [
-  { image: preformes, name: "Préformes", text: "Des préformes pour vos projets de soufflage et de conditionnement." },
-  { image: bouchons, name: "Bouchons", text: "Des bouchons pour compléter vos contenants et vos formats." },
-  { image: bouteilles, name: "Bouteilles", text: "Des bouteilles adaptées à vos boissons et produits liquides." },
-  { image: emballages, name: "Films d’emballage", text: "Des solutions de film plastique pour protéger et conditionner vos produits." },
-];
+import filmsStudio from "../assets/films-emballage-studio-v1.png";
+import capsStudio from "../assets/bouchons-studio-couleurs-v2.png";
+import preformsStudio from "../assets/preformes-gamme-mineral-v2.png";
+import bouteilles250ml from "../assets/bouteille-250ml-studio-v2.png";
+import bouteilles300ml from "../assets/bouteille-300ml-studio-v2.png";
+import bouteilles330ml from "../assets/bouteille-330ml-studio-v3.png";
+import bouteilles500ml from "../assets/bouteille-500ml-studio-v2.png";
+import bouteilles1l from "../assets/bouteille-1l-studio-v2.png";
+import bouteilles15l from "../assets/bouteille-15l-studio-v2.png";
 
 const bottleFormats = [
-  { image: bouteilles250ml, size: "250 ml", models: "2 modèles disponibles" },
-  { image: bouteilles300ml, size: "300 ml", models: "2 modèles disponibles" },
-  { image: bouteilles330ml, size: "330 ml", models: "1 modèle disponible" },
-  { image: bouteilles500ml, size: "500 ml", models: "6 modèles disponibles" },
-  { image: bouteilles1l, size: "1 L", models: "3 modèles disponibles" },
-  { image: bouteilles15l, size: "1,5 L", models: "3 modèles disponibles" },
+  { image: bouteilles250ml, size: "250 ml", className: "format-250" },
+  { image: bouteilles300ml, size: "300 ml", className: "format-300" },
+  { image: bouteilles330ml, size: "330 ml", className: "format-330" },
+  { image: bouteilles500ml, size: "500 ml", className: "format-500" },
+  { image: bouteilles1l, size: "1 L", className: "format-1l" },
+  { image: bouteilles15l, size: "1,5 L", className: "format-15l" },
 ];
 
-const machines = [
-  { image: machineMoule, name: "Moule d’injection" },
-  { image: machineFilm, name: "Ligne de film plastique" },
-  { image: machineLigne, name: "Ligne de conditionnement" },
-  { image: machineSceller, name: "Machine à sceller" },
-  { image: machineMarquage, name: "Machine de marquage industriel" },
-  { image: machineRemplissage, name: "Ligne de remplissage" },
-  { image: machineTraitementEau, name: "Système de traitement d’eau" },
-  { image: machineEtiquetage, name: "Machine d’étiquetage et tunnel de rétraction" },
-];
 ---
 
 <Layout
@@ -60,62 +34,77 @@ const machines = [
       </div>
     </header>
 
-    <section class="catalogue-section wrap" aria-labelledby="products-title">
-      <header class="catalogue-section__head">
-        <h2 id="products-title">Ce que nous fabriquons.</h2>
-        <p>Des produits pensés pour vos besoins de conditionnement.</p>
-      </header>
-      <div class="catalogue-grid">
-        {
-          products.map((product) => (
-            <article class="catalogue-card">
-              <div class="catalogue-card__image">
-                <Image src={product.image} alt={product.name} widths={[480, 720, 1000]} sizes="(max-width: 700px) 100vw, 50vw" />
-              </div>
-              <h3>{product.name}</h3>
-              <p>{product.text}</p>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
     <section class="bottle-range wrap" aria-labelledby="bottle-range-title">
-      <header class="catalogue-section__head">
-        <h2 id="bottle-range-title">Notre gamme de bouteilles.</h2>
-        <p>17 formats PET, répartis en six contenances pour s’adapter à vos produits.</p>
+      <header class="bottle-range__head">
+        <p class="bottle-range__eyebrow">Bouteilles PET</p>
+        <h2 id="bottle-range-title">Une forme pour chaque format</h2>
+        <p class="bottle-range__intro">De 250 ml à 1,5 L, des formats pensés pour s’adapter à votre produit.</p>
       </header>
-      <div class="bottle-range__grid">
-        {
-          bottleFormats.map((bottle) => (
-            <article class="bottle-range__card">
-              <div>
-                <Image src={bottle.image} alt={`Bouteilles PET ${bottle.size}`} widths={[480, 720, 1000]} sizes="(max-width: 700px) 76vw, 33vw" />
-              </div>
-              <h3>{bottle.size}</h3>
-              <p>{bottle.models}</p>
-            </article>
-          ))
-        }
+      <div class="bottle-range__carousel" data-bottle-carousel>
+        <button class="bottle-range__control" type="button" aria-label="Voir les formats précédents" data-carousel-previous>
+          <span aria-hidden="true">‹</span>
+        </button>
+        <div class="bottle-range__viewport" data-carousel-viewport>
+          <div class="bottle-range__track">
+            {
+              bottleFormats.map((bottle) => (
+                <article class={`bottle-range__card ${bottle.className}`}>
+                  <div>
+                    <Image src={bottle.image} alt={`Bouteilles PET ${bottle.size}`} widths={[480, 720, 1000]} sizes="(max-width: 700px) 76vw, 33vw" />
+                  </div>
+                  <h3>{bottle.size}</h3>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+        <button class="bottle-range__control" type="button" aria-label="Voir les formats suivants" data-carousel-next>
+          <span aria-hidden="true">›</span>
+        </button>
+      </div>
+      <p class="bottle-range__note">D’autres modèles sont disponibles. <a href="/contact">Contactez-nous</a> pour découvrir l’ensemble de la gamme.</p>
+    </section>
+
+    <section class="film-feature" aria-labelledby="film-title">
+      <div class="film-feature__layout wrap">
+        <div class="film-feature__copy">
+          <p class="film-feature__eyebrow">Films d’emballage</p>
+          <h2 id="film-title">Protéger le produit<br />jusqu’au bout</h2>
+          <p>Des films plastiques pensés pour regrouper, stabiliser et conditionner vos produits.</p>
+          <a href="/contact">Parler de votre projet</a>
+        </div>
+        <div class="film-feature__main">
+          <Image src={filmsStudio} alt="Rouleaux de film d’emballage transparent" widths={[960, 1280, 1536]} sizes="(max-width: 800px) 100vw, 58vw" />
+        </div>
       </div>
     </section>
 
-    <section class="machine-catalogue wrap" aria-labelledby="machines-title">
-      <header class="catalogue-section__head">
-        <h2 id="machines-title">Machines & équipements.</h2>
-        <p>Une sélection d’équipements pour accompagner votre production.</p>
-      </header>
-      <div class="machine-catalogue__grid">
-        {
-          machines.map((machine) => (
-            <article class="machine-catalogue__card">
-              <div class:list={{ "is-contain": machine.contain }}>
-                <Image src={machine.image} alt={machine.name} widths={[480, 720, 1000]} sizes="(max-width: 700px) 100vw, 25vw" />
-              </div>
-              <h3>{machine.name}</h3>
-            </article>
-          ))
-        }
+    <section class="caps-feature" aria-labelledby="caps-title">
+      <div class="caps-feature__layout wrap">
+        <div class="caps-feature__copy">
+          <p class="caps-feature__eyebrow">Bouchons</p>
+          <h2 id="caps-title">La couleur<br />qui vous ressemble</h2>
+          <p>Une palette de bouchons pour adapter chaque bouteille à votre identité.</p>
+          <a href="/contact">Voir les possibilités</a>
+        </div>
+        <div class="caps-feature__main">
+          <Image src={capsStudio} alt="Bouchons striés en plusieurs couleurs" widths={[960, 1280, 1536]} sizes="(max-width: 800px) 100vw, 58vw" />
+        </div>
+      </div>
+    </section>
+
+    <section class="preforms-feature" aria-labelledby="preforms-title">
+      <div class="preforms-feature__visual wrap">
+        <div class="preforms-feature__main">
+          <Image src={preformsStudio} alt="Préformes PET de différents formats et coloris" widths={[960, 1280, 1536]} sizes="100vw" />
+        </div>
+        <div class="preforms-feature__copy">
+          <p class="preforms-feature__eyebrow">Préformes</p>
+          <h2 id="preforms-title">Formats<br />et coloris</h2>
+          <p>Des préformes PET de plusieurs hauteurs et teintes, à choisir selon votre projet.</p>
+          <p class="preforms-feature__note">Spécifications et disponibilités sur demande.</p>
+          <a href="/contact">Échanger sur votre projet</a>
+        </div>
       </div>
     </section>
 
@@ -128,37 +117,90 @@ const machines = [
   .catalogue-intro h1 { max-width:8ch; margin:0; font-family:var(--font-display); font-size:clamp(4rem,8vw,8.8rem); font-weight:800; letter-spacing:-.085em; line-height:.8; }
   .catalogue-intro p { max-width:35ch; margin:30px 0 0; color:var(--color-text-soft); font-size:clamp(1.06rem,1.6vw,1.3rem); line-height:1.45; }
 
-  .catalogue-section, .machine-catalogue { padding-bottom:84px; }
-  .catalogue-section__head { display:grid; grid-template-columns:1fr minmax(210px, .45fr); align-items:end; gap:30px; margin-bottom:52px; }
-  .catalogue-section__head h2 { max-width:13ch; margin:0; font-family:var(--font-display); font-size:clamp(2.7rem,5.1vw,5.8rem); font-weight:800; letter-spacing:-.075em; line-height:.88; }
-  .catalogue-section__head p { max-width:28ch; margin:0; color:var(--color-text-soft); font-size:1.05rem; line-height:1.45; }
-  .catalogue-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
-  .catalogue-card__image { aspect-ratio:1; overflow:hidden; border-radius:22px; background:var(--color-stone); }
-  .catalogue-card__image :global(img) { display:block; width:100%; height:100%; object-fit:cover; }
-  .catalogue-card h3 { margin:16px 4px 0; font-family:var(--font-display); font-size:clamp(1.6rem,2.2vw,2.3rem); font-weight:800; letter-spacing:-.065em; line-height:.92; }
-  .catalogue-card p { max-width:34ch; margin:9px 4px 0; color:var(--color-text-soft); font-size:.94rem; line-height:1.4; }
+  .bottle-range { padding:7vw 0 10vw; }
+  .bottle-range__head { display:grid; grid-template-columns:1fr minmax(0, 1.35fr) minmax(190px, .55fr); gap:28px; align-items:end; margin-bottom:58px; }
+  .bottle-range__eyebrow { align-self:start; margin:8px 0 0; color:var(--color-ink); font-size:.76rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+  .bottle-range__head h2 { max-width:11ch; margin:0; font-family:var(--font-display); font-size:clamp(3.1rem,5.4vw,6.3rem); font-weight:800; letter-spacing:-.08em; line-height:.86; }
+  .bottle-range__intro { max-width:23ch; margin:0; color:var(--color-text-soft); font-size:1rem; line-height:1.45; }
+  .bottle-range__carousel { display:grid; grid-template-columns:44px minmax(0, 1fr) 44px; align-items:center; gap:22px; }
+  .bottle-range__viewport { overflow:hidden; }
+  .bottle-range__track { display:grid; grid-auto-flow:column; grid-auto-columns:calc((100% - 48px) / 3); gap:24px; transition:transform .45s cubic-bezier(.2,.7,.2,1); }
+  .bottle-range__control { display:grid; width:44px; height:44px; place-items:center; padding:0; border:0; background:transparent; color:var(--color-ink); cursor:pointer; font:inherit; font-size:3.2rem; font-weight:300; line-height:1; transition:opacity .2s ease; }
+  .bottle-range__control:hover { opacity:.55; }
+  .bottle-range__control:focus-visible { outline:1px solid var(--color-ink); outline-offset:4px; }
+  .bottle-range__card > div { position:relative; height:clamp(280px, 32vw, 480px); overflow:hidden; background:#fff; }
+  .bottle-range__card :global(img) { position:absolute; top:50%; left:50%; display:block; width:auto; height:var(--bottle-height); max-width:88%; max-height:calc(100% - 48px); object-fit:contain; transform:translate(-50%, -50%); }
+  .format-250 { --bottle-height:84%; }
+  .format-300 { --bottle-height:72%; }
+  .format-330 { --bottle-height:70%; }
+  .format-500 { --bottle-height:72%; }
+  .format-1l { --bottle-height:80%; }
+  .format-15l { --bottle-height:89%; }
+  .bottle-range__card h3 { margin:15px 0 0; font-family:var(--font-display); font-size:clamp(1.5rem,2vw,2.15rem); font-weight:800; letter-spacing:-.065em; line-height:.92; text-align:center; }
+  .bottle-range__note { margin:32px auto 0; color:var(--color-text-soft); font-size:.95rem; text-align:center; }
+  .bottle-range__note a { color:var(--color-ink); font-weight:700; text-underline-offset:3px; }
 
-  .bottle-range { padding-bottom:84px; }
-  .bottle-range__grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:30px 22px; }
-  .bottle-range__card > div { aspect-ratio:1; overflow:hidden; border-radius:22px; background:var(--color-ink); }
-  .bottle-range__card :global(img) { display:block; width:100%; height:100%; object-fit:cover; }
-  .bottle-range__card h3 { margin:15px 4px 0; font-family:var(--font-display); font-size:clamp(1.7rem,2.2vw,2.3rem); font-weight:800; letter-spacing:-.065em; line-height:.92; }
-  .bottle-range__card p { margin:8px 4px 0; color:var(--color-text-soft); font-size:.94rem; }
+  .film-feature { padding:6vw 0; }
+  .film-feature__layout { display:grid; grid-template-columns:minmax(250px, .72fr) minmax(0, 1.28fr); gap:clamp(32px,6vw,110px); align-items:center; }
+  .film-feature__eyebrow { margin:0 0 22px; font-size:.76rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+  .film-feature__copy h2 { margin:0; font-family:var(--font-display); font-size:clamp(3rem,4.6vw,5.4rem); font-weight:800; letter-spacing:-.08em; line-height:.85; }
+  .film-feature__copy > p { max-width:27ch; margin:28px 0 0; color:var(--color-text-soft); font-size:1rem; line-height:1.45; }
+  .film-feature__copy a { display:inline-block; margin-top:25px; font-weight:700; text-underline-offset:3px; }
+  .film-feature__main { overflow:hidden; background:#f6f7f5; }
+  .film-feature__main :global(img) { display:block; width:100%; height:auto; }
 
-  .machine-catalogue__grid { display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
-  .machine-catalogue__card > div { aspect-ratio:4/3; overflow:hidden; border-radius:22px; background:var(--color-stone); }
-  .machine-catalogue__card :global(img) { display:block; width:100%; height:100%; object-fit:cover; }
-  .machine-catalogue__card .is-contain { background:var(--color-ink); }
-  .machine-catalogue__card .is-contain :global(img) { object-fit:contain; }
-  .machine-catalogue__card h3 { margin:15px 4px 0; font-family:var(--font-display); font-size:clamp(1.35rem,1.8vw,1.85rem); font-weight:800; letter-spacing:-.055em; line-height:.98; }
+  .caps-feature { padding:6vw 0 8vw; }
+  .caps-feature__layout { display:grid; grid-template-columns:minmax(0, 1.28fr) minmax(250px, .72fr); gap:clamp(32px,6vw,110px); align-items:center; }
+  .caps-feature__copy { order:2; }
+  .caps-feature__main { order:1; }
+  .caps-feature__eyebrow { margin:0 0 22px; font-size:.76rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+  .caps-feature__copy h2 { margin:0; font-family:var(--font-display); font-size:clamp(3rem,4.6vw,5.4rem); font-weight:800; letter-spacing:-.08em; line-height:.85; }
+  .caps-feature__copy > p { max-width:27ch; margin:28px 0 0; color:var(--color-text-soft); font-size:1rem; line-height:1.45; }
+  .caps-feature__copy a { display:inline-block; margin-top:25px; font-weight:700; text-underline-offset:3px; }
+  .caps-feature__main { overflow:hidden; background:#fff; }
+  .caps-feature__main :global(img) { display:block; width:100%; height:auto; }
+
+  .preforms-feature { padding:6vw 0 9vw; }
+  .preforms-feature__visual { position:relative; width:100vw; max-width:none; margin-left:calc(50% - 50vw); padding:0; overflow:hidden; background:#f6f7f5; }
+  .preforms-feature__main :global(img) { display:block; width:100%; height:auto; }
+  .preforms-feature__copy { position:absolute; top:50%; left:max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter))); width:min(27%, 340px); transform:translateY(-50%); }
+  .preforms-feature__eyebrow { margin:0 0 22px; font-size:.76rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+  .preforms-feature__copy h2 { margin:0; font-family:var(--font-display); font-size:clamp(3rem,4.6vw,5.4rem); font-weight:800; letter-spacing:-.08em; line-height:.85; }
+  .preforms-feature__copy > p { max-width:29ch; margin:28px 0 0; color:var(--color-text-soft); font-size:1rem; line-height:1.45; }
+  .preforms-feature__copy .preforms-feature__note { margin-top:14px; font-size:.88rem; }
+  .preforms-feature__copy a { display:inline-block; margin-top:25px; font-weight:700; text-underline-offset:3px; }
 
   @media (max-width:800px) {
     .catalogue-intro { padding:74px 0 72px; }
-    .catalogue-section, .bottle-range, .machine-catalogue { padding-bottom:64px; }
-    .catalogue-section__head { grid-template-columns:1fr; gap:22px; margin-bottom:38px; }
-    .catalogue-grid, .bottle-range__grid, .machine-catalogue__grid { grid-template-columns:repeat(2,1fr); }
-    .catalogue-grid { gap:38px 16px; }
-    .machine-catalogue__grid { gap:28px 16px; }
+    .bottle-range { padding-bottom:64px; }
+    .bottle-range__head { grid-template-columns:1fr; gap:22px; margin-bottom:38px; }
+    .bottle-range__eyebrow { margin-top:0; }
+    .film-feature__layout { grid-template-columns:1fr; gap:32px; }
+    .film-feature__eyebrow { margin-top:0; }
+    .caps-feature__layout { grid-template-columns:1fr; gap:32px; }
+    .caps-feature__copy, .caps-feature__main { order:initial; }
+    .preforms-feature__copy { left:var(--gutter); width:32%; }
+    .bottle-range__carousel { grid-template-columns:36px minmax(0, 1fr) 36px; gap:10px; }
+    .bottle-range__control { width:36px; height:36px; font-size:2.7rem; }
+    .bottle-range__track { grid-auto-columns:calc((100% - 16px) / 2); gap:16px; }
   }
-  @media (max-width:640px) { .catalogue-grid, .bottle-range__grid, .machine-catalogue__grid { grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:minmax(76vw, 300px); width:100vw; margin-right:0; margin-left:calc(50% - 50vw); padding:0 var(--gutter); overflow-x:auto; overscroll-behavior-x:contain; scroll-padding-inline:var(--gutter); scroll-snap-type:x mandatory; scrollbar-width:none; }.catalogue-grid::-webkit-scrollbar, .bottle-range__grid::-webkit-scrollbar, .machine-catalogue__grid::-webkit-scrollbar { display:none; }.catalogue-card, .bottle-range__card, .machine-catalogue__card { scroll-snap-align:start; } }
+  @media (max-width:640px) { .bottle-range__carousel { grid-template-columns:1fr; }.bottle-range__control { display:none; }.bottle-range__viewport { width:100vw; margin-left:calc(50% - 50vw); padding:0 var(--gutter); overflow-x:auto; overscroll-behavior-x:contain; scroll-padding-inline:var(--gutter); scroll-snap-type:x mandatory; scrollbar-width:none; }.bottle-range__viewport::-webkit-scrollbar { display:none; }.bottle-range__track { grid-auto-columns:minmax(76vw, 300px); gap:16px; transition:none; }.bottle-range__card { scroll-snap-align:start; }.film-feature, .caps-feature, .preforms-feature { padding:72px 0; }.preforms-feature__visual { display:flex; flex-direction:column; }.preforms-feature__copy { position:static; width:auto; padding:32px var(--gutter) 0; transform:none; order:-1; }.preforms-feature__main { margin-top:26px; } }
 </style>
+
+<script>
+  document.querySelectorAll('[data-bottle-carousel]').forEach((carousel) => {
+    const track = carousel.querySelector('[data-carousel-viewport]');
+    const previous = carousel.querySelector('[data-carousel-previous]');
+    const next = carousel.querySelector('[data-carousel-next]');
+
+    const move = (direction) => {
+      const card = track.querySelector('.bottle-range__card');
+      if (!card) return;
+      const gap = Number.parseFloat(getComputedStyle(track.querySelector('.bottle-range__track')).gap) || 0;
+      track.scrollBy({ left: direction * (card.getBoundingClientRect().width + gap), behavior: 'smooth' });
+    };
+
+    previous?.addEventListener('click', () => move(-1));
+    next?.addEventListener('click', () => move(1));
+  });
+</script>

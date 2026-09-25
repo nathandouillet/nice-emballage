@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import machineMoule from "../assets/machine-atelier-mineral-v1.png";
+import machineFilm from "../assets/machine-film-mineral-v1.png";
+import machineLigne from "../assets/machine-ligne-mineral-v1.png";
+import machineSceller from "../assets/machine-sceller-mineral-v1.png";
+import machineMarquage from "../assets/machine-marquage-mineral-v1.png";
+import machineRemplissage from "../assets/machine-remplissage-mineral-v1.png";
+import machineTraitementEau from "../assets/machine-traitement-eau-mineral-v1.png";
+import machineEtiquetage from "../assets/machine-etiquetage-mineral-v1.png";
+
+const machines = [
+  { image: machineMoule, name: "Moule d’injection", format: "featured" },
+  { image: machineFilm, name: "Ligne de film plastique", format: "tall hero-tall" },
+  { image: machineLigne, name: "Ligne de conditionnement", format: "wide" },
+  { image: machineSceller, name: "Machine à sceller", format: "tall" },
+  { image: machineMarquage, name: "Machine de marquage industriel", format: "tall" },
+  { image: machineRemplissage, name: "Ligne de remplissage", format: "wide" },
+  { image: machineTraitementEau, name: "Système de traitement d’eau", format: "wide" },
+  { image: machineEtiquetage, name: "Machine d’étiquetage et tunnel de rétraction", format: "wide" },
+];
+---
+
+<Layout title="Machines — Nice Emballage" description="Les machines et équipements proposés par Nice Emballage pour accompagner votre production.">
+  <main class="machines-page">
+    <header class="machines-intro wrap">
+      <span>Machines</span>
+      <h1>Pour aller<br />plus loin</h1>
+      <p>Des équipements pour fabriquer, conditionner et développer vos capacités de production.</p>
+    </header>
+
+    <section class="machines-list wrap" aria-label="Machines et équipements">
+      {machines.map((machine) => (
+        <article class:list={["machine-item", machine.format]}>
+          <div class="machine-image">
+            <Image src={machine.image} alt={machine.name} widths={[600, 900, 1200]} sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 42vw" />
+            <h2>{machine.name}</h2>
+          </div>
+        </article>
+      ))}
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .machines-page { overflow:hidden; background:var(--color-paper); color:var(--color-ink); }
+  .machines-intro { display:grid; grid-template-columns:.7fr 1.25fr .65fr; gap:5vw; align-items:end; padding-top:10vw; padding-bottom:11vw; }
+  .machines-intro > span { align-self:start; font-size:11px; letter-spacing:.11em; text-transform:uppercase; }
+  .machines-intro h1, .machine-item h2 { margin:0; font-family:var(--font-display); font-weight:560; letter-spacing:-.075em; line-height:.84; }
+  .machines-intro h1 { font-size:clamp(70px,9vw,150px); }
+  .machines-intro p { max-width:26ch; margin:0 0 4px; color:var(--color-text-soft); font-size:15px; line-height:1.42; }
+  .machines-list { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:7vw 24px; padding-bottom:14vw; align-items:start; }
+  .machine-item { grid-column:span 4; }
+  .machine-item.featured { grid-column:span 8; }
+  .machine-item.wide { grid-column:span 6; }
+  .machine-item.tall { grid-column:span 3; }
+  .machine-item.hero-tall { grid-column:span 4; }
+  .machine-item:last-child { grid-column:4 / span 6; }
+  .machine-image { position:relative; overflow:hidden; background:#d9d9d6; }
+  .machine-image :global(img) { display:block; width:100%; height:auto; }
+  .machine-item h2 { position:absolute; z-index:1; left:18px; bottom:18px; max-width:13ch; padding:9px 11px 8px; background:rgba(242,243,240,.9); color:var(--color-ink); font-size:clamp(20px,1.8vw,33px); }
+  @media (max-width:760px) {
+    .machines-intro { display:block; padding-top:16vh; padding-bottom:22vw; }
+    .machines-intro > span { display:block; margin-bottom:42px; }
+    .machines-intro h1 { font-size:clamp(64px,17vw,100px); }
+    .machines-intro p { margin-top:32px; }
+    .machines-list { display:grid; grid-template-columns:1fr; gap:16vw; padding-bottom:28vw; }
+    .machine-item, .machine-item.featured, .machine-item.wide, .machine-item.tall, .machine-item.hero-tall, .machine-item:last-child { grid-column:1; }
+  }
+</style>

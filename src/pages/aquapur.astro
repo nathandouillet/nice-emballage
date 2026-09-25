@@ -1,0 +1,108 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import bottleLight from "../assets/aquapur-bouteille-lumiere-v1.png";
+import bottleSeries from "../assets/aquapur-bouteilles-serie-v1.png";
+import mistFalls from "../assets/aquapur-chutes-brume.webp";
+import waterHand from "../assets/aquapur-main-eau.webp";
+import { rel } from "../lib/base";
+---
+
+<Layout title="Aquapur — Nice Emballage" description="Aquapur, la marque d’eau de Nice Emballage.">
+  <main class="aquapur-page">
+    <section class="aquapur-intro">
+      <figure class="intro-image">
+        <Image src={bottleLight} alt="Bouteille Aquapur dans la lumière" />
+      </figure>
+      <div class="intro-inner wrap">
+        <span>Une marque Nice Emballage</span>
+        <h1>Aquapur</h1>
+        <p>
+          L’eau de Nice, pensée pour les gestes du quotidien.
+        </p>
+      </div>
+    </section>
+
+    <section class="source">
+      <div class="source-inner wrap">
+        <div class="source-copy">
+          <span>L’eau, en mouvement</span>
+          <h2>Une eau qui<br />accompagne</h2>
+          <p>
+            Aquapur est la marque d’eau de Nice Emballage. Une présence fraîche,
+            claire et disponible, du quotidien aux moments partagés.
+          </p>
+        </div>
+        <figure class="source-landscape">
+          <Image src={mistFalls} alt="Chutes dans la brume" />
+        </figure>
+        <figure class="source-cascade">
+          <Image src={waterHand} alt="Main au contact de l’eau" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="formats">
+      <div class="formats-inner wrap">
+        <div class="formats-head">
+          <span>Les formats</span>
+          <h2>À chaque<br />moment son eau</h2>
+          <p>
+            Une gamme de bouteilles en construction, pour répondre aux usages
+            de chacun.
+          </p>
+        </div>
+        <figure class="formats-image">
+          <Image src={bottleSeries} alt="Série de bouteilles Aquapur" />
+        </figure>
+        <a href={rel("/contact")}>Nous contacter</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .aquapur-page { overflow:hidden; background:#b5d5dc; color:#123842; }
+  .aquapur-intro { position:relative; min-height:calc(100vh - 112px); display:flex; align-items:flex-end; padding:0 0 6vw; }
+  .intro-inner { position:relative; z-index:1; display:grid; grid-template-columns:1fr auto; gap:5vw; align-items:end; color:#123842; }
+  .intro-inner > span, .source-copy > span, .formats-head > span { font-size:11px; letter-spacing:.11em; text-transform:uppercase; }
+  h1, h2 { margin:0; font-family:var(--font-display); font-weight:560; letter-spacing:-.075em; line-height:.83; }
+  h1 { grid-column:1; font-size:clamp(100px,15vw,260px); }
+  .intro-inner p { grid-column:2; max-width:23ch; margin:0 0 14px; font-size:15px; line-height:1.42; }
+  .intro-image { position:absolute; inset:0; z-index:0; margin:0; overflow:hidden; }
+  .intro-image::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(181,213,220,.6),rgba(181,213,220,.06) 56%,rgba(181,213,220,.2)); }
+  .intro-image :global(img) { display:block; width:100%; height:100%; object-fit:cover; object-position:center; }
+  .source { background:#d5e8e9; }
+  .source-inner { display:grid; grid-template-columns:.75fr .9fr 1.1fr; gap:24px; align-items:end; padding-top:12vw; padding-bottom:14vw; }
+  .source-copy { align-self:start; padding-top:5vw; }
+  .source-copy h2, .formats-head h2 { margin-top:48px; font-size:clamp(50px,6.2vw,102px); }
+  .source-copy p, .formats-head p { max-width:26ch; margin:34px 0 0; color:#42616a; font-size:15px; line-height:1.42; }
+  figure { margin:0; overflow:hidden; }
+  .source-landscape { margin-bottom:8vw; }
+  .source-cascade { align-self:stretch; }
+  .source :global(img) { display:block; width:100%; height:100%; object-fit:cover; }
+  .source-landscape { aspect-ratio:.72; }
+  .source-cascade { aspect-ratio:.82; }
+  .formats { background:#c4dde1; }
+  .formats-inner { display:grid; grid-template-columns:.7fr 1.3fr; gap:8vw; padding-top:13vw; padding-bottom:14vw; }
+  .formats-head { align-self:end; }
+  .formats-image { aspect-ratio:1.35; }
+  .formats-image :global(img) { display:block; width:100%; height:100%; object-fit:cover; }
+  .formats a { grid-column:1; align-self:start; color:inherit; font-size:14px; font-weight:650; text-decoration:none; }
+  @media (max-width:760px) {
+    .aquapur-intro { min-height:680px; padding:0 0 12vw; }
+    .intro-inner { display:block; }
+    .intro-inner > span { display:block; margin-bottom:48px; }
+    h1 { font-size:clamp(76px,21vw,124px); }
+    .intro-inner p { max-width:23ch; margin-top:34px; }
+    .intro-image { width:76vw; height:52%; }
+    .source-inner { display:grid; grid-template-columns:1fr; gap:18px; padding-top:24vw; padding-bottom:24vw; }
+    .source-copy { padding:0 0 18vw; }
+    .source-copy h2, .formats-head h2 { margin-top:38px; font-size:clamp(55px,15vw,88px); }
+    .source-landscape { margin:0 18vw 0 0; }
+    .source-cascade { margin-left:18vw; }
+    .formats-inner { display:block; padding-top:24vw; padding-bottom:24vw; }
+    .formats-image { margin-top:16vw; }
+    .formats a { display:block; margin-top:30px; }
+  }
+</style>

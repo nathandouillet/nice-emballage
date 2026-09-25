@@ -3,33 +3,33 @@
    ============================================================ */
 :root {
   /* --- Couleurs de marque --- */
-  --color-ink: #1a1d1b;
-  --color-paper: #f5f4f0;
-  --color-paper-dim: #eceae4;
-  --color-stone: #dcd9d1;
-  --color-yellow: #f0b429;
-  --color-teal: #2e6b6b;
+  --color-ink: #17343a;
+  --color-paper: #f2f3f0;
+  --color-paper-dim: #dce5e2;
+  --color-stone: #d4dfdc;
+  --color-yellow: #dbe7e3;
+  --color-teal: #3e7e89;
   --color-whatsapp: #25d366;
 
   /* --- États (hover) --- */
   --color-ink-hover: #33362f;
-  --color-yellow-hover: #dda320;
+  --color-yellow-hover: #c8d9d3;
   --color-whatsapp-hover: #1ebd5a;
 
   /* --- Textes secondaires --- */
-  --color-text-soft: #4a4d4a; /* paragraphes sur fond clair */
-  --color-text-muted: #5c5f59; /* légendes sur fond clair */
-  --color-text-faint: #8a8d89; /* tagline, méta */
+  --color-text-soft: #485b59; /* paragraphes sur fond clair */
+  --color-text-muted: #60706e; /* légendes sur fond clair */
+  --color-text-faint: #87928f; /* tagline, méta */
   --color-on-ink: #b7b9b3; /* texte courant sur fond sombre */
   --color-on-ink-faint: #8f938a; /* titres de colonnes sur fond sombre */
   --color-on-ink-strong: #d7d8d3;
 
   /* --- Typographie --- */
-  --font-sans: "Arial", "Helvetica Neue", Arial, sans-serif;
-  --font-display: "Arial", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Archivo", Arial, sans-serif;
+  --font-display: "Archivo", Arial, sans-serif;
 
   /* --- Mise en page --- */
-  --container: 1320px;
+  --container: 1540px;
   --gutter: 40px;
 
   /* --- Rayons --- */
