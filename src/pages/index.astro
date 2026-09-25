@@ -74,8 +74,8 @@ import { rel } from "../lib/base";
   .intro {
     /* 56vw ≈ hauteur de l'image 16/9 : évite un grand vide sur tablette portrait */
     min-height: min(92vh, 56vw);
-    padding-top: 8vh;
-    padding-bottom: 4vw;
+    padding-top: 4vh;
+    padding-bottom: 0;
   }
   h1,
   h2 {
@@ -114,14 +114,11 @@ import { rel } from "../lib/base";
     font-weight: var(--kicker-weight);
   }
   .statement {
-    padding: 6vw 0 6vw 0;
-    text-align: center;
-    border-top: 1px solid var(--color-text-soft);
-    border-bottom: 1px solid var(--color-text-soft);
+    padding-block: 7vw 5vw;
   }
   .statement p {
-    max-width: 16ch;
-    margin: auto;
+    max-width: 18ch;
+    margin: 0;
     font-family: var(--font-display);
     font-size: clamp(36px, 5.1vw, 82px);
     font-weight: var(--fw-display);
@@ -268,7 +265,7 @@ import { rel } from "../lib/base";
     .intro {
       min-height: auto;
       display: block;
-      padding-top: 48px;
+      padding-top: 20px;
       padding-bottom: 64px;
     }
     .intro-side {
@@ -279,7 +276,7 @@ import { rel } from "../lib/base";
       aspect-ratio: 1.25;
     }
     .statement {
-      padding-block: 14vw;
+      padding-block: 14vw 12vw;
     }
     .statement p {
       font-size: clamp(32px, 10.2vw, 44px); /* tient dans la gouttière dès 360px */
