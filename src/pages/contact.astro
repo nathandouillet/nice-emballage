@@ -2,10 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import MapEmbed from "../components/MapEmbed.astro";
 
-const email = "emballagenice@gmail.com";
-const phone = "+226 64 98 66 66";
-const phoneHref = "tel:+22664986666";
-const whatsapp = "https://wa.me/22664986666";
+const email = "nice.emballage.ouaga@gmail.com";
+const phone = "Téléphone : +226 45 97 66 66";
+const phoneHref = "tel:+22645976666";
+const whatsapp1Number = "+226 04 98 77 77";
+const whatsapp2Number = "+226 64 98 66 66";
+const whatsapp1 = "https://wa.me/22604987777";
+const whatsapp2 = "https://wa.me/22664986666";
+
 const coords = "12.411808,-1.418128";
 const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}`;
 ---
@@ -28,8 +32,13 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
       <div class="contact-direct">
         <p class="contact-kicker">Nous contacter</p>
         <a href={phoneHref}>{phone}</a>
+        <a href={whatsapp1} target="_blank" rel="noopener"
+          >WhatsApp 1: {whatsapp1Number}</a
+        >
+        <a href={whatsapp2} target="_blank" rel="noopener"
+          >WhatsApp 2: {whatsapp2Number}</a
+        >
         <a href={`mailto:${email}`}>{email}</a>
-        <a href={whatsapp} target="_blank" rel="noopener">WhatsApp</a>
       </div>
 
       <form class="contact-form" data-mailto={email}>
@@ -138,7 +147,7 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
     font-weight: var(--fw-display);
     letter-spacing: var(--ls-display-xl);
     line-height: var(--lh-display-xl);
-    }
+  }
   .contact-hero__lead {
     grid-column: 3;
     max-width: 24ch;
@@ -219,7 +228,7 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
   .contact-form button {
     align-self: flex-start;
     margin-top: 8px;
-    }
+  }
 
   .location {
     position: relative;
@@ -261,10 +270,10 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
     margin: 22px 0 0;
     color: var(--color-text-soft);
     font-size: var(--text-small);
-    }
+  }
   .location__info a {
     margin-top: 28px;
-    }
+  }
 
   /* écrans tactiles (tablettes comprises) : zones cliquables ≥ 44px */
   @media (pointer: coarse) {
@@ -322,16 +331,34 @@ const directions = `https://www.google.com/maps/dir/?api=1&destination=${coords}
     }
   }
   @media (max-width: 380px) {
-    .contact-hero h1 { font-size: 3.2rem; } /* « votre projet » tient sur une ligne en 320px */
+    .contact-hero h1 {
+      font-size: 3.2rem;
+    } /* « votre projet » tient sur une ligne en 320px */
   }
   @media (max-width: 560px) {
     .contact-form__row {
       grid-template-columns: 1fr;
       gap: 26px;
     }
-    .location { display:flex; flex-direction:column; min-height:0; }
-    .location__map, .location__map :global(.google-map), .location__map :global(iframe) { position:relative; height:360px; }
-    .location__info { position:static; display:block; width:100%; min-height:0; padding-top:0; padding-bottom:0; } /* width:100% : sinon les marges auto de .wrap rétrécissent le bloc dans le flex */
+    .location {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .location__map,
+    .location__map :global(.google-map),
+    .location__map :global(iframe) {
+      position: relative;
+      height: 360px;
+    }
+    .location__info {
+      position: static;
+      display: block;
+      width: 100%;
+      min-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    } /* width:100% : sinon les marges auto de .wrap rétrécissent le bloc dans le flex */
     .location__info > div {
       max-width: none;
       width: 100%;
