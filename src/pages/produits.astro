@@ -5,20 +5,61 @@ import filmsStudio from "../assets/films-emballage-studio-v1.png";
 import capsStudio from "../assets/bouchons-studio-couleurs-v2.png";
 import preformsStudio from "../assets/preformes-macro-editorial-v1.png";
 import bouteilles250ml from "../assets/bouteille-250ml-studio-v2.png";
+import bouteilles250mlModele2 from "../assets/bouteille-250ml-modele-2-studio-v1.png";
+import bouteilles250mlModele3 from "../assets/bouteille-250ml-modele-3-studio-v1.png";
 import bouteilles300ml from "../assets/bouteille-300ml-studio-v2.png";
+import bouteilles300mlModele2 from "../assets/bouteille-300ml-modele-2-studio-v1.png";
 import bouteilles330ml from "../assets/bouteille-330ml-studio-v3.png";
-import bouteilles500ml from "../assets/bouteille-500ml-studio-v2.png";
+import bouteilles500ml from "../assets/bouteille-500ml-studio-v3.png";
+import bouteilles500mlModele2 from "../assets/bouteille-500ml-modele-2-studio-v1.png";
+import bouteilles500mlModele3 from "../assets/bouteille-500ml-modele-3-studio-v1.png";
+import bouteilles500mlModele4 from "../assets/bouteille-500ml-modele-4-studio-v1.png";
+import bouteilles500mlModele5 from "../assets/bouteille-500ml-modele-5-studio-v1.png";
 import bouteilles1l from "../assets/bouteille-1l-studio-v2.png";
+import bouteilles1lModele1 from "../assets/bouteille-1l-modele-1-studio-v1.png";
+import bouteilles1lModele2 from "../assets/bouteille-1l-modele-2-studio-v1.png";
 import bouteilles15l from "../assets/bouteille-15l-studio-v2.png";
+import bouteilles15lModele1 from "../assets/bouteille-15l-modele-1-studio-v1.png";
+import bouteilles15lModele2 from "../assets/bouteille-15l-modele-2-studio-v1.png";
 import { rel } from "../lib/base";
 
 const bottleFormats = [
-  { image: bouteilles250ml, size: "250 ml", className: "format-250" },
-  { image: bouteilles300ml, size: "300 ml", className: "format-300" },
-  { image: bouteilles330ml, size: "330 ml", className: "format-330" },
-  { image: bouteilles500ml, size: "500 ml", className: "format-500" },
-  { image: bouteilles1l, size: "1 L", className: "format-1l" },
-  { image: bouteilles15l, size: "1,5 L", className: "format-15l" },
+  {
+    image: bouteilles250ml,
+    size: "250 ml",
+    className: "format-250",
+    modelDialog: "bottle-250ml-model-dialog",
+  },
+  {
+    image: bouteilles300ml,
+    size: "300 ml",
+    className: "format-300",
+    modelDialog: "bottle-300ml-model-dialog",
+  },
+  {
+    image: bouteilles330ml,
+    size: "330 ml",
+    className: "format-330",
+    modelDialog: "bottle-330ml-model-dialog",
+  },
+  {
+    image: bouteilles500ml,
+    size: "500 ml",
+    className: "format-500",
+    modelDialog: "bottle-500ml-model-dialog",
+  },
+  {
+    image: bouteilles1l,
+    size: "1 L",
+    className: "format-1l",
+    modelDialog: "bottle-1l-model-dialog",
+  },
+  {
+    image: bouteilles15l,
+    size: "1,5 L",
+    className: "format-15l",
+    modelDialog: "bottle-15l-model-dialog",
+  },
 ];
 ---
 
@@ -59,15 +100,38 @@ const bottleFormats = [
             {
               bottleFormats.map((bottle) => (
                 <article class={`bottle-range__card ${bottle.className}`}>
-                  <div>
-                    <Image
-                      src={bottle.image}
-                      alt={`Bouteilles PET ${bottle.size}`}
-                      widths={[480, 720, 1000]}
-                      sizes="(max-width: 700px) 76vw, 33vw"
-                    />
-                  </div>
-                  <h3>{bottle.size}</h3>
+                  {bottle.modelDialog ? (
+                    <button
+                      class="bottle-range__model-trigger"
+                      type="button"
+                      data-bottle-model-trigger={bottle.modelDialog}
+                      aria-haspopup="dialog"
+                      aria-controls={bottle.modelDialog}
+                    >
+                      <div>
+                        <Image
+                          src={bottle.image}
+                          alt={`Bouteille PET ${bottle.size}`}
+                          widths={[480, 720, 1000]}
+                          sizes="(max-width: 700px) 76vw, 33vw"
+                        />
+                      </div>
+                      <h3>{bottle.size}</h3>
+                      <span>Voir les modèles</span>
+                    </button>
+                  ) : (
+                    <>
+                      <div>
+                        <Image
+                          src={bottle.image}
+                          alt={`Bouteille PET ${bottle.size}`}
+                          widths={[480, 720, 1000]}
+                          sizes="(max-width: 700px) 76vw, 33vw"
+                        />
+                      </div>
+                      <h3>{bottle.size}</h3>
+                    </>
+                  )}
                 </article>
               ))
             }
@@ -88,6 +152,236 @@ const bottleFormats = [
         > pour découvrir l’ensemble de la gamme.
       </p>
     </section>
+
+    <div
+      class="bottle-model-dialog"
+      id="bottle-15l-model-dialog"
+      data-bottle-model-dialog
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="bottle-15l-model-dialog-title"
+      hidden
+    >
+      <div class="bottle-model-dialog__inner">
+        <div class="bottle-model-dialog__head">
+          <div>
+            <p>1,5 L</p>
+            <h2 id="bottle-15l-model-dialog-title">Les trois modèles</h2>
+          </div>
+          <button type="button" aria-label="Fermer" data-bottle-model-close>×</button>
+        </div>
+        <div class="bottle-model-dialog__grid">
+          <figure>
+            <Image
+              src={bouteilles15l}
+              alt="Modèle de bouteille PET 1,5 litre à corps torsadé"
+              widths={[480, 720, 1000]}
+              sizes="(max-width: 700px) 90vw, 30vw"
+            />
+            <figcaption>Modèle 1</figcaption>
+          </figure>
+          <figure>
+            <Image
+              src={bouteilles15lModele1}
+              alt="Modèle de bouteille PET 1,5 litre à reliefs marqués"
+              widths={[480, 720, 1000]}
+              sizes="(max-width: 700px) 90vw, 40vw"
+            />
+            <figcaption>Modèle 2</figcaption>
+          </figure>
+          <figure>
+            <Image
+              src={bouteilles15lModele2}
+              alt="Modèle de bouteille PET 1,5 litre à nervures horizontales"
+              widths={[480, 720, 1000]}
+              sizes="(max-width: 700px) 90vw, 40vw"
+            />
+            <figcaption>Modèle 3</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="bottle-model-dialog"
+      id="bottle-250ml-model-dialog"
+      data-bottle-model-dialog
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="bottle-250ml-model-dialog-title"
+      hidden
+    >
+      <div class="bottle-model-dialog__inner">
+        <div class="bottle-model-dialog__head">
+          <div>
+            <p>250 ml</p>
+            <h2 id="bottle-250ml-model-dialog-title">Les trois modèles</h2>
+          </div>
+          <button type="button" aria-label="Fermer" data-bottle-model-close>×</button>
+        </div>
+        <div class="bottle-model-dialog__grid">
+          <figure>
+            <Image src={bouteilles250ml} alt="Modèle de bouteille PET 250 millilitres" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 30vw" />
+            <figcaption>Modèle 1</figcaption>
+          </figure>
+          <figure>
+            <Image src={bouteilles250mlModele2} alt="Modèle de bouteille PET 250 millilitres à panneaux rectangulaires" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 30vw" />
+            <figcaption>Modèle 2</figcaption>
+          </figure>
+          <figure>
+            <Image src={bouteilles250mlModele3} alt="Modèle de bouteille PET 250 millilitres à taille affinée" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 30vw" />
+            <figcaption>Modèle 3</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="bottle-model-dialog bottle-model-dialog--two"
+      id="bottle-300ml-model-dialog"
+      data-bottle-model-dialog
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="bottle-300ml-model-dialog-title"
+      hidden
+    >
+      <div class="bottle-model-dialog__inner">
+        <div class="bottle-model-dialog__head">
+          <div>
+            <p>300 ml</p>
+            <h2 id="bottle-300ml-model-dialog-title">Les deux modèles</h2>
+          </div>
+          <button type="button" aria-label="Fermer" data-bottle-model-close>×</button>
+        </div>
+        <div class="bottle-model-dialog__grid">
+          <figure>
+            <Image src={bouteilles300ml} alt="Modèle de bouteille PET 300 millilitres" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 30vw" />
+            <figcaption>Modèle 1</figcaption>
+          </figure>
+          <figure>
+            <Image src={bouteilles300mlModele2} alt="Modèle de bouteille PET 300 millilitres à facettes" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 30vw" />
+            <figcaption>Modèle 2</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="bottle-model-dialog bottle-model-dialog--one"
+      id="bottle-330ml-model-dialog"
+      data-bottle-model-dialog
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="bottle-330ml-model-dialog-title"
+      hidden
+    >
+      <div class="bottle-model-dialog__inner">
+        <div class="bottle-model-dialog__head">
+          <div>
+            <p>330 ml</p>
+            <h2 id="bottle-330ml-model-dialog-title">Le modèle disponible</h2>
+          </div>
+          <button type="button" aria-label="Fermer" data-bottle-model-close>×</button>
+        </div>
+        <div class="bottle-model-dialog__grid">
+          <figure>
+            <Image src={bouteilles330ml} alt="Modèle de bouteille PET 330 millilitres" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 40vw" />
+            <figcaption>Modèle 1</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="bottle-model-dialog"
+      id="bottle-1l-model-dialog"
+      data-bottle-model-dialog
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="bottle-1l-model-dialog-title"
+      hidden
+    >
+      <div class="bottle-model-dialog__inner">
+        <div class="bottle-model-dialog__head">
+          <div>
+            <p>1 L</p>
+            <h2 id="bottle-1l-model-dialog-title">Les trois modèles</h2>
+          </div>
+          <button type="button" aria-label="Fermer" data-bottle-model-close>×</button>
+        </div>
+        <div class="bottle-model-dialog__grid">
+          <figure>
+            <Image
+              src={bouteilles1l}
+              alt="Modèle de bouteille PET 1 litre à col long"
+              widths={[480, 720, 1000]}
+              sizes="(max-width: 700px) 90vw, 30vw"
+            />
+            <figcaption>Modèle 1</figcaption>
+          </figure>
+          <figure>
+            <Image
+              src={bouteilles1lModele1}
+              alt="Modèle de bouteille PET 1 litre à épaulement facetté"
+              widths={[480, 720, 1000]}
+              sizes="(max-width: 700px) 90vw, 30vw"
+            />
+            <figcaption>Modèle 2</figcaption>
+          </figure>
+          <figure>
+            <Image
+              src={bouteilles1lModele2}
+              alt="Modèle de bouteille PET 1 litre à reliefs ondulés"
+              widths={[480, 720, 1000]}
+              sizes="(max-width: 700px) 90vw, 30vw"
+            />
+            <figcaption>Modèle 3</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="bottle-model-dialog"
+      id="bottle-500ml-model-dialog"
+      data-bottle-model-dialog
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="bottle-500ml-model-dialog-title"
+      hidden
+    >
+      <div class="bottle-model-dialog__inner">
+        <div class="bottle-model-dialog__head">
+          <div>
+            <p>500 ml</p>
+            <h2 id="bottle-500ml-model-dialog-title">Les cinq modèles</h2>
+          </div>
+          <button type="button" aria-label="Fermer" data-bottle-model-close>×</button>
+        </div>
+        <div class="bottle-model-dialog__grid">
+          <figure>
+            <Image src={bouteilles500ml} alt="Modèle de bouteille PET 500 millilitres à corps cylindrique" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 30vw" />
+            <figcaption>Modèle 1</figcaption>
+          </figure>
+          <figure>
+            <Image src={bouteilles500mlModele2} alt="Modèle de bouteille PET 500 millilitres à panneaux verticaux" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 30vw" />
+            <figcaption>Modèle 2</figcaption>
+          </figure>
+          <figure>
+            <Image src={bouteilles500mlModele3} alt="Modèle de bouteille PET 500 millilitres à relief torsadé" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 30vw" />
+            <figcaption>Modèle 3</figcaption>
+          </figure>
+          <figure>
+            <Image src={bouteilles500mlModele4} alt="Modèle de bouteille PET 500 millilitres à reliefs ondulés" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 30vw" />
+            <figcaption>Modèle 4</figcaption>
+          </figure>
+          <figure>
+            <Image src={bouteilles500mlModele5} alt="Modèle de bouteille PET 500 millilitres à vaguelettes croisées" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 30vw" />
+            <figcaption>Modèle 5</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
 
     <section class="film-feature" aria-labelledby="film-title">
       <div class="film-feature__layout wrap">
@@ -272,6 +566,38 @@ const bottleFormats = [
     object-fit: contain;
     transform: translate(-50%, -50%);
   }
+  .bottle-range__model-trigger {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    text-align: inherit;
+  }
+  .bottle-range__model-trigger > div {
+    position: relative;
+    height: clamp(280px, 32vw, 480px);
+    overflow: hidden;
+    background: #fff;
+  }
+  .bottle-range__model-trigger > span {
+    display: block;
+    margin-top: 4px;
+    color: var(--color-text-soft);
+    font-size: var(--text-small);
+    text-align: center;
+    transition: color 0.2s ease;
+  }
+  .bottle-range__model-trigger:hover > span {
+    color: var(--color-ink);
+  }
+  .bottle-range__model-trigger:focus-visible {
+    outline: 1px solid var(--color-ink);
+    outline-offset: 6px;
+  }
   .format-250 {
     --bottle-height: 84%;
   }
@@ -310,6 +636,95 @@ const bottleFormats = [
     font-size: inherit;
     color: var(--color-ink);
     white-space: nowrap; /* évite « Contactez-/nous » sur mobile */
+  }
+  .bottle-model-dialog {
+    position: fixed;
+    z-index: 20;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    overflow-y: auto;
+    background: rgb(23 52 58 / 0.45);
+    backdrop-filter: blur(4px);
+  }
+  .bottle-model-dialog[hidden] {
+    display: none;
+  }
+  .bottle-model-dialog__inner {
+    width: min(1120px, 100%);
+    max-height: min(880px, calc(100vh - 40px));
+    padding: clamp(24px, 4vw, 56px);
+    overflow-y: auto;
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+  .bottle-model-dialog__head {
+    position: sticky;
+    top: -1px;
+    z-index: 1;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 24px;
+    padding: 1px 0 16px;
+    background: var(--color-paper);
+  }
+  .bottle-model-dialog__head p {
+    margin: 0 0 8px;
+    font-size: var(--kicker-size);
+    font-weight: var(--kicker-weight);
+    letter-spacing: var(--kicker-ls);
+    text-transform: uppercase;
+  }
+  .bottle-model-dialog__head h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: var(--fw-display);
+    letter-spacing: var(--ls-display-md);
+    line-height: 0.95;
+  }
+  .bottle-model-dialog__head button {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-ink);
+    cursor: pointer;
+    font-size: 2.4rem;
+    line-height: 1;
+  }
+  .bottle-model-dialog__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .bottle-model-dialog--two .bottle-model-dialog__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .bottle-model-dialog--one .bottle-model-dialog__grid {
+    grid-template-columns: minmax(0, 480px);
+    justify-content: center;
+  }
+  .bottle-model-dialog figure {
+    margin: 0;
+    background: #fff;
+  }
+  .bottle-model-dialog figure :global(img) {
+    display: block;
+    width: 100%;
+    height: clamp(280px, 46vh, 440px);
+    object-fit: contain;
+    object-position: center;
+  }
+  .bottle-model-dialog figcaption {
+    padding: 14px 16px 16px;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: var(--fw-display);
   }
 
   .film-feature {
@@ -539,6 +954,44 @@ const bottleFormats = [
     .bottle-range__card {
       scroll-snap-align: start;
     }
+    .bottle-model-dialog {
+      padding: 12px;
+    }
+    .bottle-model-dialog__inner {
+      max-height: calc(100vh - 24px);
+    }
+    .bottle-model-dialog__head {
+      position: static;
+      margin-bottom: 24px;
+      padding: 0;
+      background: transparent;
+    }
+    .bottle-model-dialog__head button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      padding: 0 0 3px;
+      border: 1px solid rgb(23 52 58 / 0.12);
+      border-radius: 50%;
+      background: var(--color-paper);
+      box-shadow: 0 4px 18px rgb(23 52 58 / 0.14);
+      line-height: 1;
+    }
+    .bottle-model-dialog__grid {
+      grid-template-columns: 1fr;
+    }
+    .bottle-model-dialog--two .bottle-model-dialog__grid {
+      grid-template-columns: 1fr;
+    }
+    .bottle-model-dialog--one .bottle-model-dialog__grid {
+      grid-template-columns: 1fr;
+    }
     .film-feature,
     .caps-feature,
     .preforms-feature {
@@ -568,5 +1021,37 @@ const bottleFormats = [
 
     previous?.addEventListener("click", () => move(-1));
     next?.addEventListener("click", () => move(1));
+  });
+
+  let openBottleModelDialog = null;
+
+  const closeBottleModels = () => {
+    if (!openBottleModelDialog) return;
+    openBottleModelDialog.hidden = true;
+    openBottleModelDialog = null;
+    document.body.style.overflow = "";
+  };
+
+  document.querySelectorAll("[data-bottle-model-trigger]").forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      const dialog = document.getElementById(trigger.dataset.bottleModelTrigger);
+      if (!dialog) return;
+      openBottleModelDialog = dialog;
+      dialog.hidden = false;
+      document.body.style.overflow = "hidden";
+      dialog.querySelector("[data-bottle-model-close]")?.focus();
+    });
+  });
+
+  document.querySelectorAll("[data-bottle-model-dialog]").forEach((dialog) => {
+    dialog.querySelector("[data-bottle-model-close]")?.addEventListener("click", closeBottleModels);
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) closeBottleModels();
+    });
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && openBottleModelDialog) {
+      closeBottleModels();
+    }
   });
 </script>
