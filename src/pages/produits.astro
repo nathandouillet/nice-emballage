@@ -34,12 +34,14 @@ const bottleFormats = [
     size: "300 ml",
     className: "format-300",
     modelDialog: "bottle-300ml-model-dialog",
+    modelCount: 1,
   },
   {
     image: bouteilles330ml,
     size: "330 ml",
     className: "format-330",
     modelDialog: "bottle-330ml-model-dialog",
+    modelCount: 1,
   },
   {
     image: bouteilles500ml,
@@ -114,9 +116,12 @@ const bottleFormats = [
                           widths={[480, 720, 1000]}
                           sizes="(max-width: 700px) 76vw, 33vw"
                         />
+                        <span class="bottle-range__image-action">
+                          Voir {bottle.modelCount === 1 ? "le modèle" : "les modèles"}
+                          <span aria-hidden="true">↗</span>
+                        </span>
                       </div>
                       <h3>{bottle.size}</h3>
-                      <span>Voir les modèles</span>
                     </button>
                   ) : (
                     <>
@@ -555,6 +560,7 @@ const bottleFormats = [
     max-height: calc(100% - 48px);
     object-fit: contain;
     transform: translate(-50%, -50%);
+    transition: transform 0.25s ease;
   }
   .bottle-range__model-trigger {
     display: block;
@@ -573,16 +579,28 @@ const bottleFormats = [
     overflow: hidden;
     background: #fff;
   }
-  .bottle-range__model-trigger > span {
-    display: block;
-    margin-top: 4px;
-    color: var(--color-text-soft);
-    font-size: var(--text-small);
-    text-align: center;
-    transition: color 0.2s ease;
-  }
-  .bottle-range__model-trigger:hover > span {
+  .bottle-range__image-action {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 11px;
+    background: rgb(255 255 255 / 0.92);
     color: var(--color-ink);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    box-shadow: 0 3px 14px rgb(23 52 58 / 0.1);
+  }
+  .bottle-range__image-action span {
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .bottle-range__model-trigger:hover :global(img) {
+    transform: translate(-50%, -50%) scale(1.025);
   }
   .bottle-range__model-trigger:focus-visible {
     outline: 1px solid var(--color-ink);
