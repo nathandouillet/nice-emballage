@@ -7,7 +7,6 @@ import preformsStudio from "../assets/preformes-macro-editorial-v1.png";
 import bouteilles250ml from "../assets/bouteille-250ml-studio-v2.png";
 import bouteilles250mlModele2 from "../assets/bouteille-250ml-modele-2-studio-v1.png";
 import bouteilles250mlModele3 from "../assets/bouteille-250ml-modele-3-studio-v1.png";
-import bouteilles300ml from "../assets/bouteille-300ml-studio-v2.png";
 import bouteilles300mlModele2 from "../assets/bouteille-300ml-modele-2-studio-v1.png";
 import bouteilles330ml from "../assets/bouteille-330ml-studio-v3.png";
 import bouteilles500ml from "../assets/bouteille-500ml-studio-v3.png";
@@ -15,9 +14,9 @@ import bouteilles500mlModele2 from "../assets/bouteille-500ml-modele-2-studio-v1
 import bouteilles500mlModele3 from "../assets/bouteille-500ml-modele-3-studio-v1.png";
 import bouteilles500mlModele4 from "../assets/bouteille-500ml-modele-4-studio-v1.png";
 import bouteilles500mlModele5 from "../assets/bouteille-500ml-modele-5-studio-v1.png";
+import bouteilles500mlModele6 from "../assets/bouteille-500ml-modele-6-studio-v1.png";
 import bouteilles1l from "../assets/bouteille-1l-studio-v2.png";
 import bouteilles1lModele1 from "../assets/bouteille-1l-modele-1-studio-v1.png";
-import bouteilles1lModele2 from "../assets/bouteille-1l-modele-2-studio-v1.png";
 import bouteilles15l from "../assets/bouteille-15l-studio-v2.png";
 import bouteilles15lModele1 from "../assets/bouteille-15l-modele-1-studio-v1.png";
 import bouteilles15lModele2 from "../assets/bouteille-15l-modele-2-studio-v1.png";
@@ -31,7 +30,7 @@ const bottleFormats = [
     modelDialog: "bottle-250ml-model-dialog",
   },
   {
-    image: bouteilles300ml,
+    image: bouteilles300mlModele2,
     size: "300 ml",
     className: "format-300",
     modelDialog: "bottle-300ml-model-dialog",
@@ -187,7 +186,7 @@ const bottleFormats = [
               widths={[480, 720, 1000]}
               sizes="(max-width: 700px) 90vw, 40vw"
             />
-            <figcaption>Modèle 2</figcaption>
+            <figcaption>Modèle 1</figcaption>
           </figure>
           <figure>
             <Image
@@ -237,7 +236,7 @@ const bottleFormats = [
     </div>
 
     <div
-      class="bottle-model-dialog bottle-model-dialog--two"
+      class="bottle-model-dialog bottle-model-dialog--one"
       id="bottle-300ml-model-dialog"
       data-bottle-model-dialog
       role="dialog"
@@ -249,15 +248,11 @@ const bottleFormats = [
         <div class="bottle-model-dialog__head">
           <div>
             <p>300 ml</p>
-            <h2 id="bottle-300ml-model-dialog-title">Les deux modèles</h2>
+            <h2 id="bottle-300ml-model-dialog-title">Le modèle disponible</h2>
           </div>
           <button type="button" aria-label="Fermer" data-bottle-model-close>×</button>
         </div>
         <div class="bottle-model-dialog__grid">
-          <figure>
-            <Image src={bouteilles300ml} alt="Modèle de bouteille PET 300 millilitres" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 30vw" />
-            <figcaption>Modèle 1</figcaption>
-          </figure>
           <figure>
             <Image src={bouteilles300mlModele2} alt="Modèle de bouteille PET 300 millilitres à facettes" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 30vw" />
             <figcaption>Modèle 2</figcaption>
@@ -293,7 +288,7 @@ const bottleFormats = [
     </div>
 
     <div
-      class="bottle-model-dialog"
+      class="bottle-model-dialog bottle-model-dialog--two"
       id="bottle-1l-model-dialog"
       data-bottle-model-dialog
       role="dialog"
@@ -305,7 +300,7 @@ const bottleFormats = [
         <div class="bottle-model-dialog__head">
           <div>
             <p>1 L</p>
-            <h2 id="bottle-1l-model-dialog-title">Les trois modèles</h2>
+            <h2 id="bottle-1l-model-dialog-title">Les deux modèles</h2>
           </div>
           <button type="button" aria-label="Fermer" data-bottle-model-close>×</button>
         </div>
@@ -328,15 +323,6 @@ const bottleFormats = [
             />
             <figcaption>Modèle 2</figcaption>
           </figure>
-          <figure>
-            <Image
-              src={bouteilles1lModele2}
-              alt="Modèle de bouteille PET 1 litre à reliefs ondulés"
-              widths={[480, 720, 1000]}
-              sizes="(max-width: 700px) 90vw, 30vw"
-            />
-            <figcaption>Modèle 3</figcaption>
-          </figure>
         </div>
       </div>
     </div>
@@ -354,7 +340,7 @@ const bottleFormats = [
         <div class="bottle-model-dialog__head">
           <div>
             <p>500 ml</p>
-            <h2 id="bottle-500ml-model-dialog-title">Les cinq modèles</h2>
+            <h2 id="bottle-500ml-model-dialog-title">Les six modèles</h2>
           </div>
           <button type="button" aria-label="Fermer" data-bottle-model-close>×</button>
         </div>
@@ -378,6 +364,10 @@ const bottleFormats = [
           <figure>
             <Image src={bouteilles500mlModele5} alt="Modèle de bouteille PET 500 millilitres à vaguelettes croisées" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 30vw" />
             <figcaption>Modèle 5</figcaption>
+          </figure>
+          <figure>
+            <Image src={bouteilles500mlModele6} alt="Modèle de bouteille PET 500 millilitres à corps lisse et taille resserrée" widths={[480, 720, 1000]} sizes="(max-width: 700px) 90vw, 30vw" />
+            <figcaption>Modèle 6</figcaption>
           </figure>
         </div>
       </div>
