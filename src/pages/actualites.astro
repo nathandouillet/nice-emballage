@@ -22,12 +22,11 @@ const formatDate = (date: Date) =>
   description="Les dernières nouvelles de Nice Emballage, fabricant d'emballage plastique et de machines industrielles au Burkina Faso."
 >
   <main class="news-page">
-    <section class="news-intro" aria-labelledby="news-title">
-      <div class="wrap">
-        <h1 id="news-title">Les nouvelles de Nice Emballage.</h1>
-        <p>La vie de nos ateliers, de nos équipes et de nos projets à Ouagadougou.</p>
-      </div>
-    </section>
+    <header class="news-intro wrap">
+      <span>Actualités</span>
+      <h1>Les nouvelles<br />de l’atelier</h1>
+      <p>La vie de nos ateliers, de nos équipes et de nos projets à Ouagadougou.</p>
+    </header>
 
     {
       featured && (
@@ -40,38 +39,51 @@ const formatDate = (date: Date) =>
               <time datetime={featured.data.date.toISOString()}>{formatDate(featured.data.date)}</time>
               <h2>{featured.data.title}</h2>
               <p>{featured.data.excerpt}</p>
-              <span>Lire l’article</span>
+              <span class="cta-link">Lire l’article</span>
             </div>
           </a>
         </section>
       )
     }
 
-    <section class="articles-list wrap" aria-label="Toutes les actualités">
-      {remainingArticles.map((article) => <ArticleCard article={article} />)}
-    </section>
+    {
+      remainingArticles.length > 0 && (
+        <section class="articles-list wrap" aria-label="Toutes les actualités">
+          {remainingArticles.map((article) => <ArticleCard article={article} />)}
+        </section>
+      )
+    }
   </main>
 </Layout>
 
 <style>
   .news-page { overflow:hidden; background:var(--color-paper); }
-  .news-intro { padding:104px 0 84px; text-align:center; }
-  .news-intro h1 { max-width:13ch; margin:0 auto; font-family:var(--font-display); font-size: var(--text-h1); font-weight: var(--fw-display); letter-spacing: var(--ls-display-xl); line-height: var(--lh-display-xl); }
-  .news-intro p { max-width:39ch; margin:28px auto 0; color:var(--color-text-soft); font-size: var(--text-lead); line-height:1.45; }
 
-  .featured-story { padding-bottom:112px; }
+  .news-intro { display:grid; grid-template-columns:.7fr 1.25fr .65fr; gap:5vw; align-items:end; padding-top:10vw; padding-bottom:11vw; }
+  .news-intro > span { align-self:start; font-size: var(--kicker-size); letter-spacing: var(--kicker-ls); text-transform:uppercase; font-weight: var(--kicker-weight); }
+  .news-intro h1 { margin:0; font-family:var(--font-display); font-size: var(--text-h1); font-weight: var(--fw-display); letter-spacing: var(--ls-display-xl); line-height: var(--lh-display-xl); }
+  .news-intro p { max-width:26ch; margin:0 0 4px; color:var(--color-text-soft); font-size: var(--text-body); line-height:1.42; }
+
+  .featured-story { padding-bottom:9vw; }
   .featured-story > a { display:grid; grid-template-columns:1.08fr .92fr; align-items:center; gap:clamp(2.5rem,7vw,9rem); color:var(--color-ink); text-decoration:none; }
   .featured-story__image { aspect-ratio:1; overflow:hidden; border-radius: var(--radius-media); background:var(--color-stone); }
   .featured-story__image :global(img) { display:block; width:100%; height:100%; object-fit:cover; }
   .featured-story__copy { padding-right:clamp(0rem,3vw,3rem); }
   .featured-story time { color:var(--color-text-faint); font-size: 13px; font-weight:700; }
-  .featured-story h2 { max-width:12ch; margin:18px 0 0; font-family:var(--font-display); font-size: var(--text-h2-sm); font-weight: var(--fw-display); letter-spacing: var(--ls-display-xl); line-height:.92; }
+  .featured-story h2 { max-width:14ch; margin:18px 0 0; font-family:var(--font-display); font-size: var(--text-h2-sm); font-weight: var(--fw-display); letter-spacing: var(--ls-display-xl); line-height:.92; }
   .featured-story p { max-width:35ch; margin:24px 0 0; color:var(--color-text-soft); font-size: var(--text-lead); line-height:1.5; }
-  .featured-story span { display:inline-block; margin-top:30px; padding: 15px 26px; border-radius:var(--radius-pill); background:var(--color-yellow); font-size: 15px; font-weight: 700; }
-  .featured-story > a:hover span { background:var(--color-yellow-hover); }
+  .featured-story span.cta-link { margin-top:28px; }
 
-  .articles-list { display:grid; grid-template-columns:repeat(3,1fr); gap:64px 28px; padding-bottom:120px; }
+  .articles-list { display:grid; grid-template-columns:repeat(3,1fr); gap:64px 28px; padding-bottom:9vw; }
   @media (max-width:900px) { .articles-list { grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:800px) { .news-intro { padding:20px 0 40px; } .featured-story { padding-bottom:48px; } .featured-story > a { grid-template-columns:1fr; gap:30px; } .featured-story__copy { padding-right:0; } }
+  @media (max-width:800px) {
+    .news-intro { display:block; padding-top:20px; padding-bottom:48px; }
+    .news-intro > span { display:block; margin-bottom:24px; }
+    .news-intro h1 { font-size:clamp(48px,12vw,76px); }
+    .news-intro p { margin-top:24px; }
+    .featured-story { padding-bottom:48px; }
+    .featured-story > a { grid-template-columns:1fr; gap:30px; }
+    .featured-story__copy { padding-right:0; }
+  }
   @media (max-width:560px) { .articles-list { grid-template-columns:1fr; gap:36px; padding-bottom:56px; } }
 </style>

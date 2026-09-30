@@ -61,21 +61,7 @@ const dateIso = date.toISOString().slice(0, 10);
     background: var(--color-paper);
   }
   .post-head {
-    position: relative;
-    isolation: isolate;
     padding: 96px 0 72px;
-  }
-  .post-head::before {
-    position: absolute;
-    z-index: -1;
-    top: 66px;
-    left: -176px;
-    width: 286px;
-    height: 332px;
-    border: 29px solid var(--color-yellow);
-    border-bottom: 0;
-    border-radius: 180px 180px 0 0;
-    content: "";
   }
   .post-head > .wrap,
   .post-cover {
@@ -114,6 +100,7 @@ const dateIso = date.toISOString().slice(0, 10);
     height: auto;
     aspect-ratio: 16 / 9;
     object-fit: cover;
+    object-position: 50% 4%;
     border-radius: var(--radius-media);
     background: var(--color-stone);
   }
@@ -141,6 +128,11 @@ const dateIso = date.toISOString().slice(0, 10);
   }
   .post-body :global(p) {
     margin: 0 0 20px;
+  }
+  .post-body > :global(p:first-of-type) {
+    color: var(--color-ink);
+    font-size: var(--text-lead);
+    line-height: 1.5;
   }
   .post-body :global(ul),
   .post-body :global(ol) {
@@ -193,11 +185,6 @@ const dateIso = date.toISOString().slice(0, 10);
     }
     .post-head {
       padding: 72px 0 52px;
-    }
-    .post-head::before {
-      top: 38px;
-      left: -226px;
-      opacity: 0.75;
     }
     .back {
       padding: 10px 0;
